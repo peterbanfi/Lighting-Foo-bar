@@ -10,6 +10,7 @@ const path = require('path');
 const rfs = require('rotating-file-stream');
 const helmet = require('helmet');
 const cors = require('cors');
+const LocalStrategy = require('passport-local').Strategy;
 
 const db = require('./config/database.js');
 const User = require('./models/user');
@@ -20,59 +21,65 @@ const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
 const app = express();
 
-// Connect to MongoDB
-mongoose.connect(
-  db.uri, db.options,
-  () => {
-    console.log('MongoDB connected.');
-  },
-  (err) => {
-    console.error(`MongoDB error.:${err}`);
-  },
-);
-
 // Logging
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 const accessLogStream = rfs('access.log', {
-  interval: '1d',
-  path: logDirectory,
+    interval: '1d',
+    path: logDirectory,
 });
 app.use(morgan('combined', {
-  stream: accessLogStream,
-  skip: (req, res) => res.statusCode < 400,
+    stream: accessLogStream,
+    skip: (req, res) => res.statusCode < 400,
 }));
 
 // Security
 app.use(helmet());
 
-// Enable CORS
-app.use(cors());
-
 // Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false,
+    extended: false,
 }));
 
 // Cookie handling
-// app.use(cookieParser());
+app.use(cookieParser());
 
 // Session handling
 app.use(session({
-  secret: 'YOUR_SECRET_KEY',
-  resave: true,
-  saveUninitialized: true,
+    secret: 'YOUR_SECRET_KEY',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        secure: false,
+        maxAge: 36000
+    },
 }));
 
 // Passport Auth
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(User.createStrategy());
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Connect to MongoDB
+mongoose.connect(
+    db.uri, db.options,
+    () => {
+        console.log('MongoDB connected.');
+    },
+    (err) => {
+        console.error(`MongoDB error.:${err}`);
+    },
+);
+
+
+
+// Enable CORS
+app.use(cors());
+
 // User User router
-app.use('/', userRouter);
+app.use('/user/', userRouter);
 app.use('/blogpost/', blogpostRouter);
 
 // Start server

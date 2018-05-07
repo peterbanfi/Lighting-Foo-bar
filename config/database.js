@@ -19,11 +19,11 @@ const password = 'toor';
 const database = 'blog';
 
 module.exports = {
-  uri: `mongodb://${user}:${password}@${host}:${port}/${database}`,
-  options: {
-    connectTimeoutMS: 2000,
-    reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 500,
-    useMongoClient: true,
-  },
+    uri: `mongodb://${user}:${password}@${host}:${port}/${database}`,
+    options: {
+        connectTimeoutMS: 2000,
+        reconnectTries: Number.MAX_VALUE,
+        reconnectInterval: 500,
+        useMongoClient: true,
+    },
 };
