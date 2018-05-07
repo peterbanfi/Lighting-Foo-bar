@@ -42,8 +42,8 @@ module.exports = {
   }),
 
   removePost: (userid, blogpostid) => User.findByIdAndUpdate(userid, {
-    $pop: {
+    $pull: {
       blogposts: blogpostid,
-    },
-  }),
+    }
+  })
 };

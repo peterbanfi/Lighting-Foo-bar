@@ -11,6 +11,11 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  /**
+   * One to Many kapcsolat
+   * a blogposts tartalmazza a blogpost collection-ből azokat
+   * az ObjectId-kat, amelyek az adott felhasználó blogbejegyzései
+   */
   blogposts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Blogpost',

@@ -20,7 +20,7 @@ module.exports = {
     create: (req, res) => {
         Blogpost.create(req.body)
             .then(blogpost => UserController.addPost(req.body.userid, blogpost._id))
-            .then(blogpost => res.send(blogpost))
+            .then(user => res.send(user))
             .catch(err => res.send(err));
     },
 
@@ -32,8 +32,8 @@ module.exports = {
 
     remove: (req, res) => {
         Blogpost.findByIdAndRemove(req.params.id)
-            .then(blogpost => UserController.removePost(req.body.userid, blogpost._id))
-            .then(blogpost => res.json(blogpost))
+            .then(() => UserController.removePost(req.body.userid, req.params.id))
+            .then(user => res.json(user))
             .catch(err => res.send(err));
     },
 };
