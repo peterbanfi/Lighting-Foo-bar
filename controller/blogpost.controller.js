@@ -1,6 +1,5 @@
 const Blogpost = require('../models/blogpost');
 const UserController = require('../controller/user.controller');
-const User = require('../models/user');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
@@ -19,8 +18,7 @@ module.exports = {
 
     create: (req, res) => {
         Blogpost.create(req.body)
-            .then(blogpost => UserController.addPost(req.body.userid, blogpost._id))
-            .then(user => res.send(user))
+            .then(blogpost => res.send(blogpost))
             .catch(err => res.send(err));
     },
 
@@ -32,8 +30,7 @@ module.exports = {
 
     remove: (req, res) => {
         Blogpost.findByIdAndRemove(req.params.id)
-            .then(() => UserController.removePost(req.body.userid, req.params.id))
-            .then(user => res.json(user))
+            .then(blogpost => res.json(blogpost))
             .catch(err => res.send(err));
     },
 };
