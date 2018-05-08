@@ -62,7 +62,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Connect to MongoDB
+// Connect to MongoDB   
 mongoose.connect(
     db.uri, db.options,
     () => {
@@ -72,8 +72,6 @@ mongoose.connect(
         console.error(`MongoDB error.:${err}`);
     },
 );
-
-
 
 // Enable CORS
 app.use(cors());
