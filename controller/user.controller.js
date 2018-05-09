@@ -1,12 +1,5 @@
 const User = require('../models/user');
 
-
-function isLoggedIn(req, res) {
-    if (req.isAuthenticated())
-        return 'y'
-    return 'n';
-}
-
 module.exports = {
     profile: (req, res) => {
         res.json({
@@ -26,7 +19,9 @@ module.exports = {
     },
 
     login: (req, res) => res.json({
-        sid: req.sessionID
+        id: req.user._id,
+        username: req.user.username,
+        email: req.user.email,
     }),
 
     logout: (req, res) => {

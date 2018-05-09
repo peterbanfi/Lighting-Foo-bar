@@ -1,8 +1,6 @@
 const chai = require('chai');
 const expect = require('chai').expect;
 const chaiHttp = require('chai-http');
-
-const blogpost = require('../controller/blogpost.controller');
 const baseUrl = 'http://localhost:8080/blogpost';
 chai.use(chaiHttp);
 
@@ -33,7 +31,6 @@ describe('Blogpost', () => {
                 .get('/5aef5a7ebf57fb33e86095ef')
                 .end(function (err, res) {
                     expect(res.body._id).to.exist;
-                    console.log(res.body);
                     done();
                 });
         });

@@ -34,27 +34,25 @@ app.use(morgan('combined', {
 
 // Security
 app.use(helmet());
-
-// Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false,
 }));
-
-// Cookie handling
-app.use(cookieParser());
-
+app.use(cookieParser('secret'));
 // Session handling
-app.use(session({
-    secret: 'YOUR_SECRET_KEY',
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-        secure: false,
-        maxAge: 36000
-    },
-}));
-
+app.use(
+	session(
+		{
+            secret: 'secret',
+            resave: false,
+            httpOnly: false,
+            saveUninitialized: true,
+            cookie : {
+                maxAge : 7 * 24 * 60 * 60 * 1000 // seconds which equals 1 week
+            }
+        }
+	)
+);
 // Passport Auth
 app.use(passport.initialize());
 app.use(passport.session());
@@ -75,10 +73,15 @@ mongoose.connect(
 
 // Enable CORS
 app.use(cors());
-
+  
 // User User router
 app.use('/user/', userRouter);
 app.use('/blogpost/', blogpostRouter);
+
+app.use(express.static('public'));
+app.get('/',(req,res) => 
+    res.sendFile(__dirname + '/view/index.html')
+);
 
 // Start server
 app.listen(port);
