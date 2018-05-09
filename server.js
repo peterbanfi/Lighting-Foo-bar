@@ -34,11 +34,13 @@ app.use(morgan('combined', {
 
 // Security
 app.use(helmet());
+
+// Body Parse middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false,
 }));
-// app.use(cookieParser('secret'));
+
 // Session handling
 app.use(
 	session(
@@ -53,7 +55,7 @@ app.use(
         }
 	)
 );
-// Passport Auth
+// Passport - Auth
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -72,7 +74,6 @@ mongoose.connect(
 );  
 
 // Enable CORS
-// app.use(cors());
 app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
 
 // User User router

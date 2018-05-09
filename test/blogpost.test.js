@@ -4,6 +4,7 @@ const chaiHttp = require('chai-http');
 const baseUrl = 'http://localhost:8080/blogpost';
 chai.use(chaiHttp);
 
+// Simple Base Examples
 describe('Blogpost', () => {
     describe('list()', () => {
         it('response statusCode equal to 200', (done) => {
