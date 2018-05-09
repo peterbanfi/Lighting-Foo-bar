@@ -1,5 +1,4 @@
 const Blogpost = require('../models/blogpost');
-const UserController = require('../controller/user.controller');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 

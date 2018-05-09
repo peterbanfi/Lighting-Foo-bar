@@ -1,39 +1,31 @@
 const User = require('../models/user');
 
 module.exports = {
-    profile: (req, res) => {
-        res.json({
-            user: req.user,
-        })
-    },
-        
-    register: (req, res) => {
-        User.register(new User({
-                username: req.body.username,
-                email: req.body.email,
-            }), req.body.password)
-            .then(() => res.json({
-                success: 'Sikeres regisztráció',
-            }))
-            .catch(err => res.send(err));
-    },
+  profile: (req, res) => {
+    res.json({
+      user: req.user,
+    });
+  },
 
-    login: (req, res) => res.json({success:'Sikeres belépés'} ),
+  register: (req, res) => {
+    User.register(new User({
+      username: req.body.username,
+      email: req.body.email,
+    }), req.body.password)
+      .then(() => res.json({
+        success: 'Sikeres regisztráció',
+      }))
+      .catch(err => res.send(err));
+  },
 
-    logout: (req, res) => {
-        req.logout();
-        res.json({success:'Sikeres kilépés'});
-    },
+  login: (req, res) => res.json({
+    success: 'Sikeres belépés',
+  }),
 
-    updateProfile: (req, res) => {
-
-    },
-
-    updatePassword: (req, res) => {
-
-    },
-
-    deleteProfile: () => {
-
-    }
+  logout: (req, res) => {
+    req.logout();
+    res.json({
+      success: 'Sikeres kilépés',
+    });
+  },
 };

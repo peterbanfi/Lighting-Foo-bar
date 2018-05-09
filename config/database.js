@@ -1,12 +1,12 @@
 /*
-use blog
+use TESTDB
 db.createUser(
    {
-     user: "root",
-     pwd: "toor",
+     user: "USERFORTESTDB",
+     pwd: "USERPASSWORD",
      roles:
        [
-         { role: "readWrite", db: "blog" }
+         { role: "readWrite", db: "TESTDB" }
        ]
    }
 )
@@ -14,16 +14,16 @@ db.createUser(
 
 const host = 'localhost';
 const port = 27017;
-const user = 'USERFORTESTDB';
-const password = 'USERPASSWORD';
-const database = 'TESTDB';
+const user = 'root';
+const password = 'toor';
+const database = 'blog';
 
 module.exports = {
-//uri:  'mongodb://root:toor@localhost:27017/blog'
   uri: `mongodb://${user}:${password}@${host}:${port}/${database}`,
   options: {
     connectTimeoutMS: 5000,
     reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 500
+    reconnectInterval: 500,
+    useMongoClient: true,
   },
 };
