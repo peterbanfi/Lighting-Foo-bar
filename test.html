@@ -19,7 +19,7 @@
         function userFetch(url, method, data = '') {
             fetch('http://localhost:8080/user/' + url, {
                     method: method,
-                    credentials: 'same-origin',
+
                     body: JSON.stringify(data),
                     headers: {
                         'Accept': 'application/json',

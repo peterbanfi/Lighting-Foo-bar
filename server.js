@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieSession = require('cookie-session');
 const fs = require('fs');
 const path = require('path');
 const rfs = require('rotating-file-stream');
@@ -45,10 +46,9 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 
 // Session handling
-app.use(session({
+app.use(cookieSession({
     secret: 'YOUR_SECRET_KEY',
-    resave: true,
-    saveUninitialized: true,
+
     cookie: {
         secure: false,
         maxAge: 36000
