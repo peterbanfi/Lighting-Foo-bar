@@ -6,7 +6,7 @@ module.exports = {
             user: req.user,
         })
     },
-
+        
     register: (req, res) => {
         User.register(new User({
                 username: req.body.username,
@@ -18,17 +18,11 @@ module.exports = {
             .catch(err => res.send(err));
     },
 
-    login: (req, res) => res.json({
-        id: req.user._id,
-        username: req.user.username,
-        email: req.user.email,
-    }),
+    login: (req, res) => res.json({success:'Sikeres belépés'} ),
 
     logout: (req, res) => {
         req.logout();
-        res.json({
-            success: 'Kilépve',
-        });
+        res.json({success:'Sikeres kilépés'});
     },
 
     updateProfile: (req, res) => {

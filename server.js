@@ -38,13 +38,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false,
 }));
-app.use(cookieParser('secret'));
+// app.use(cookieParser('secret'));
 // Session handling
 app.use(
 	session(
 		{
             secret: 'secret',
-            resave: false,
+            resave: true,
             httpOnly: false,
             saveUninitialized: true,
             cookie : {
@@ -69,19 +69,20 @@ mongoose.connect(
     (err) => {
         console.error(`MongoDB error.:${err}`);
     },
-);
+);  
 
 // Enable CORS
-app.use(cors());
-  
+// app.use(cors());
+app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
+
 // User User router
 app.use('/user/', userRouter);
 app.use('/blogpost/', blogpostRouter);
 
 app.use(express.static('public'));
 app.get('/',(req,res) => 
-    res.sendFile(__dirname + '/view/index.html')
-);
+    res.json({success:'scuccess'})
+);  
 
 // Start server
 app.listen(port);
