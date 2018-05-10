@@ -1,12 +1,12 @@
 /*
-use TESTDB
+use blog
 db.createUser(
    {
-     user: "USERFORTESTDB",
-     pwd: "USERPASSWORD",
+     user: "root",
+     pwd: "toor",
      roles:
        [
-         { role: "readWrite", db: "TESTDB" }
+         { role: "readWrite", db: "blog" }
        ]
    }
 )

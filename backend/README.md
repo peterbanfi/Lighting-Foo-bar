@@ -1,47 +1,30 @@
 # TZPL (tanfolyam záró project leírás)
 
-## A projekt megnevezése/célja
-> __Webáruház__ létrehozása backend és frontend felülettel, teljes körű  felhasználókezeléssel.
-
-## Alapkövetelmények
-1. Az API javascript file-jainak 100%-ban meg kell felelnie a backend mappa 
-gyökérkönyvtárában található .eslintrc-ben definiált konvencióknak.
-2. A teljes projekt kódjának meg kell felelnie a Clean Code szabályainak.
-3. Használható, bőbeszédű README.md írása.
-4. Minimum 2 nézete legyen a frontend oldalaknak. Mobil, és desktop.
-5. A typescript kódodnak 100%-ban meg kell felelni az alapértelmezett Angularos TSlint
-szabályoknak.
-6. A css fájloknak a frontend mappa gyökerében található .stylelintrc szabályoknak meg kell felelnie.
-7. A REST API-t mind natívan kell tesztelni, Postman segítségével, mind pedig unit teszteket kell írni. A Unit tesztek során mindegyik metódusunknál a response státuszkódját, a kapott adat típusát,
-és értékeit is vizsgálni kell.
-Ha egy objektumot várunk vissza, akkor az objektum tulajdonságait külön vizsgáljuk le.
-Pl.: https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai 
+## A projekt célja
+> __Webáruház__ létrehozása backend és frontend felülettel, teljes körű 
+felhasználókezeléssel.
 
 ## Felhasznált eszközök
-* A csapatok számára github blueprint projektet biztosítunk kiindulási alapként. A kiinduló projetkben egy egyszerű
-felhasználó - blogbejegyzés típusú REST API van, felhasználói hitelesítéssel.
+* A csapatok számára github blueprint projektet biztosítunk kiindulási alapként.
 * MongoDB adatbáziskezelő.
-* NodeJS.
+* NodeJS backend oldali script.
 * Angular 5 (6) frontend oldali keretrendszer.
-* Bootstrap 4 (használható más CSS keretrendszer is, amely reszponzív megjelenést biztosít).
+* Bootstrap 4 (használható más CSS keretrendszer is, amely reszponzív 
+megjelenést biztosít).
 
 ## Az alkalmazás részei
-
-### Publikus oldalak
-
 
 ### Admin felület
 * Az admin-felületet csak bejelentkezés után lehet elérni.
 * __Dashboard:__ számokkal és grafikonon (google chart) is 
 megjelennek a rendszer főbb statisztikai adatai: felhasználók száma, termékek 
 száma, vásárlók száma. Példa: [SB Admin](https://blackrockdigital.github.io/startbootstrap-sb-admin/) 
-* __Vásárlók:__ vásárlók CRUD.
+* __Vásárlók:__ váráslók CRUD.
 * __Rendelések:__ beérkező rendelések CRUD. 
 * __Termékek:__ termékek CRUD.
 * __Hozzászólások:__ hozzászólás CRUD.
 * __Kategóriák:__ kategóriák CRUD.
-* __Felhasználók:__ CRUD, ahol az admin jogosultságú felhasználókat kezeljük. Az adatbázisba mentsd le
-role-ba ki az admin.
+* __Felhasználók:__ CRUD, ahol az admin jogosultságú felhasználókat kezeljük. 
   
 __Az entitások alapvető jellemzői:__  
 * A vásárlónál minimum tárolni kell: vezetéknév, keresztnév, email (ezzel lép be), 
@@ -52,7 +35,8 @@ mennyiséget, a vásárló azonosítóját, a vásárló külön megjegyzését,
 Vigyázz, a termékek tömbként fognak megjelenni a rendelésen belül, mivel egy 
 rendelés során több terméket is meg lehet rendelni.
 * A termékről tárolni kell: név, url (keresőbarát név), gyártó, aktív/inaktív, 
-mennyiségi egység, kép, aktuális ár, szállítási határidő (pld: 2 nap, 3 hét, stb...), raktárkészlet. 
+mennyiségi egység, kép, aktuális ár, 
+szállítási határidő (pld: 2 nap, 3 hét, stb...), raktárkészlet. 
 * A termékeket lehessen select segítségével kategóriákhoz rendelni. 
 * A hozzászólások a termékekhez kapcsolódnak. 
 * A felhasználók hozzászólásait lehessen jóváhagyni vagy elutasítani, 
@@ -64,7 +48,7 @@ jelszó, aktív/inaktív.
 
 ### Frontend felület (a bolt)
 > Alapvetően egy webáruház tetszőleges termékekkel.  
-
+  
 __Funkciók:__  
 * Felhasználó kezelés: regisztráció, bejelentkezés, kijelentkezés, 
 elfelejtett jelszó.
