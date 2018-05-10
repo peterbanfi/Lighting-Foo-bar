@@ -27,9 +27,6 @@ felhasználó - blogbejegyzés típusú REST API van, felhasználói hitelesít�
 
 ## Az alkalmazás részei
 
-### Publikus oldalak
-
-
 ### Admin felület
 * Az admin-felületet csak bejelentkezés után lehet elérni.
 * __Dashboard:__ számokkal és grafikonon (google chart) is 
@@ -88,4 +85,3 @@ tehát, ha például az a termék neve hogy: philips villanyborotva szakállvág
 akkor az a keresőbarát url amit tárolunk az adatbázisban hogy 'philips-villanyborotva-szakallvogóval', a kategória neve borotvák aminek az url 
 azaz keresőbarát címe a 'borotvak', tehát a teljes termék-url így fog kinézni:  
 _localhost:4200/borotvak/philips-villanyborotva-szakallvogóval_
-
