@@ -12,9 +12,9 @@ export class RegistrationComponent implements OnInit {
     username: '',
     email: '',
     password: '',
-    passwordConf: '',
     rights: true
   };
+  passwordConf: '';
 
   baseUrl = 'http://localhost:8080/user/register';
   constructor(public http: Http) { }
@@ -28,6 +28,18 @@ export class RegistrationComponent implements OnInit {
       .subscribe(data => {
         console.log(data['_body']);
       });
+  }
+
+  validation() {
+    if (this.user.username === '' || this.user.email === '' || this.user.password === '' || this.passwordConf === '') {
+      return alert('Please Fill the form!');
+    }
+    if (this.user.password !== this.passwordConf) {
+      return alert('Confirm your password!');
+    } else {
+      this.register();
+    }
+
   }
 
   selectChangeHandler(event: any) {
