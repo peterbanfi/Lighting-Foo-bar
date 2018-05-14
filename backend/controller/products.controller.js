@@ -5,14 +5,30 @@ mongoose.Promise = require('bluebird');
 module.exports = {
   list: (req, res) => {
     Products.find({})
-      .then(products => res.json(products))
-      .catch(err => res.send(err));
+      .then((products) => {
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(500).json({ error: products });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
   },
 
   find: (req, res) => {
     Products.findById(req.params.id)
-      .then(products => res.json(products))
-      .catch(err => res.send(err));
+      .then((products) => {
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(404).json({ message: 'Not a valid Id!' });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
   },
 
   create: (req, res) => {
@@ -24,19 +40,43 @@ module.exports = {
     }
 
     Products.create(body)
-      .then(products => res.send(products))
-      .catch(err => res.send(err));
+      .then((products) => {
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(500).json({ error: products });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
   },
 
   update: (req, res) => {
     Products.findByIdAndUpdate(req.params.id, req.body)
-      .then(products => res.json(products))
-      .catch(err => res.send(err));
+      .then((products) => {
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(404).json({ message: 'Not a valid Id!' });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
   },
 
   remove: (req, res) => {
     Products.findByIdAndRemove(req.params.id)
-      .then(products => res.json(products))
-      .catch(err => res.send(err));
+      .then((products) => {
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(404).json({ message: 'Not a valid Id!' });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
   },
 };
