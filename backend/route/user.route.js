@@ -4,8 +4,10 @@ const UserController = require('../controller/user.controller');
 
 userRouter.get('/profile', UserController.profile);
 userRouter.get('/listAll', UserController.listAll);
+userRouter.get('/getOne/:id', UserController.getOne);
 userRouter.delete('/remove/:id', UserController.remove);
 userRouter.post('/register', UserController.register);
+userRouter.put('/update/:id', UserController.update);
 userRouter.post('/login', passport.authenticate('local'), UserController.login);
 userRouter.get('/logout', UserController.logout);
 

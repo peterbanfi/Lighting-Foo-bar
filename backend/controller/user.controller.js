@@ -45,7 +45,9 @@ module.exports = {
     });
   },
 
-  /** Remove user  */
+  /** 
+   * Remove user  
+   * */
   remove: (req, res) => {
     User.findByIdAndRemove(req.params.id)
       .then(() => {
@@ -55,5 +57,33 @@ module.exports = {
       .catch((err) => {
         return res.status(200).send(err);
       });
+  },
+
+  /**
+   * Update User
+   */
+  update: (req, res) => {
+    req.body.updatedAt = new Date().toLocaleDateString();
+    User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+      if (err) {
+        res.send(err);
+        console.log(err);
+      }
+      res.json(post);
+    });
+  },
+
+  /**
+   * Find one user
+   */
+  getOne: (req, res, next) => {
+    User.findById(req.params.id)
+      .then((userFound) => {
+        if (!userFound) {
+          return res.status(404).end();
+        }
+        return res.status(200).json(userFound);
+      })
+      .catch(err => next(err));
   },
 };
