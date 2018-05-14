@@ -4,7 +4,7 @@ const orderRouter = express.Router();
 const orderController = require('../controller/order.controller');
 
 function loggedIn(req, res, next) {
-    if (req.user) {
+    if (req.user.rights) {
         next();
     } else {
         res.json({
