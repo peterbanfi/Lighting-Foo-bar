@@ -12,10 +12,16 @@ module.exports = {
  */
   register: (req, res) => {
     User.register(new User({
+<<<<<<< HEAD
       username: req.body.username,
       email: req.body.email,
       rights: req.body.rights,
     }), req.body.password)
+=======
+        username: req.body.username,
+        email: req.body.email,
+      }), req.body.password)
+>>>>>>> 7fe39763f4e8e75f28f3a34b56cc870dbb892627
       .then(() => res.json({
         success: 'Sikeres regisztráció',
       }))
