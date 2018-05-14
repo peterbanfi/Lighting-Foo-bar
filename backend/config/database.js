@@ -12,7 +12,6 @@ db.createUser(
 )
 */
 
-
 const password = '12345678';
 const user = 'foobar';
 
