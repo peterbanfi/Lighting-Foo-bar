@@ -7,7 +7,7 @@ module.exports = {
     });
   },
 
-/**
+  /**
  * felhasználói jogosultság beállítása
  */
   register: (req, res) => {
