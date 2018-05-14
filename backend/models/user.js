@@ -22,8 +22,10 @@ const userSchema = mongoose.Schema({
 
 /**
  * Beállítva az 5 elrontott próbálkozás után 3 percre kitiltás
+ * email címmel lehet belépni
  */
 userSchema.plugin(passportLocalMongoose, {
+  usernameField: 'email',
   maxAttempts: 5,
   interval: 3000 * 60,
   hashField: 'password',
