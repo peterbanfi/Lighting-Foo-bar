@@ -16,7 +16,14 @@ module.exports = {
   },
 
   create: (req, res) => {
-    Products.create(req.body)
+    let body = JSON.stringify(req.body);
+    body = JSON.parse(body);
+
+    if (req.file) {
+      body.productImg = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
+    }
+
+    Products.create(body)
       .then(products => res.send(products))
       .catch(err => res.send(err));
   },
