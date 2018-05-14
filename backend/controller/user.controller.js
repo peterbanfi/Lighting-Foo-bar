@@ -6,6 +6,10 @@ module.exports = {
       user: req.user,
     });
   },
+
+  /**
+   * összes regisztrált felhasználó listázása
+   */
   listAll: (req, res) => {
     User.find({}, (err, user) => {
       if (err) {

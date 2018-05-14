@@ -15,8 +15,8 @@ export class RegistrationComponent implements OnInit {
     rights: true
   };
   passwordConf: '';
-
   baseUrl = 'http://localhost:8080/user/register';
+
   constructor(public http: Http) { }
 
   ngOnInit() {
