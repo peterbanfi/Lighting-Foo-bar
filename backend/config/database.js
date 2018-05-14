@@ -12,14 +12,12 @@ db.createUser(
 )
 */
 
-const host = 'localhost';
-const port = 27017;
-const user = 'root';
-const password = 'toor';
-const database = 'blog';
+
+const password = '12345678';
+const user = 'foobar';
 
 module.exports = {
-  uri: `mongodb://${user}:${password}@${host}:${port}/${database}`,
+  uri: `mongodb://${user}:${password}@ds217970.mlab.com:17970/lightining-foobar`,
   options: {
     connectTimeoutMS: 5000,
     reconnectTries: Number.MAX_VALUE,
