@@ -8,6 +8,7 @@
         <th scope="col">Rights</th>
         <th scope="col">Created At</th>
         <th scope="col">Updated At</th>
+        <th scope="col">Controls</th>
       </tr>
     </thead>
     <tbody>
@@ -16,8 +17,12 @@
         <td>{{x.username}}</td>
         <td>{{x.email}}</td>
         <td>{{x.rights}}</td>
-        <td>{{x.createdAt}}</td>
-        <td>{{x.updatedAt}}</td>
+        <td>{{x.createdAt | date:'fullDate'}}</td>
+        <td>{{x.updatedAt | date:'fullDate'}}</td>
+        <td class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary">Update</button>
+          <button type="button" class="btn btn-secondary" (click)="removeUser(x._id, x.username)">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>

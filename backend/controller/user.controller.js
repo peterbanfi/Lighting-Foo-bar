@@ -44,4 +44,16 @@ module.exports = {
       success: 'Sikeres kilépés',
     });
   },
+
+  /** Remove user  */
+  remove: (req, res) => {
+    User.findByIdAndRemove(req.params.id)
+      .then(() => {
+
+        res.status(204).end();
+      })
+      .catch((err) => {
+        return res.status(200).send(err);
+      });
+  },
 };
