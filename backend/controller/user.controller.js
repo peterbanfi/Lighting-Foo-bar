@@ -6,6 +6,14 @@ module.exports = {
       user: req.user,
     });
   },
+  listAll: (req, res) => {
+    User.find({}, (err, user) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(user);
+    });
+  },
 
   /**
    * felhasználói jogosultság beállítása
