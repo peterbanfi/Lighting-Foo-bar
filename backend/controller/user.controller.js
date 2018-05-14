@@ -7,10 +7,14 @@ module.exports = {
     });
   },
 
+  /**
+   * felhasználói jogosultság beállítása
+   */
   register: (req, res) => {
     User.register(new User({
         username: req.body.username,
         email: req.body.email,
+        rights: req.body.rights,
       }), req.body.password)
       .then(() => res.json({
         success: 'Sikeres regisztráció',
