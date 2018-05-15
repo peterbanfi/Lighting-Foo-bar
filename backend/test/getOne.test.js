@@ -11,10 +11,10 @@ chai.use(chaiHttp);
  * testing listing
  */
 describe('User', () => {
-    describe('listAll()', () => {
+    describe('getOne()', () => {
         it('response statusCode equal to 200', (done) => {
             chai.request(baseUrl)
-                .get('/listAll')
+                .get('/getOne/5af978175590e71398bd7380')
                 .end((err, res) => {
                     expect(res).to.have.status(200);
                     done();
