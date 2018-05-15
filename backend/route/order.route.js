@@ -14,11 +14,11 @@ function loggedIn(req, res, next) {
 }
 
 orderRouter.route('/')
-    .get(orderController.list)
+    .get(loggedIn, orderController.list)
     .post(loggedIn, orderController.create);
 
 orderRouter.route('/:id')
-    .get(orderController.find)
+    .get(loggedIn, orderController.find)
     .put(loggedIn, orderController.update)
     .delete(loggedIn, orderController.remove);
 
