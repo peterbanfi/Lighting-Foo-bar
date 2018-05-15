@@ -12,6 +12,8 @@ import { AllUserComponent } from './all-user/all-user.component';
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 
 @NgModule({
@@ -22,13 +24,15 @@ import { ProductsComponent } from './products/products.component';
     AllUserComponent,
     HomeComponent,
     OrdersComponent,
-    ProductsComponent
+    ProductsComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2GoogleChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

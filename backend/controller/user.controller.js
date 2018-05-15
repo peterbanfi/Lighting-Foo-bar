@@ -37,7 +37,8 @@ module.exports = {
    * Egyszerű login
    */
   login: (req, res) => res.json({
-    success: 'Sikeres belépés',
+    login: true,
+    user: req.user.rights,
   }),
   /**
    * És logout
