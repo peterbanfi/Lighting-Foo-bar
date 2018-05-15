@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home
+          <a class="nav-link" routerLink="home" routerLinkActive="active">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
@@ -34,6 +34,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalLong">
+          <!-- <i class="fas fa-sign-in-alt"></i> -->
           Login
         </button>
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -43,10 +44,6 @@
     </div>
   </div>
 </nav>
-
-<!-- Modal -->
-<!-- Button trigger modal -->
-
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -59,14 +56,33 @@
         </button>
       </div>
       <div class="modal-body">
-        <label for="name">Username</label>
-        <input class="form-control" type="text" id="name" [(ngModel)]="user.username">
+
+        <label for="name">Email</label>
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-at"></i>
+            </div>
+            <input class="form-control" type="text" id="name" [(ngModel)]="user.username">
+          </div>
+        </div>
         <label for="password">Password</label>
-        <input class="form-control" type="password" id="password" [(ngModel)]="user.password">
-        <input type="button" class="btn btn-outline-success" value="Login" (click)="login()">
-        <input type="button" class="btn btn-outline-danger" value="Logout" (click)="logout()">
-        <input type="button" class="btn btn-outline-dark" value="Profil" (click)="profile()">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-key"></i>
+            </div>
+            <input class="form-control" type="password" placeholder="Password" required id="password" [(ngModel)]="user.password">
+          </div>
+        </div>
+        <hr>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <input type="button" class="btn btn-outline-success" value="Login" (click)="login()">
+          <input type="button" class="btn btn-outline-danger" value="Logout" (click)="logout()">
+          <input type="button" class="btn btn-outline-dark" value="Profil" (click)="profile()">
+        </div>
       </div>
+
       <div class="modal-footer">
         <a routerLink="registration" routerLinkActive="active">Registrate!</a>
       </div>
