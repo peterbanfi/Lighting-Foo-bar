@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+/**
+ * validator behúzása, telepítése
+ */
 const validator = require('validator');
 
 const userSchema = mongoose.Schema({
