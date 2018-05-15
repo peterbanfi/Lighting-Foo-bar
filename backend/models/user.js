@@ -12,12 +12,8 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  rights: {
-    type: Boolean,
-    required: true,
-  },
 }, {
-  timestamps: true,
+  timestamps: true
 });
 
 /**

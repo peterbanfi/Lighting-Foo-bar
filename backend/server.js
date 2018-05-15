@@ -13,7 +13,9 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
 const userRouter = require('./route/user.route');
-const orderRouter = require('./route/order.route');
+const blogpostRouter = require('./route/blogpost.route');
+const productsRouter = require('./route/products.route');
+const ordersRouter = require('./route/order.route');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
@@ -34,6 +36,9 @@ app.use(morgan('combined', {
 
 // Security
 app.use(helmet());
+
+// Product pictures folder
+app.use('/uploads', express.static('uploads'));
 
 // Body Parse middleware
 app.use(bodyParser.json());
@@ -76,8 +81,9 @@ app.use(cors({
 
 // User User router
 app.use('/user/', userRouter);
-//app.use('/products/', productRouter);
-app.use('/orders/', orderRouter);
+app.use('/blogpost/', blogpostRouter);
+app.use('/products/', productsRouter);
+app.use('/orders/', ordersRouter);
 
 // Start server
 app.listen(port);
