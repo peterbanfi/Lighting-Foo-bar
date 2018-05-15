@@ -33,20 +33,23 @@ module.exports = {
       }))
       .catch(err => res.send(err));
   },
-
+  /**
+   * Egyszerű login
+   */
   login: (req, res) => res.json({
     success: 'Sikeres belépés',
   }),
-
+  /**
+   * És logout
+   */
   logout: (req, res) => {
     req.logout();
     res.json({
       success: 'Sikeres kilépés',
     });
   },
-
   /** 
-   * Remove user  
+   * felhasználó törlése  
    * */
   remove: (req, res) => {
     User.findByIdAndRemove(req.params.id)
@@ -60,7 +63,7 @@ module.exports = {
   },
 
   /**
-   * Update User
+   * Update felhasznló
    */
   update: (req, res) => {
     req.body.updatedAt = new Date().toLocaleDateString();
@@ -74,7 +77,7 @@ module.exports = {
   },
 
   /**
-   * Find one user
+   * Egy bizonyos felhasználó keresése
    */
   getOne: (req, res, next) => {
     User.findById(req.params.id)
