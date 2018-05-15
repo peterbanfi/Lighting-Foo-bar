@@ -70,11 +70,10 @@ export class AllUserComponent implements OnInit {
     /**
      * A select ablakot beállítom userre ha user, vagy adminra, ha admin.
       */
-    if (this.modal.rights === false) {
-      document.getElementById('user').selected = true;
-    } else {
-      document.getElementById('admin').selected = true;
-    }
+    /*     if (this.modal.rights === false) {
+          document.getElementById('user').selected = true;
+        } else {
+          document.getElementById('admin').selected = true;
+        } */
   }
-
 }

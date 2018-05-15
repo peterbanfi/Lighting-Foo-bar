@@ -8,13 +8,17 @@ const baseUrl = 'http://localhost:8080/user';
 chai.use(chaiHttp);
 
 /**
- * testing finding specified user
+ * testing listing
  */
 describe('User', () => {
-    describe('getOne()', () => {
+    describe('login()', () => {
         it('response statusCode equal to 200', (done) => {
             chai.request(baseUrl)
-                .get('/getOne/5af98ca9a7580c1f4cb83099')
+                .post('/login')
+                .send({
+                    'username': 'admin@admin.com',
+                    'password': 'admin',
+                })
                 .end((err, res) => {
                     expect(res).to.have.status(200);
                     done();

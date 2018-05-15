@@ -8,15 +8,15 @@ const baseUrl = 'http://localhost:8080/user';
 chai.use(chaiHttp);
 
 /**
- * testing finding specified user
+ * testing listing
  */
 describe('User', () => {
-    describe('getOne()', () => {
-        it('response statusCode equal to 200', (done) => {
+    describe('remove()', () => {
+        it('response statusCode equal to 204', (done) => {
             chai.request(baseUrl)
-                .get('/getOne/5af98ca9a7580c1f4cb83099')
+                .delete('/remove/5af978175590e71398bd7380')
                 .end((err, res) => {
-                    expect(res).to.have.status(200);
+                    expect(res).to.have.status(204);
                     done();
                 });
         });
