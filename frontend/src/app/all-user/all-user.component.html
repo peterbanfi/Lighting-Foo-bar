@@ -66,8 +66,8 @@
             </span>
           </div>
           <select class="form-control" name="updatedRights" id="updatedRights" (change)="selectChangeHandler($event)">
-            <option id="admin" value="true">Admin</option>
-            <option id="user" value="false">User</option>
+            <option id="admin" value="true" [selected]="modal.rights === true">Admin</option>
+            <option id="user" value="false" [selected]="modal.rights === false">User</option>
           </select>
         </div>
       </div>
