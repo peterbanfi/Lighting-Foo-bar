@@ -12,17 +12,9 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-<<<<<<< HEAD
-}, { timestamps: true });
-=======
-  rights: {
-    type: Boolean,
-    required: true,
-  },
 }, {
-  timestamps: true,
+  timestamps: true
 });
->>>>>>> register2
 
 /**
  * Beállítva az 5 elrontott próbálkozás után 3 percre kitiltás
