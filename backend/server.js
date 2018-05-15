@@ -13,8 +13,11 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
 const userRouter = require('./route/user.route');
+<<<<<<< HEAD
 const blogpostRouter = require('./route/blogpost.route');
 const productsRouter = require('./route/products.route');
+=======
+>>>>>>> register2
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
@@ -65,8 +68,12 @@ passport.deserializeUser(User.deserializeUser());
 
 // Connect to MongoDB
 mongoose.connect(db.uri, db.options)
-  .then(() => { console.log('MongoDB connected.'); })
-  .catch((err) => { console.error(`MongoDB error.:${err}`); });
+  .then(() => {
+    console.log('MongoDB connected.');
+  })
+  .catch((err) => {
+    console.error(`MongoDB error.:${err}`);
+  });
 
 // Enable CORS
 app.use(cors({
@@ -76,8 +83,11 @@ app.use(cors({
 
 // User User router
 app.use('/user/', userRouter);
+<<<<<<< HEAD
 app.use('/blogpost/', blogpostRouter);
 app.use('/products/', productsRouter);
+=======
+>>>>>>> register2
 
 // Start server
 app.listen(port);

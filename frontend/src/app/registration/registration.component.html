@@ -1,0 +1,116 @@
+<div class="container">
+  <form class="form-horizontal" role="form" method="POST" action="/register">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h2>Register New User</h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="name">Username</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-user"></i>
+            </div>
+            <input type="text" name="name" class="form-control" id="username" placeholder="Username" required autofocus [(ngModel)]="user.username">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="email">E-Mail Address</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-at"></i>
+            </div>
+            <input type="text" name="email" class="form-control" id="email" placeholder="you@example.com" required autofocus [(ngModel)]="user.email">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put e-mail validation error messages here -->
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="password">Password</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group has-danger">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-key"></i>
+            </div>
+            <input type="password" name="password" class="form-control" id="passwordReg" placeholder="Password" required [(ngModel)]="user.password">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <i class="fa fa-close"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="password2">Confirm Password</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fas fa-reply"></i>
+            </div>
+            <input type="password" name="passwordConfirmation" class="form-control" id="passwordConfirm" placeholder="Password" required
+              [(ngModel)]="passwordConf">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <label for="exampleFormControlSelect1">Select rights:</label>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <select class="form-control" id="exampleFormControlSelect1" (change)="selectChangeHandler($event)">
+            <option value="true">Admin</option>
+            <option value="false">User</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <hr>
+        <button type="submit" class="btn btn-success" (click)="validation()">
+          <i class="fa fa-user-plus"></i> Register</button>
+      </div>
+    </div>
+  </form>
+</div>

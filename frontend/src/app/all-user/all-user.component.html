@@ -1,0 +1,80 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Rights</th>
+        <th scope="col">Created At</th>
+        <th scope="col">Updated At</th>
+        <th scope="col">Controls</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of datas index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{x.username}}</td>
+        <td>{{x.email}}</td>
+        <td>{{x.rights}}</td>
+        <td>{{x.createdAt | date:'fullDate'}}</td>
+        <td>{{x.updatedAt | date:'fullDate'}}</td>
+        <td class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal" (click)="modalChange(x._id)">Update</button>
+          <button type="button" class="btn btn-secondary" (click)="removeUser(x._id, x.username)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalTitle">Update User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="updatedUsername">Username</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span id="inputGroupPrepend" class="input-group-text">
+              <span class="fas fa-user" aria-hidden="true"></span>
+            </span>
+          </div>
+          <input class="form-control" name="updatedUsername" type="text" id="updateUsername" [(ngModel)]="modal.username" value="{{modal.username}}">
+        </div>
+        <label for="updatedEmail">E-mail</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span id="inputGroupPrepend" class="input-group-text">
+              <span aria-hidden="true">@</span>
+            </span>
+          </div>
+          <input class="form-control" name="updatedEmail" type="text" id="updateEmail" [(ngModel)]="modal.email" value="{{modal.email}}">
+        </div>
+
+        <label for="updatedRights">Rights</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span id="inputGroupPrepend" class="input-group-text">
+              <span class="fas fa-users-cog" aria-hidden="true"></span>
+            </span>
+          </div>
+          <select class="form-control" name="updatedRights" id="updatedRights" (change)="selectChangeHandler($event)">
+            <option id="admin" value="true" [selected]="modal.rights === true">Admin</option>
+            <option id="user" value="false" [selected]="modal.rights === false">User</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
+        <input type="button" class="btn btn-outline-success" value="Save" (click)="update()">
+      </div>
+    </div>
+  </div>
+</div>
