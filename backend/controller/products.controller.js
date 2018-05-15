@@ -77,6 +77,14 @@ module.exports = {
   remove: (req, res) => {
     Products.findByIdAndRemove(req.params.id)
       .then((products) => {
+        let imgRoute = products.productImg;
+        imgRoute = imgRoute.substring(22);
+        console.log(imgRoute);
+
+        fs.unlink(imgRoute, (err) => {
+          if (err) throw err;
+        });
+
         if (products) {
           res.status(200).json(products);
         } else {
