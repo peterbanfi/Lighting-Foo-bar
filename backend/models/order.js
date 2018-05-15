@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const orderSchema = mongoose.Schema({
-    userid: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
     products: [{
-        productid: {
+        product: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product',
             required: true
@@ -16,10 +16,7 @@ const orderSchema = mongoose.Schema({
             type: Number,
             required: true
         }
-    }],
-    updatedBy: {
-        type: String
-    }
+    }]
 }, {
     timestamps: true,
 });

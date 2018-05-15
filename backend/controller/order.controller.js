@@ -4,23 +4,37 @@ mongoose.Promise = require('bluebird');
 
 module.exports = {
     list: (req, res) => {
-        Order.find({})
-            .populate('product', 'productName productPrice')
+        Order.find()
             .populate('user', 'username')
+            .populate('products.product', 'productName productPrice')
+            .exec()
             .then(orders => res.json(orders))
             .catch(err => res.send(err));
     },
 
     find: (req, res) => {
         Order.findById(req.params.id)
+            .populate('user', 'username')
+            .populate('products.product', 'productName productPrice')
+            .exec()
             .then(order => res.json(order))
             .catch(err => res.send(err));
     },
 
     create: (req, res) => {
         Order.create(req.body)
-            .then(order => res.send(order))
-            .catch(err => res.send(err));
+            .then(order => {
+                if (order) {
+                    res.status(200).json(order);
+                } else {
+                    res.status(500).json({
+                        error: order
+                    });
+                }
+            })
+            .catch(err => res.status(500).json({
+                error: err
+            }));
     },
 
     update: (req, res) => {

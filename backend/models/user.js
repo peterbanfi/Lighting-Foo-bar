@@ -42,12 +42,4 @@ userSchema.plugin(passportLocalMongoose, {
   },
 });
 
-<<
-<< << < HEAD
-module.exports = mongoose.model('User', userSchema); ===
-=== =
-
 module.exports = mongoose.model('User', userSchema);
-
->>>
->>> > 67 ab51b1e77fa8259264c72127001d3eaed1ad0d
