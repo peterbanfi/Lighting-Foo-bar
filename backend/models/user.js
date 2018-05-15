@@ -11,9 +11,7 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-}, {
-  timestamps: true,
-});
+}, { timestamps: true });
 
 userSchema.plugin(passportLocalMongoose, {
   maxAttempts: 5,
