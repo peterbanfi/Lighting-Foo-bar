@@ -12,12 +12,8 @@ const cors = require('cors');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
-const userRouter = require('./route/user.route'); <<
-<< << < HEAD
-const blogpostRouter = require('./route/blogpost.route');
-const productsRouter = require('./route/products.route'); ===
-=== = >>>
->>> > register2
+const userRouter = require('./route/user.route');
+const productsRouter = require('./route/products.route');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
@@ -83,7 +79,6 @@ app.use(cors({
 
 // User User router
 app.use('/user/', userRouter);
-app.use('/blogpost/', blogpostRouter);
 app.use('/products/', productsRouter);
 
 // Start server
