@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -8,9 +9,9 @@ import { Http, RequestOptions } from '@angular/http';
 })
 export class StatisticsComponent implements OnInit {
   pieChartData = {
-    chartType: 'ColumnChart',
+    chartType: 'LineChart',
     dataTable: [
-      ['Orders', 'Orders Per Month'],
+      ['Orders', 'Orders Per Day'],
     ],
     options: {
       'title': 'Orders',
@@ -20,17 +21,23 @@ export class StatisticsComponent implements OnInit {
     },
   };
   datas: any;
+  datas2: any;
+  datas3: any;
   baseUrl = 'http://localhost:8080/orders/';
-
+  allIncome = 0;
+  numberOfUsers = 0;
+  numberOfProducts = 0;
 
   constructor(public http: Http) {
+
     this.getAll();
+    this.listAllUser();
+    this.listAllProduct();
   }
 
   ngOnInit() {
+
   }
-
-
   /**
    * A rendelések lekérése.
    */
@@ -44,7 +51,28 @@ export class StatisticsComponent implements OnInit {
       }
     );
   }
-
+  /**
+   * Hány regisztrált fehasználója van az oldalnak?
+   */
+  listAllUser() {
+    this.http.get(`http://localhost:8080/user/listAll`)
+      .subscribe(data => {
+        this.datas2 = JSON.parse(data['_body']);
+        this.numberOfUsers = this.datas2.length;
+      }
+      );
+  }
+  /**
+   * Hány termékünk van?
+   */
+  listAllProduct() {
+    this.http.get(`http://localhost:8080/products/`)
+      .subscribe(data => {
+        this.datas3 = JSON.parse(data['_body']);
+        this.numberOfProducts = this.datas3.length;
+      }
+      );
+  }
   /**
    * Az egyes rendelések értékét számolja össze.
    * @param data A leadott rendelések.
@@ -60,11 +88,11 @@ export class StatisticsComponent implements OnInit {
       }
       if (i !== 0) {
         this.pieChartData.dataTable[i][1] = allPrice;
+        this.allIncome = this.allIncome + allPrice;
       }
     }
     this.checkSameDays(this.pieChartData);
   }
-
   /**
    * checkSameDays -> Azonos napon leadott rendelések vizsgálása, és összeadása.
    * @param data A leadott rendelések.
@@ -83,7 +111,6 @@ export class StatisticsComponent implements OnInit {
       }
     }
   }
-
   /**
   * setDate -> Átalakítja a dátumot, és beállítja a grafikonnak tetsző formátumba.
   * @param date A Rendelések dátuma.
@@ -93,8 +120,6 @@ export class StatisticsComponent implements OnInit {
       data[i].createdAt = this.convertDate(data[i].createdAt);
     }
   }
-
-
   /**
    * convertDate -> Kiveszi a rendelés időpontját, + megvizsgálja, hogy az aktuális hónapban lett-e leadva
    *                Ha nem, akkor nem kerül be a chartba.
@@ -112,7 +137,6 @@ export class StatisticsComponent implements OnInit {
       return false;
     }
   }
-
   /**
    * getDays -> A rendelések dátumából, kiveszi a napot, és azt állítja be a grafikonba.
    * @param date A Rendelések dátuma.

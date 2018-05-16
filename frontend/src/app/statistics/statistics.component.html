@@ -1,6 +1,20 @@
 <div class="container">
-  <p>statistics
-  </p>
+  <div class="row">
+    <div class="col-4">
+      <h6>Registered users: </h6>
+      <h1>{{numberOfUsers}}</h1>
+    </div>
+    <div class="col-4">
+      <h6>All income this month: </h6>
+      <h1>{{allIncome}} Ft</h1>
+    </div>
+    <div class="col-4">
+      <h6>Number of products: </h6>
+      <h1>{{numberOfProducts}}</h1>
+    </div>
+
+  </div>
+
 
   <google-chart [data]="pieChartData"></google-chart>
 </div>
