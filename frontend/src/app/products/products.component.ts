@@ -119,14 +119,3 @@ export class ProductsComponent implements OnInit {
   }
 
 }
-
-// interface Products {
-//   _id: String;
-//   updatedAt: Date;
-//   createdAt: Date;
-//   productName: String;
-//   productUrl: String;
-//   productPrice: Number;
-//   productManufacturer: String;
-//   productImg?: String;
-// }
