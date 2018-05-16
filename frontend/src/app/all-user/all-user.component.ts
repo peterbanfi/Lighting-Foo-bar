@@ -66,7 +66,6 @@ export class AllUserComponent implements OnInit {
       console.error('API error:' + res.error);
     } else {
       this.datas = res;
-      console.log(this.datas);
     }
   }
   /**

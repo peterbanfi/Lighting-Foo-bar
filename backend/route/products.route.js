@@ -63,7 +63,7 @@ productsRouter.route('/')
 
 productsRouter.route('/:id')
     .get(productsController.find)
-    .put(loggedIn, productsController.update)
+    .put(loggedIn, upload.single('productImg'), productsController.update)
     .delete(loggedIn, productsController.remove);
 
 module.exports = productsRouter;

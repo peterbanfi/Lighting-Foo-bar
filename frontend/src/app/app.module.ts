@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderService } from './order.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ProductsComponent } from './products/products.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     RegistrationComponent,
     AllUserComponent,
     HomeComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

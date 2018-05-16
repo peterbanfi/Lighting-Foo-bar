@@ -1,16 +1,13 @@
 const Products = require('../models/products');
 const mongoose = require('mongoose');
+const fs = require('fs');
 mongoose.Promise = require('bluebird');
 
 module.exports = {
   list: (req, res) => {
     Products.find({})
       .then((products) => {
-        if (products) {
-          res.status(200).json(products);
-        } else {
-          res.status(500).json({ error: products });
-        }
+        res.status(200).json(products);
       })
       .catch((err) => {
         res.status(500).json({ error: err });
@@ -41,11 +38,7 @@ module.exports = {
 
     Products.create(body)
       .then((products) => {
-        if (products) {
-          res.status(200).json(products);
-        } else {
-          res.status(500).json({ error: products });
-        }
+        res.status(200).json(products);
       })
       .catch((err) => {
         res.status(500).json({ error: err });
@@ -53,8 +46,23 @@ module.exports = {
   },
 
   update: (req, res) => {
-    Products.findByIdAndUpdate(req.params.id, req.body)
+    let body = JSON.stringify(req.body);
+    body = JSON.parse(body);
+
+    if (req.file) {
+      body.productImg = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
+    }
+
+    Products.findByIdAndUpdate(req.params.id, body)
       .then((products) => {
+        let imgRoute = products.productImg;
+        imgRoute = imgRoute.substring(22);
+        console.log(imgRoute);
+
+        fs.unlink(imgRoute, (err) => {
+          if (err) throw err;
+        });
+
         if (products) {
           res.status(200).json(products);
         } else {
@@ -69,6 +77,14 @@ module.exports = {
   remove: (req, res) => {
     Products.findByIdAndRemove(req.params.id)
       .then((products) => {
+        let imgRoute = products.productImg;
+        imgRoute = imgRoute.substring(22);
+        console.log(imgRoute);
+
+        fs.unlink(imgRoute, (err) => {
+          if (err) throw err;
+        });
+
         if (products) {
           res.status(200).json(products);
         } else {
