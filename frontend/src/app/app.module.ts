@@ -15,6 +15,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { HttpProductsService } from './http-products.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { InterceptorModule } from './interceptor/interceptor.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    InterceptorModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger'
     })

@@ -61,7 +61,6 @@ export class ProductsComponent implements OnInit {
     }
     this.http.post(`${this.domain}`, body)
       .then(res => {
-        console.log(res);
         location.reload();
       });
   }
@@ -72,7 +71,6 @@ export class ProductsComponent implements OnInit {
     const array = [];
     this.http.getSingle(domain)
       .then((res) => {
-        console.log(res);
         array.push(res);
         this.product = array.map(doc => ({
           _id: doc['_id'],
@@ -96,12 +94,10 @@ export class ProductsComponent implements OnInit {
     body.append('productManufacturer', this.product[0].productManufacturer);
     body.append('productUrl', this.product[0].productUrl);
     if (this.selectedFile) {
-      console.log(this.selectedFile.name);
       body.append('productImg', this.selectedFile, this.selectedFile.name);
     }
     this.http.put(`${domain}`, body)
       .then(res => {
-        console.log(res);
         location.reload();
       });
   }
@@ -112,7 +108,6 @@ export class ProductsComponent implements OnInit {
 
     this.http.delete(domain)
       .then(res => {
-        console.log(res);
         location.reload();
       });
 
