@@ -11,6 +11,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AllUserComponent } from './all-user/all-user.component';
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderService } from './order.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,9 +28,10 @@ import { OrdersComponent } from './orders/orders.component';
     BrowserModule,
     HttpModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

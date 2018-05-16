@@ -4,22 +4,33 @@ const orderRouter = express.Router();
 const orderController = require('../controller/order.controller');
 
 function loggedIn(req, res, next) {
+    if (req.user) {
+        isAdmin(req, res, next);
+        //next();
+    } else {
+        res.json({
+            error: 'Be kell jelentkezned.'
+        });
+    }
+}
+
+function isAdmin(req, res, next) {
     if (req.user.rights) {
         next();
     } else {
         res.json({
-            error: 'Be kell jelentkezned'
+            error: 'A kéréshez nem rendelkezel a kellő jogosultsággal.'
         });
     }
 }
 
 orderRouter.route('/')
-    .get(loggedIn, orderController.list)
-    .post(loggedIn, orderController.create);
+    .get(orderController.list)
+    .post(orderController.create);
 
 orderRouter.route('/:id')
-    .get(loggedIn, orderController.find)
-    .put(loggedIn, orderController.update)
-    .delete(loggedIn, orderController.remove);
+    .get(orderController.find)
+    .put(orderController.update)
+    .delete(orderController.remove);
 
 module.exports = orderRouter;
