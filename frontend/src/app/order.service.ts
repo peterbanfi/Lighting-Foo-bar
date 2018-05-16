@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
+
 
 @Injectable()
 export class OrderService {
-  Orders: any;
-  Products: any;
-  Users: any;
-  constructor(public http: Http) {
-    this.getAll();
-  }
+  constructor(public http: HttpClient) { }
 
   getAll() {
-    this.http.get(`http://localhost:8080/orders/`).forEach(data =>
+    /*this.http.get(`http://localhost:8080/orders/`).forEach(data =>
       this.Orders = JSON.parse(data['_body']));
-    /*this.http.get(`http://localhost:8080/products/`).subscribe(
+    this.http.get(`http://localhost:8080/products/`).subscribe(
       data => this.Products = JSON.parse(data['_body']));
     this.http.get(`http://localhost:8080/user/listAll`).subscribe(
       data => this.Users = JSON.parse(data['_body']));*/

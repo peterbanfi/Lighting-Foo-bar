@@ -35,14 +35,14 @@ const upload = multer({
 
 function loggedIn(req, res, next) {
   /*
-      Checks if there's anyone logged in
-      */
+        Checks if there's anyone logged in
+        */
   if (req.user) {
     let user = JSON.stringify(req.user);
     user = JSON.parse(user);
     /*
-            Checks if the user logged in is an Admin
-            */
+                Checks if the user logged in is an Admin
+                */
     if (user.rights) {
       next();
     } else {

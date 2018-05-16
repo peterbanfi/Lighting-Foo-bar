@@ -24,6 +24,7 @@ export class OrdersComponent implements OnInit {
   Products: any;
   Users: any;
   newOrder: any = { products: [] };
+  newOrderDisplay: any = { products: [], total: 0 };
   addNewProductToOrder: any = {};
   orderToUpdate: any = {};
 
@@ -43,13 +44,15 @@ export class OrdersComponent implements OnInit {
 
   // Place a new order with the data of newOrder
   placeOrder() {
-    this.http.post(`${this.baseUrl}`, this.newOrder);
+    this.http.post(this.baseUrl, JSON.stringify(this.newOrder));
+    this.newOrder = { products: [] };
     location.reload();
   }
 
   // Update order specified by order ID.
   updateOrder() {
     this.http.put(`${this.baseUrl}${this.orderToUpdate['_id']}`, this.orderToUpdate);
+    this.orderToUpdate = {};
     location.reload();
   }
 
@@ -63,14 +66,32 @@ export class OrdersComponent implements OnInit {
 
   // Add product to the new order
   addProduct() {
-    this.newOrder.products.push(this.addNewProductToOrder);
+    const qty = this.addNewProductToOrder.quantity;
+    const price = this.addNewProductToOrder.productPrice;
+    this.newOrder.products.push({
+      product: this.addNewProductToOrder._id,
+      quantity: qty
+    });
+    this.newOrderDisplay.products
+      .push({
+        name: this.addNewProductToOrder.productName,
+        quantity: qty,
+        product: {
+          productPrice: price
+        }
+      });
+    this.newOrderDisplay.total += price * qty;
     this.addNewProductToOrder = {};
-    console.log(this.newOrder);
+    // console.log(this.newOrder);
+    // console.log(this.newOrderDisplay);
   }
 
   // Delete product from the new order
   deleteProduct(i: number) {
+    const product = this.newOrderDisplay.products[i];
+    this.newOrderDisplay.total -= product.quantity * product.product.productPrice;
     this.newOrder.products.splice(i, 1);
+    this.newOrderDisplay.products.splice(i, 1);
   }
 
   // Select order to be updated

@@ -34,57 +34,90 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="placeOrderModalTitle">Update User</h5>
+        <h5 class="modal-title" id="placeOrderModalTitle">Place new order</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-5">
+          <div class="col-2">
             <label for="orderingUsername">Username</label>
           </div>
-          <div class="col-7">
+          <div class="col-10">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span id="inputGroupPrepend" class="input-group-text">
                   <span class="fas fa-user" aria-hidden="true"></span>
                 </span>
               </div>
-              <select class="form-control" id="orderingUsername" name="orderingUsername" [(ngModel)]="newOrder.username">
-                <option *ngFor="let user of Users" value="[[user._id]]">{{user.username}}</option>
+              <select class="form-control" id="orderingUsername" name="orderingUsername" [(ngModel)]="newOrder.user" required>
+                <option *ngFor="let user of Users" [ngValue]="user._id">{{user.username}}</option>
               </select>
             </div>
           </div>
         </div>
-        <label for="orderNewProduct">E-mail</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span id="inputGroupPrepend" class="input-group-text">
-              <span class="fas fa-beer" aria-hidden="true"></span>
-            </span>
+        <br>
+        <div class="row">
+          <div class="col-2">
+            <label for="orderNewProduct">Beverage</label>
           </div>
-          <select class="form-control" id="orderNewProduct" name="orderNewProduct" [(ngModel)]="addNewProductToOrder.id">
-            <option *ngFor="let product of Products" value="[[product._id]]">{{product.productName}}</option>
-          </select>
+          <div class="col-8">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span id="inputGroupPrepend" class="input-group-text">
+                  <span class="fas fa-beer" aria-hidden="true"></span>
+                </span>
+              </div>
+              <select class="form-control" id="orderNewProduct" name="orderNewProduct" [(ngModel)]="addNewProductToOrder" required>
+                <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+product.productPrice+' HUF'}}</option>
+              </select>
+              <input type="number" class="form-control tableinput" name="newProductQuantity" id="newProductQuantity" [(ngModel)]="addNewProductToOrder.quantity"
+                min="1" max="1000" value="1" required>
+            </div>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-default" (click)="addProduct()">Add</button>
+          </div>
         </div>
-
-        <label for="updatedRights">Rights</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span id="inputGroupPrepend" class="input-group-text">
-              <span class="fas fa-users-cog" aria-hidden="true"></span>
-            </span>
-          </div>
-          <select class="form-control" name="updatedRights" id="updatedRights" (change)="selectChangeHandler($event)">
-            <option id="admin" value="true" [selected]="orderToUpdate.rights === true">Admin</option>
-            <option id="user" value="false" [selected]="orderToUpdate.rights === false">User</option>
-          </select>
+        <br>
+        <div class="row">
+          <table class="table">
+            <thead>
+              <th scope="col">Product name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Subtotal</th>
+              <th></th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of newOrderDisplay.products index as i">
+                <td>
+                  {{product.name}}
+                </td>
+                <td>
+                  {{product.product.productPrice + ' HUF'}}
+                </td>
+                <td>
+                  {{product.quantity}}
+                </td>
+                <td>
+                  {{product.product.productPrice * product.quantity + ' HUF'}}
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="deleteProduct(i)">Remove</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="modal-footer">
+        <p>
+          Total: {{newOrderDisplay.total}} HUF
+        </p>
         <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
-        <input type="button" class="btn btn-outline-success" value="Save" (click)="update()">
+        <input type="button" class="btn btn-outline-success" value="Place order" (click)="placeOrder()">
       </div>
     </div>
   </div>
