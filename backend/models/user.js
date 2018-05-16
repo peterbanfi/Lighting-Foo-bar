@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+/**
+ * validator behúzása, telepítése
+ */
+const validator = require('validator');
 
 const userSchema = mongoose.Schema({
   username: {
@@ -12,6 +16,13 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+<<<<<<< HEAD
+=======
+  rights: {
+    type: Boolean,
+    required: true,
+  },
+>>>>>>> admin
 }, {
   timestamps: true
 });
@@ -19,12 +30,25 @@ const userSchema = mongoose.Schema({
 /**
  * Beállítva az 5 elrontott próbálkozás után 3 percre kitiltás
  * email címmel lehet belépni
+ * a jelszónak min 8 karakternek kell lennie
  */
 userSchema.plugin(passportLocalMongoose, {
   usernameField: 'email',
   maxAttempts: 5,
   interval: 3000 * 60,
   hashField: 'password',
+  passwordValidator: (password, cb) => {
+    if (!validator.isLength(password, 8)) {
+      return cb({code: 400, message: 'A megadott jelszónak legalább 8 karakter hosszúnak kell lennie.' });
+    }
+    return cb(null);
+  },
 });
 
+<<<<<<< HEAD
 module.exports = mongoose.model('User', userSchema);
+=======
+
+module.exports = mongoose.model('User', userSchema);
+
+>>>>>>> admin
