@@ -5,15 +5,15 @@
       <thead>
         <tr>
           <th class="sort-th">ID</th>
-          <th class="sort-th">productName</th>
-          <th class="sort-th">productPrice</th>
-          <th class="sort-th">productManufacturer</th>
-          <th class="sort-th">productUrl</th>
-          <th class="sort-th">createdAt</th>
-          <th class="sort-th">updatedAt</th>
-          <th class="sort-th">productImg</th>
+          <th class="sort-th">Terméknév</th>
+          <th class="sort-th">Ár</th>
+          <th class="sort-th">Gyártó</th>
+          <th class="sort-th">Kulcsszavak</th>
+          <th class="sort-th">Feltöltve</th>
+          <th class="sort-th">Frissítve</th>
+          <th class="sort-th">Kép</th>
           <th>
-            <button id="listAll" (click)="list()" class="btn btn-success">Összes listázása</button>
+            <button id="listAll" (click)="list()" class="btn btn-success">Lista Frissítés</button>
           </th>
         </tr>
       </thead>
@@ -53,8 +53,8 @@
           <td>{{ product.productPrice }}</td>
           <td>{{ product.productManufacturer }}</td>
           <td>{{ product.productUrl }}</td>
-          <td>{{ product.createdAt }}</td>
-          <td>{{ product.updatedAt }}</td>
+          <td>{{ product.createdAt | date }}</td>
+          <td>{{ product.updatedAt | date }}</td>
           <td>
             <img src="{{ product.productImg }}" alt="{{ product.productName }}" height="100" />
           </td>
@@ -78,7 +78,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form *ngFor='let field of product'>
           <div class="form-group">
             <label for="prodId">ID</label>
             <input id="prodId" type="text" name='prodId' [(ngModel)]="product[0]._id" disabled class="form-control" />
@@ -102,12 +102,12 @@
           </div>
           <div class="form-group">
             <label for="prodCreatedAt">Feltöltve</label>
-            <input id="prodCreatedAt" type="text" name='prodCreatedAt' [(ngModel)]="product[0].createdAt" disabled class="form-control"
+            <input id="prodCreatedAt" type="text" name='prodCreatedAt' value='{{ product[0].createdAt | date }}' disabled class="form-control"
             />
           </div>
           <div class="form-group">
             <label for="prodUpdatedAt">Frissítve</label>
-            <input id="prodUpdatedAt" type="text" name='prodUpdatedAt' [(ngModel)]="product[0].updatedAt" disabled class="form-control"
+            <input id="prodUpdatedAt" type="text" name='prodUpdatedAt' value='{{ product[0].updatedAt | date }}' disabled class="form-control"
             />
           </div>
           <img src="{{ product[0].productImg }}" alt="{{ product[0].productName }}" height="100" />
