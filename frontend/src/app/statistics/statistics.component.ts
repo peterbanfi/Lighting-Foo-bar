@@ -13,13 +13,15 @@ export class StatisticsComponent implements OnInit {
   pieChartData: any = {
     chartType: 'LineChart',
     dataTable: [
-      ['Orders', 'Orders Per Day'],
+      ['Orders', 'Total amount of orders per day'],
     ],
     options: {
-      'title': 'Orders',
+      'title': 'All Orders This Month',
       is3D: true,
-      'width': 600,
-      'height': 600
+      curveType: 'function',
+      legend: { position: 'bottom' },
+      'width': 1000,
+      'height': 800
     },
   };
   datas: any;
