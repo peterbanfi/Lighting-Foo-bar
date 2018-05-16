@@ -13,7 +13,7 @@ export class StatisticsComponent implements OnInit {
       ['Orders', 'Orders Per Month'],
     ],
     options: {
-      'title': 'Tasks',
+      'title': 'Orders',
       is3D: true,
       'width': 600,
       'height': 600
@@ -21,6 +21,8 @@ export class StatisticsComponent implements OnInit {
   };
   datas: any;
   baseUrl = 'http://localhost:8080/orders/';
+
+
   constructor(public http: Http) {
     this.getAll();
   }
@@ -28,6 +30,10 @@ export class StatisticsComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  /**
+   * A rendelések lekérése.
+   */
   getAll() {
     this.http.get(this.baseUrl).subscribe(
       (data) => {
@@ -39,50 +45,81 @@ export class StatisticsComponent implements OnInit {
     );
   }
 
+  /**
+   * Az egyes rendelések értékét számolja össze.
+   * @param data A leadott rendelések.
+   */
   countOrders(data) {
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let num = 0;
-    let desk = [];
-    let counter = [];
-    console.log(data);
-    for (let j = 0; j < data.length; j++) {
-      for (let month = 0; month < months.length; month++) {
-        if (month !== data[j].createdAt) {
-
-        }
-        if (month === data[j].createdAt) {
-          num++;
-        }
-        counter = [months[month], num];
-        desk.push(counter);
-        num = 0;
+    for (let i = 0; i < data.length - 1; i++) {
+      let allPrice = 0;
+      for (let j = 0; j < data[i].products.length; j++) {
+        const quantity = data[i].products[j].quantity;
+        const price = data[i].products[j].product.productPrice;
+        const multiply = quantity * price;
+        allPrice = allPrice + multiply;
+      }
+      if (i !== 0) {
+        this.pieChartData.dataTable[i][1] = allPrice;
       }
     }
-    for (let k = 0; k < desk.length; k++) {
-      this.pieChartData['dataTable'].push(desk[k]);
-    }
-    console.log(this.pieChartData);
+    this.checkSameDays(this.pieChartData);
   }
 
+  /**
+   * checkSameDays -> Azonos napon leadott rendelések vizsgálása, és összeadása.
+   * @param data A leadott rendelések.
+   */
+  checkSameDays(data) {
+    for (let i = 1; i < data.dataTable.length; i++) {
+      for (let j = 1; j < data.dataTable.length; j++) {
+        if (data.dataTable[i] !== data.dataTable[j]) {
+          const num1 = parseInt(data.dataTable[i][0], 2);
+          const num2 = parseInt(data.dataTable[j][0], 2);
+          if (num1 === num2) {
+            this.pieChartData.dataTable[i][1] = this.pieChartData.dataTable[i][1] + this.pieChartData.dataTable[j][1];
+            this.pieChartData.dataTable.splice(j, 1);
+          }
+        } else { }
+      }
+    }
+  }
+
+  /**
+  * setDate -> Átalakítja a dátumot, és beállítja a grafikonnak tetsző formátumba.
+  * @param date A Rendelések dátuma.
+  */
   setDate(data) {
     for (let i = 0; i < data.length; i++) {
       data[i].createdAt = this.convertDate(data[i].createdAt);
     }
   }
 
+
+  /**
+   * convertDate -> Kiveszi a rendelés időpontját, + megvizsgálja, hogy az aktuális hónapban lett-e leadva
+   *                Ha nem, akkor nem kerül be a chartba.
+   * @param date A Rendelések dátuma.
+   */
   convertDate(date) {
-    const dayArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const originalDate = new Date(date);
-    const year = originalDate.getFullYear();
     const month = originalDate.getMonth();
-    const day = originalDate.getDate();
-    const hour = originalDate.getHours();
-    const minutes = originalDate.getMinutes();
-    const seconds = originalDate.getSeconds();
-    //date = `${year}. ${month}. ${day}. ${hour}:${minutes}:${seconds}`;
-    date = month;
-    return date;
+    const dateCheck = new Date();
+    const dateNow = dateCheck.getMonth();
+    if (month === dateNow) {
+      this.getDays(date);
+      return true;
+    } else {
+      return false;
+    }
   }
 
-
+  /**
+   * getDays -> A rendelések dátumából, kiveszi a napot, és azt állítja be a grafikonba.
+   * @param date A Rendelések dátuma.
+   */
+  getDays(date) {
+    const originalDate = new Date(date);
+    const day = originalDate.getDate().toString();
+    this.pieChartData['dataTable'].push([`${day}`, 10]);
+  }
 }

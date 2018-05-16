@@ -38,6 +38,7 @@ export class RegistrationComponent implements OnInit {
       return alert('Confirm your password!');
     } else {
       this.register();
+      alert('Thank you! You can login now!');
     }
 
   }
