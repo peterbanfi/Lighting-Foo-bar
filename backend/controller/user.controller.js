@@ -28,10 +28,10 @@ module.exports = {
       email: req.body.email,
       rights: req.body.rights,
     }), req.body.password)
-      .then(() => res.json({
-        success: 'Sikeres regisztráció',
-      }))
-      .catch(err => res.send(err));
+      .then(user => res.json(user))
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
   },
   /**
    * Egyszerű login
@@ -44,21 +44,22 @@ module.exports = {
    */
   logout: (req, res) => {
     req.logout();
-    res.json({
+    res.status(200).json({
       success: 'Sikeres kilépés',
     });
   },
-  /** 
-   * felhasználó törlése  
+  /**
+   * felhasználó törlése
    * */
   remove: (req, res) => {
     User.findByIdAndRemove(req.params.id)
       .then(() => {
-
-        res.status(204).end();
+        res.status(200).json({
+          success: 'Sikeres törlés',
+        });
       })
       .catch((err) => {
-        return res.status(200).send(err);
+        return res.status(500).send(err);
       });
   },
 
