@@ -12,13 +12,13 @@
           <a class="nav-link" routerLink="home" routerLinkActive="active">Home
           </a>
         </li>
-        <li class="nav-item" *ngIf="!user.rigths && user">
+        <li class="nav-item" *ngIf="!user.rigths">
           <a class="nav-link" routerLink="users" routerLinkActive="active">User</a>
         </li>
-        <li class="nav-item" *ngIf="!user.rights && user">
+        <li class="nav-item" *ngIf="user.rights">
           <a class="nav-link" routerLink="orders" routerLinkActive="active">Orders</a>
         </li>
-        <li class="nav-item" *ngIf="user; else exampleModalLong">
+        <li class="nav-item">
           <a class="nav-link" routerLink="products" routerLinkActive="active">Products</a>
         </li>
         <li class="nav-item dropdown">
