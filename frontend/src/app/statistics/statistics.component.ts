@@ -8,7 +8,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
   styleUrls: ['./statistics.component.css']
 })
 export class StatisticsComponent implements OnInit {
-  pieChartData = {
+  pieChartData: any = {
     chartType: 'LineChart',
     dataTable: [
       ['Orders', 'Orders Per Day'],
@@ -48,6 +48,7 @@ export class StatisticsComponent implements OnInit {
         this.datas = data;
         this.setDate(data);
         this.countOrders(data);
+        console.log(this.pieChartData.dataTable);
       }
     );
   }
@@ -144,6 +145,6 @@ export class StatisticsComponent implements OnInit {
   getDays(date) {
     const originalDate = new Date(date);
     const day = originalDate.getDate().toString();
-    this.pieChartData['dataTable'].push([`${day}`, 10]);
+    this.pieChartData['dataTable'].push([`${day}`, 0]);
   }
 }
