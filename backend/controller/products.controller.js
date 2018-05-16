@@ -97,8 +97,16 @@ module.exports = {
   remove: (req, res) => {
     Products.findByIdAndRemove(req.params.id)
       .then((products) => {
-        let imgRoute = products.productImg;
-        imgRoute = imgRoute.substring(22);
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(404).json({ message: 'Not a valid Id!' });
+        }
+        let imgRoute = '';
+        if (products.productImg) {
+          imgRoute = products.productImg;
+          imgRoute = imgRoute.substring(22);
+        }
 
         fs.exists(imgRoute, (exists) => {
           if (exists) {
@@ -107,12 +115,6 @@ module.exports = {
             });
           }
         });
-
-        if (products) {
-          res.status(200).json(products);
-        } else {
-          res.status(404).json({ message: 'Not a valid Id!' });
-        }
       })
       .catch((err) => {
         res.status(500).json({ error: err });
