@@ -89,15 +89,16 @@ export class ProductsComponent implements OnInit {
   }
 
   put() {
-    const domain = `${this.domain}/${this.product[0]._id}`;
+    const domain = `${this.domain}/${this.product[0]['_id']}`;
     const body = new FormData();
-    body.append('productName', this.product[0].productName);
-    body.append('productPrice', this.product[0].productPrice);
-    body.append('productManufacturer', this.product[0].productManufacturer);
-    body.append('productUrl', this.product[0].productUrl);
+    body.append('productName', this.product[0]['productName']);
+    body.append('productPrice', this.product[0]['productPrice']);
+    body.append('productManufacturer', this.product[0]['productManufacturer']);
+    body.append('productUrl', this.product[0]['productUrl']);
     if (this.selectedFile) {
       body.append('productImg', this.selectedFile, this.selectedFile.name);
     }
+    console.log(body);
     this.http.put(`${domain}`, body)
       .then(() => location.reload())
       .catch((err) => {
@@ -107,7 +108,7 @@ export class ProductsComponent implements OnInit {
 
 
   delete() {
-    const domain = `${this.domain}/${this.product[0]._id}`;
+    const domain = `${this.domain}/${this.product[0]['_id']}`;
 
     this.http.delete(domain)
       .then(() => location.reload())
