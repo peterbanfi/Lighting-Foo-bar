@@ -8,7 +8,7 @@
 #### Felhasználó kezelés (Admin, Vásárlók)
 
 Nyilvántartjuk a felhasználók adatait MongoDB adatbázisban. 
-A felhasználók közt megkülönböztetünk admin-okat, aki minden funkcióhoz rendelkeznek jogosultsággal, és felhasználót, akik a webáruház vásárlói. Ők csak a saját adataikat szerkeszthetik, előzetes vásárlásaikat látják.
+A felhasználók közt megkülönböztetünk adminokat, aki minden funkcióhoz rendelkeznek jogosultsággal, és felhasználót, akik a webáruház vásárlói. Ők csak a saját adataikat szerkeszthetik, előzetes vásárlásaikat látják.
 A felhasználókról elsősorban a nevét, email címét, és jelszavát tároljuk regisztrációkor. 
 
 A felhasználók authenktikációja (regisztráció, belépés, kilépés) alkalmával az alábbi elvásárokat vettük figyelembe, illetve kerültek beállításra:
@@ -88,9 +88,9 @@ __Oldalak/Funkciók:__
   - felhasználók száma, 
   - termékek száma,
   - adott havi bevétel megjelenítése (számmal és grafikonon (google-chart használatával) is, napokra bontva) 
-- __Rendelések:__ beérkező rendelések CRUD. 
-- __Termékek:__ termékek CRUD. Képfeltöltés is lehetséges az adott termékhez.
-- __Felhasználók:__ 
+- __Orders:__ beérkező rendelések CRUD. 
+- __Products:__ termékek CRUD. Képfeltöltés is lehetséges az adott termékhez.
+- __Users:__ 
   - CRUD, ahol az admin, és a user jogosultságú felhasználókat is kezeljük
   - az admin felhasználók a regisztrált emberek jogosultságát módosítani tudják egy egyszerű select segítségével. 
 
