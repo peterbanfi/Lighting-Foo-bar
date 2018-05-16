@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 @Component({
   selector: 'app-statistics',
@@ -28,7 +29,7 @@ export class StatisticsComponent implements OnInit {
   numberOfUsers = 0;
   numberOfProducts = 0;
 
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
 
     this.getAll();
     this.listAllUser();
@@ -44,11 +45,10 @@ export class StatisticsComponent implements OnInit {
   getAll() {
     this.http.get(this.baseUrl).subscribe(
       (data) => {
-        data = JSON.parse(data['_body']);
+        data = data;
         this.datas = data;
         this.setDate(data);
         this.countOrders(data);
-        console.log(this.pieChartData.dataTable);
       }
     );
   }
@@ -58,7 +58,7 @@ export class StatisticsComponent implements OnInit {
   listAllUser() {
     this.http.get(`http://localhost:8080/user/listAll`)
       .subscribe(data => {
-        this.datas2 = JSON.parse(data['_body']);
+        this.datas2 = data;
         this.numberOfUsers = this.datas2.length;
       }
       );
@@ -69,7 +69,7 @@ export class StatisticsComponent implements OnInit {
   listAllProduct() {
     this.http.get(`http://localhost:8080/products/`)
       .subscribe(data => {
-        this.datas3 = JSON.parse(data['_body']);
+        this.datas3 = data;
         this.numberOfProducts = this.datas3.length;
       }
       );

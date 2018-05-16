@@ -14,7 +14,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
     FormsModule,
     AppRoutingModule,
     Ng2GoogleChartsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
