@@ -15,13 +15,9 @@ log
 npm-debug.log
 node_modules
 
-<<<<<<< HEAD
 package-lock.json
 
 uploads
 *.jpg
 *.jpeg
 *.png
-=======
-package-lock.json
->>>>>>> admin

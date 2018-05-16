@@ -16,11 +16,11 @@ A felhasználókról elsősorban a nevét, email címét, és jelszavát tárolj
 A felhasználók authenktikációja (regisztráció, belépés, kilépés) alkalmával az alábbi elvásárokat vettük figyelembe, illetve kerültek beállításra:
 
 * __regisztráció:__ 
-  A regisztráció során a felhasználó nevét, email címét, és jelszavát (duplán) kell megadnia. Vizsgáljuk, hogy a két jelszó megeggyezik e.
+  A regisztráció során a felhasználó nevét, email címét, és jelszavát (duplán) kell megadnia. Vizsgáljuk, hogy a két jelszó megegyezik e.
   A jelszónak minimum 8 karakter hosszúnak kell lennie(ehhez telepíteni kellett a 'validator'-t).
 
 * __bejelentkezés:__ 
-  Emailcím, és jelszó alapján történik a belépés. 
+  Email cím, és jelszó alapján történik a belépés. 
   5 elrontott kísérlet után blokkoljuk 3 percre a bejelentkezést.
 
 
@@ -47,7 +47,7 @@ Rendelések nyilvántartása.
 __Adatok:__
 
 * rendelés azonosító
-* ki, azaz melyik user
+* ki, azaz melyik felhasználó
 * mikor
 * milyen termékeket
 * milyen mennyiségben
@@ -55,14 +55,14 @@ __Adatok:__
 
 __Funkciók__: 
 
-* rendelést leadni csak belépett user tud
+* rendelést leadni csak belépett regisztrált, belépett felhasználó tud
 * rendelést módosítani, törölni csak admin tud
 
 ### Frontend
 
 #### Admin felület
 
-El kell készítened Angular + Bootstrap segítségével a responsive, szabadon választott, de igényesen, esztétikusan megtervezett admin felületet a REST API-hoz.
+Angular + Bootstrap segítségével létrehoztunk egy responsive, igényesen, esztétikusan megtervezett admin felületet a REST API-hoz.
 
 Az admin-felületet csak bejelentkezés után lehet elérni az admin jogosultságúaknak.
 
