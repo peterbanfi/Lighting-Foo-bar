@@ -71,11 +71,23 @@ mongoose.connect(db.uri, db.options)
     console.error(`MongoDB error.:${err}`);
   });
 
+// CORS for frontend
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'lazyUpdate, normalizedNames, headers, Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE');
+    return res.status(200).json({});
+  }
+  return next();
+});
+
 // Enable CORS
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:4200',
-}));
+// app.use(cors({
+//   credentials: true,
+//   origin: 'http://localhost:4200',
+// }));
 
 // User User router
 app.use('/user/', userRouter);

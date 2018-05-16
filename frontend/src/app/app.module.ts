@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NavComponent } from './nav/nav.component';
@@ -12,6 +13,8 @@ import { AllUserComponent } from './all-user/all-user.component';
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
+import { HttpProductsService } from './http-products.service';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 
 @NgModule({
@@ -27,10 +30,14 @@ import { ProductsComponent } from './products/products.component';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger'
+    })
   ],
-  providers: [],
+  providers: [HttpProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

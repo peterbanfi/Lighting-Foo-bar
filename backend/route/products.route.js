@@ -55,11 +55,14 @@ function loggedIn(req, res, next) {
 
 productsRouter.route('/')
   .get(productsController.list)
-  .post(loggedIn, upload.single('productImg'), productsController.create);
+  .post(upload.single('productImg'), productsController.create);
+// .post(loggedIn, upload.single('productImg'), productsController.create);
 
 productsRouter.route('/:id')
   .get(productsController.find)
-  .put(loggedIn, upload.single('productImg'), productsController.update)
-  .delete(loggedIn, productsController.remove);
+  .put(upload.single('productImg'), productsController.update)
+  .delete(productsController.remove);
+// .put(loggedIn, upload.single('productImg'), productsController.update)
+// .delete(loggedIn, productsController.remove);
 
 module.exports = productsRouter;
