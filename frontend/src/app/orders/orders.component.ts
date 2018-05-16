@@ -5,13 +5,12 @@ import { OrderService } from '../order.service';
 
 @Pipe({ name: 'total' })
 export class TotalPipe implements PipeTransform {
-  constructor() { }
-  transform(order) {
+  transform(order: any) {
     let total = 0;
     for (let i = 0; i < order.products.length; i++) {
       total += order.products[i].product.productPrice * order.products[i].quantity;
     }
-    return total;
+    return `${total} HUF`;
   }
 }
 @Component({
