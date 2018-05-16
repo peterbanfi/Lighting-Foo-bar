@@ -8,7 +8,6 @@ const fs = require('fs');
 const path = require('path');
 const rfs = require('rotating-file-stream');
 const helmet = require('helmet');
-const cors = require('cors');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
@@ -83,15 +82,26 @@ app.use((req, res, next) => {
   return next();
 });
 
-// Enable CORS
-// app.use(cors({
-//   credentials: true,
-//   origin: 'http://localhost:4200',
-// }));
-
 // User User router
 app.use('/user/', userRouter);
 app.use('/products/', productsRouter);
+
+// 404 error handling
+app.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+// 500 error
+app.use((error, req, res) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
 
 // Start server
 app.listen(port);

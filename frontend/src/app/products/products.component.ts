@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit {
   };
   selectedFile: File = null;
   deleted: Boolean = false;
+  error: String = '';
 
   constructor(private http: HttpProductsService) {
 
@@ -60,8 +61,9 @@ export class ProductsComponent implements OnInit {
       body.append('productImg', this.selectedFile, this.selectedFile.name);
     }
     this.http.post(`${this.domain}`, body)
-      .then(res => {
-        location.reload();
+      .then(() => location.reload())
+      .catch((err) => {
+        alert(err.error.error);
       });
   }
 
@@ -97,8 +99,9 @@ export class ProductsComponent implements OnInit {
       body.append('productImg', this.selectedFile, this.selectedFile.name);
     }
     this.http.put(`${domain}`, body)
-      .then(res => {
-        location.reload();
+      .then(() => location.reload())
+      .catch((err) => {
+        alert(err.error.error);
       });
   }
 
@@ -107,8 +110,9 @@ export class ProductsComponent implements OnInit {
     const domain = `${this.domain}/${this.product[0]._id}`;
 
     this.http.delete(domain)
-      .then(res => {
-        location.reload();
+      .then(() => location.reload())
+      .catch((err) => {
+        alert(err.error.error);
       });
 
   }
