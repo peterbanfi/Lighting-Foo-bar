@@ -16,7 +16,7 @@
         <td>{{order.user.username}}</td>
         <td>{{order.createdAt | date:'fullDate'}}</td>
         <td>{{order.updatedAt | date:'fullDate'}}</td>
-        <td>{{order}}</td>
+        <td>{{order | total}}</td>
         <td class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal" (click)="selectOrderToUpdate(order)">Order Details</button>
           <button type="button" class="btn btn-secondary" (click)="deleteOrder(order)">Delete Order</button>
