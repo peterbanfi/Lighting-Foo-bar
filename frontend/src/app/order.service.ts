@@ -7,10 +7,13 @@ export class OrderService {
   Orders: any;
   Products: any;
   Users: any;
-  constructor(public http: Http) { }
+  constructor(public http: Http) {
+    this.getAll();
+  }
 
   getAll() {
-    return this.http.get(`http://localhost:8080/orders/`);
+    this.http.get(`http://localhost:8080/orders/`).forEach(data =>
+      this.Orders = JSON.parse(data['_body']));
     /*this.http.get(`http://localhost:8080/products/`).subscribe(
       data => this.Products = JSON.parse(data['_body']));
     this.http.get(`http://localhost:8080/user/listAll`).subscribe(

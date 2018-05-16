@@ -8,9 +8,6 @@
         <th scope="col">Updated At</th>
         <th scope="col">Total</th>
         <th scope="col">Controls</th>
-        <th scope="col">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#placeOrderModal">New Order</button>
-        </th>
       </tr>
     </thead>
     <tbody>
@@ -20,9 +17,9 @@
         <td>{{order.createdAt | date:'fullDate'}}</td>
         <td>{{order.updatedAt | date:'fullDate'}}</td>
         <td>{{order | total}}</td>
-        <td colspan="2" class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#updateModal" (click)="selectOrderToUpdate(order)">Order Details</button>
-          <button type="button" class="btn btn-danger" (click)="deleteOrder(order)">Delete Order</button>
+        <td class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal" (click)="selectOrderToUpdate(order)">Order Details</button>
+          <button type="button" class="btn btn-secondary" (click)="deleteOrder(order)">Delete Order</button>
         </td>
       </tr>
     </tbody>
@@ -40,22 +37,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-5">
-            <label for="orderingUsername">Username</label>
+        <label for="orderingUsername">Username</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span id="inputGroupPrepend" class="input-group-text">
+              <span class="fas fa-user" aria-hidden="true"></span>
+            </span>
           </div>
-          <div class="col-7">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span id="inputGroupPrepend" class="input-group-text">
-                  <span class="fas fa-user" aria-hidden="true"></span>
-                </span>
-              </div>
-              <select class="form-control" id="orderingUsername" name="orderingUsername" [(ngModel)]="newOrder.username">
-                <option *ngFor="let user of Users" value="[[user._id]]">{{user.username}}</option>
-              </select>
-            </div>
-          </div>
+          <select class="form-control" id="orderingUsername" name="orderingUsername" [(ngModel)]="newOrder.username">
+            <option *ngFor="let user of Users" value="[[user._id]]">{{user.username}}</option>
+          </select>
         </div>
         <label for="orderNewProduct">E-mail</label>
         <div class="input-group">

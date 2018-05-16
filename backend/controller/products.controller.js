@@ -10,7 +10,9 @@ module.exports = {
         res.status(200).json(products);
       })
       .catch((err) => {
-        res.status(500).json({ error: err });
+        res.status(500).json({
+          error: err,
+        });
       });
   },
 
@@ -20,11 +22,15 @@ module.exports = {
         if (products) {
           res.status(200).json(products);
         } else {
-          res.status(404).json({ message: 'Not a valid Id!' });
+          res.status(404).json({
+            message: 'Not a valid Id!',
+          });
         }
       })
       .catch((err) => {
-        res.status(500).json({ error: err });
+        res.status(500).json({
+          error: err,
+        });
       });
   },
 
@@ -41,7 +47,9 @@ module.exports = {
         res.status(200).json(products);
       })
       .catch((err) => {
-        res.status(500).json({ error: err });
+        res.status(500).json({
+          error: err,
+        });
       });
   },
 
@@ -66,11 +74,15 @@ module.exports = {
         if (products) {
           res.status(200).json(products);
         } else {
-          res.status(404).json({ message: 'Not a valid Id!' });
+          res.status(404).json({
+            message: 'Not a valid Id!',
+          });
         }
       })
       .catch((err) => {
-        res.status(500).json({ error: err });
+        res.status(500).json({
+          error: err,
+        });
       });
   },
 
@@ -88,11 +100,15 @@ module.exports = {
         if (products) {
           res.status(200).json(products);
         } else {
-          res.status(404).json({ message: 'Not a valid Id!' });
+          res.status(404).json({
+            message: 'Not a valid Id!',
+          });
         }
       })
       .catch((err) => {
-        res.status(500).json({ error: err });
+        res.status(500).json({
+          error: err,
+        });
       });
   },
 };

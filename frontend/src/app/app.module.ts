@@ -10,7 +10,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { AllUserComponent } from './all-user/all-user.component';
 import { HomeComponent } from './home/home.component';
-import { OrdersComponent } from './orders/orders.component';
+import { OrdersComponent, TotalPipe } from './orders/orders.component';
 import { OrderService } from './order.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './products/products.component';
@@ -24,7 +24,8 @@ import { ProductsComponent } from './products/products.component';
     AllUserComponent,
     HomeComponent,
     OrdersComponent,
-    ProductsComponent
+    ProductsComponent,
+    TotalPipe
   ],
   imports: [
     BrowserModule,

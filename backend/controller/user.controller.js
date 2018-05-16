@@ -48,18 +48,15 @@ module.exports = {
       success: 'Sikeres kilépés',
     });
   },
-  /** 
-   * felhasználó törlése  
+  /**
+   * felhasználó törlése
    * */
   remove: (req, res) => {
     User.findByIdAndRemove(req.params.id)
       .then(() => {
-
         res.status(204).end();
       })
-      .catch((err) => {
-        return res.status(200).send(err);
-      });
+      .catch(err => res.status(200).send(err));
   },
 
   /**
