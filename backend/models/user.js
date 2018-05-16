@@ -12,9 +12,11 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-}, {
-  timestamps: true
-});
+  rights: {
+    type: Boolean,
+    required: true,
+  },
+}, { timestamps: true });
 
 /**
  * Beállítva az 5 elrontott próbálkozás után 3 percre kitiltás
