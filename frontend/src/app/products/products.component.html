@@ -53,8 +53,8 @@
           <td>{{ product.productPrice }}</td>
           <td>{{ product.productManufacturer }}</td>
           <td>{{ product.productUrl }}</td>
-          <td>{{ product.createdAt | date }}</td>
-          <td>{{ product.updatedAt | date }}</td>
+          <td>{{ product.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ product.updatedAt | date:'yyyy-MM-dd HH:mm' }}</td>
           <td>
             <img src="{{ product.productImg }}" alt="{{ product.productName }}" height="100" />
           </td>
@@ -102,12 +102,12 @@
           </div>
           <div class="form-group">
             <label for="prodCreatedAt">Feltöltve</label>
-            <input id="prodCreatedAt" type="text" name='prodCreatedAt' value='{{ product[0].createdAt | date }}' disabled class="form-control"
+            <input id="prodCreatedAt" type="text" name='prodCreatedAt' value='{{ product[0].createdAt | date:"yyyy-MM-dd HH:mm" }}' disabled class="form-control"
             />
           </div>
           <div class="form-group">
             <label for="prodUpdatedAt">Frissítve</label>
-            <input id="prodUpdatedAt" type="text" name='prodUpdatedAt' value='{{ product[0].updatedAt | date }}' disabled class="form-control"
+            <input id="prodUpdatedAt" type="text" name='prodUpdatedAt' value='{{ product[0].updatedAt | date:"yyyy-MM-dd HH:mm" }}' disabled class="form-control"
             />
           </div>
           <img src="{{ product[0].productImg }}" alt="{{ product[0].productName }}" height="100" />
