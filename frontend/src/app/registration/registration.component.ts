@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,7 @@ export class RegistrationComponent implements OnInit {
   passwordConf: '';
   baseUrl = 'http://localhost:8080/user/register';
 
-  constructor(public http: Http) { }
+  constructor(public http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -26,7 +27,7 @@ export class RegistrationComponent implements OnInit {
     console.log(this.user);
     this.http.post(this.baseUrl, this.user)
       .subscribe(data => {
-        console.log(data['_body']);
+        console.log(data);
       });
   }
 
@@ -39,6 +40,7 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.register();
       alert('Thank you! You can login now!');
+      window.location.href = 'http://localhost:4200/home';
     }
 
   }

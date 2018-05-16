@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -28,6 +29,8 @@ export class StatisticsComponent implements OnInit {
   allIncome = 0;
   numberOfUsers = 0;
   numberOfProducts = 0;
+  datas4: any = [];
+  datas5: any = [];
 
   constructor(public http: HttpClient) {
 
@@ -45,10 +48,10 @@ export class StatisticsComponent implements OnInit {
   getAll() {
     this.http.get(this.baseUrl).subscribe(
       (data) => {
-        data = data;
+        console.log(data);
         this.datas = data;
-        this.setDate(data);
-        this.countOrders(data);
+        this.setDate(this.datas);
+        this.countOrders(this.datas5);
       }
     );
   }
@@ -79,7 +82,7 @@ export class StatisticsComponent implements OnInit {
    * @param data A leadott rendelések.
    */
   countOrders(data) {
-    for (let i = 0; i < data.length - 1; i++) {
+    for (let i = 0; i < data.length; i++) {
       let allPrice = 0;
       for (let j = 0; j < data[i].products.length; j++) {
         const quantity = data[i].products[j].quantity;
@@ -87,26 +90,33 @@ export class StatisticsComponent implements OnInit {
         const multiply = quantity * price;
         allPrice = allPrice + multiply;
       }
-      if (i !== 0) {
-        this.pieChartData.dataTable[i][1] = allPrice;
-        this.allIncome = this.allIncome + allPrice;
-      }
+      this.datas4[i][1] = allPrice;
+      this.allIncome = this.allIncome + allPrice;
     }
-    this.checkSameDays(this.pieChartData);
+
+    this.checkSameDays(this.datas4);
+    this.populateChart(this.datas4);
+
+  }
+
+  populateChart(data) {
+    for (let i = 0; i < data.length; i++) {
+      this.pieChartData.dataTable.push(data[i]);
+    }
   }
   /**
    * checkSameDays -> Azonos napon leadott rendelések vizsgálása, és összeadása.
    * @param data A leadott rendelések.
    */
   checkSameDays(data) {
-    for (let i = 1; i < data.dataTable.length; i++) {
-      for (let j = 1; j < data.dataTable.length; j++) {
-        if (data.dataTable[i] !== data.dataTable[j]) {
-          const num1 = parseInt(data.dataTable[i][0], 2);
-          const num2 = parseInt(data.dataTable[j][0], 2);
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data.length; j++) {
+        if (data[i] !== data[j]) {
+          const num1 = data[i][0];
+          const num2 = data[j][0];
           if (num1 === num2) {
-            this.pieChartData.dataTable[i][1] = this.pieChartData.dataTable[i][1] + this.pieChartData.dataTable[j][1];
-            this.pieChartData.dataTable.splice(j, 1);
+            this.datas4[i][1] = this.datas4[i][1] + this.datas4[j][1];
+            this.datas4.splice(j, 1);
           }
         } else { }
       }
@@ -118,7 +128,7 @@ export class StatisticsComponent implements OnInit {
   */
   setDate(data) {
     for (let i = 0; i < data.length; i++) {
-      data[i].createdAt = this.convertDate(data[i].createdAt);
+      this.convertDate(data[i].createdAt, data[i]);
     }
   }
   /**
@@ -126,17 +136,16 @@ export class StatisticsComponent implements OnInit {
    *                Ha nem, akkor nem kerül be a chartba.
    * @param date A Rendelések dátuma.
    */
-  convertDate(date) {
+  convertDate(date, data) {
     const originalDate = new Date(date);
     const month = originalDate.getMonth();
     const dateCheck = new Date();
     const dateNow = dateCheck.getMonth();
     if (month === dateNow) {
       this.getDays(date);
-      return true;
-    } else {
-      return false;
-    }
+      this.datas5.push(data);
+
+    } else { }
   }
   /**
    * getDays -> A rendelések dátumából, kiveszi a napot, és azt állítja be a grafikonba.
@@ -144,7 +153,7 @@ export class StatisticsComponent implements OnInit {
    */
   getDays(date) {
     const originalDate = new Date(date);
-    const day = originalDate.getDate().toString();
-    this.pieChartData['dataTable'].push([`${day}`, 0]);
+    const day = originalDate.getDate();
+    this.datas4.push([day, '']);
   }
 }
