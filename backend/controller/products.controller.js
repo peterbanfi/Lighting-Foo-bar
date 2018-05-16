@@ -48,7 +48,6 @@ module.exports = {
   update: (req, res) => {
     let body = JSON.stringify(req.body);
     body = JSON.parse(body);
-    console.log(body);
     if (req.file) {
       body.productImg = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
     }
@@ -56,8 +55,6 @@ module.exports = {
     if (!body.productImg) {
       Products.findById(req.params.id)
         .then((products) => {
-          console.log(products);
-          console.log(products.productImg);
           body.productImg = products.productImg;
         })
         .then(Products.findByIdAndUpdate(req.params.id, body)
@@ -76,7 +73,6 @@ module.exports = {
         .then((products) => {
           let imgRoute = products.productImg;
           imgRoute = imgRoute.substring(22);
-          console.log(imgRoute);
 
           fs.exists(imgRoute, (exists) => {
             if (exists) {
@@ -103,7 +99,6 @@ module.exports = {
       .then((products) => {
         let imgRoute = products.productImg;
         imgRoute = imgRoute.substring(22);
-        console.log(imgRoute);
 
         fs.exists(imgRoute, (exists) => {
           if (exists) {
