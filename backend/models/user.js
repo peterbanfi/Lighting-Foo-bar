@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
+/**
+ * validator behúzása, telepítése
+ */
 const validator = require('validator');
 
 const userSchema = mongoose.Schema({
@@ -13,8 +16,12 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  rights: {
+    type: Boolean,
+    required: true,
+  },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
 /**
@@ -31,7 +38,7 @@ userSchema.plugin(passportLocalMongoose, {
     if (!validator.isLength(password, 8)) {
       return cb({
         code: 400,
-        message: 'A megadott jelszónak legalább 8 karakter hosszúnak kell lennie.'
+        message: 'A megadott jelszónak legalább 8 karakter hosszúnak kell lennie.',
       });
     }
     return cb(null);

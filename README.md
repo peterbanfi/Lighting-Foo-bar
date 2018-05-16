@@ -1,55 +1,26 @@
 # TZPL (tanfolyam záró project leírás)
 
 ## A projekt megnevezése
-> __Webáruház__ létrehozása backend és frontend felülettel,  felhasználókezeléssel.
-
-## A projekt leírása
-A projekt során el kell készítenetek egy komplett webáruház backend, és frontend  részét. 
-A backend részt NodeJS + express  segítségével kell megvalósítani. 
-A frontend oldali részhez Angular 5 (vagy 6),  és bootstrap 4 keretrendszereket kell használni. Az adatokat MongoDB-be kell tárolni.
-Az adott részek részletes leírására a spinteknél kerül sor.
-A két sprint github-os commitja kerülnek értékelésre, tehát egyénileg, mindenki munkája ellenőrizve lesz. Legalább nap végén pusholjatok mindig, mert enélkül nem tudjuk a munkátokat elfogadni. A projekt maga a gyakorlati záróvizsgátok, tehát ennek az értékelése, és a CooSpace-es teszt teszik ki a teljes záróvizsgátokat. A vizsga akkor sikeres, ha mind az elméleti, mind a gyakorlati rész sikeres, azaz eléri a 70%-ot.
+> __Szesz-pressz Webáruház__ létrehozása backend és frontend felülettel,  felhasználókezeléssel.
 
 ## 1. Sprint
-Az első _sprint_ célja a rendelkezésre bocsájtott REST API alapján egy teljes értékű szerveroldali forráskód, valamint egy ezen API-t használó Angular segítségével írt webes admin felület létrehozása.
-A sprint végén be kell mutatni az elkészült forráskódot, a megírt teszteket (PostMan, mocha + chai), a működő admin felületet, mely teljesíti a webáruház következő funkcióit:
-
-### Alapkövetelmények
-
-1. Az API javascript file-jainak 100%-ban meg kell felelnie a backend mappa gyökérkönyvtárában található .eslintrc-ben definiált konvencióknak.
-2. A projekt során tartsd szem előtt a Clean Code szabályait.
-3. Használható, bőbeszédű README.md írása.
-4. A REST API-t mind natívan kell tesztelni, Postman segítségével, mind pedig unit teszteket kell írni. A Unit tesztek során mindegyik metódusunknál a response státuszkódját, a kapott adat típusát, és értékeit is vizsgálni kell.
-    Ha egy objektumot várunk vissza, akkor az objektum tulajdonságait külön vizsgáljuk le.
-    Pl.: https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai 
-5. Minimum 2 nézete legyen a frontend oldalaknak. Mobil, és desktop.
-6. A typescript kódodnak 100%-ban meg kell felelni az alapértelmezett Angularos TSlint
-   szabályoknak. 
-7. A css fájloknak a frontend mappa gyökerében található .stylelintrc szabályoknak meg kell felelnie.
-8. A css class elnevezéseknél használd a BEM metodikát.
-9. A szerveroldali javascript kódoknál használd az osztályok/objektumok, metódusok dokumentáláshoz a jsDoc által megkövetelt formátumot. A projekt végén a jsDoc segítségével kigenerált html formátumú dokumentációt is be kell mutatni.
-
-__Figyelem__: A Tslint, Stylelint, Eslint plugint telepítsétek a VSCodeba.
 
 ### Backend
 
 #### Felhasználó kezelés (Admin, Vásárlók)
 
-Nyilvántartjuk a felhasználók adatait. 
-A felhasználók közt megkülönböztetünk admin-okat, akik minden funkcióhoz rendelkeznek jogosultsággal, és user-eket, akik a webáruház vásárlói, csak a saját adataikat szerkeszthetik, előzetes vásárlásaikat látják.
-A felhasználókról elsősorban a nevét, email címét, és jelszavát kell tárolnunk regisztrációkor. 
+Nyilvántartjuk a felhasználók adatait MongoDB adatbázisban. 
+A felhasználók közt megkülönböztetünk admin-okat, akik minden funkcióhoz rendelkeznek jogosultsággal, és user-eket, akik a webáruház vásárlói. Ők csak a saját adataikat szerkeszthetik, előzetes vásárlásaikat látják.
+A felhasználókról elsősorban a nevét, email címét, és jelszavát tároljuk regisztrációkor. 
 
-A felhasználók authenktikációja (regisztráció, belépés, kilépés) a kapott kiinduló projekt már rendelkezésre áll, csak a következő módosításokat kell elvégzni:
-
-__Funkciók__:
+A felhasználók authenktikációja (regisztráció, belépés, kilépés) alkalmával az alábbi elvásárokat vettük figyelembe, illetve kerültek beállításra:
 
 * __regisztráció:__ 
-  A regisztráció során a felhasználó nevét, email címét, és jelszavát (duplán) kell megadnia. Vizsgálni kell, hogy a két jelszó megeggyezik e.
-  A jelszónak minimum 8 karakter hosszúnak kell lennie.
+  A regisztráció során a felhasználó nevét, email címét, és jelszavát (duplán) kell megadnia. Vizsgáljuk, hogy a két jelszó megeggyezik e.
+  A jelszónak minimum 8 karakter hosszúnak kell lennie(ehhez telepíteni kellett a 'validator'-t).
 
 * __bejelentkezés:__ 
-
-  Emailcím, és jelszó alapján kell validálni a belépést. 
+  Emailcím, és jelszó alapján történik a belépés. 
   5 elrontott kísérlet után blokkoljuk 3 percre a bejelentkezést.
 
 

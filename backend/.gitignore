@@ -21,3 +21,6 @@ uploads
 *.jpg
 *.jpeg
 *.png
+
+package-lock.json
+
