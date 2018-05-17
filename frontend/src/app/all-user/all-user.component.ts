@@ -56,7 +56,7 @@ export class AllUserComponent implements OnInit {
         console.log(data);
         this.errorHandling(data);
       });
-    //location.reload();
+    location.reload();
   }
   /**
    * Basic error handling
