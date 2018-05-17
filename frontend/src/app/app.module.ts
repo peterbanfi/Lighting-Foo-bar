@@ -36,6 +36,10 @@ import { InterceptorModule } from './interceptor/interceptor.module';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    InterceptorModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger'
+    })
   ],
   providers: [
     OrderService,
