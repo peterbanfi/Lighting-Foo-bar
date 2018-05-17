@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-all-user',
@@ -17,7 +18,7 @@ export class AllUserComponent implements OnInit {
     rights: Boolean,
   };
   user: any;
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
     this.listAll();
   }
 
@@ -61,7 +62,6 @@ export class AllUserComponent implements OnInit {
    * @param res the function needs data, this is the res param.
    */
   errorHandling(res) {
-    res = JSON.parse(res['_body']);
     if (res.error) {
       console.error('API error:' + res.error);
     } else {

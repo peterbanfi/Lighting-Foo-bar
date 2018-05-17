@@ -14,10 +14,11 @@ import { OrdersComponent, TotalPipe } from './orders/orders.component';
 import { OrderService } from './order.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './products/products.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { HttpProductsService } from './http-products.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { InterceptorModule } from './interceptor/interceptor.module';
-
 
 @NgModule({
   declarations: [
@@ -28,20 +29,23 @@ import { InterceptorModule } from './interceptor/interceptor.module';
     HomeComponent,
     OrdersComponent,
     ProductsComponent,
-    TotalPipe
+    TotalPipe,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    Ng2GoogleChartsModule,
+    HttpClientModule,
     InterceptorModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger'
     })
+
   ],
-  providers: [
+  providers: [OrderService,
     OrderService,
     HttpProductsService
   ],
