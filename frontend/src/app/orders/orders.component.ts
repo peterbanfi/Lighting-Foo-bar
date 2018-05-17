@@ -26,7 +26,8 @@ export class OrdersComponent implements OnInit {
   newOrder: any = { products: [] };
   newOrderDisplay: any = { products: [], total: 0 };
   addNewProductToOrder: any = {};
-  orderToUpdate: any = {};
+  orderToUpdate: any = { user: { username: 'valaki' }, products: [] };
+  orderToUpdateDisplay: any = { user: { username: 'valaki' }, products: [] };
 
   constructor(public http: Http, private Oservice: OrderService) {
     this.getAll();
@@ -44,22 +45,58 @@ export class OrdersComponent implements OnInit {
 
   // Place a new order with the data of newOrder
   placeOrder() {
-    this.http.post(this.baseUrl, this.newOrder);
+    this.http.post(this.baseUrl, this.newOrder).subscribe(data => {
+      console.log(data);
+    });
     this.newOrder = { products: [] };
     location.reload();
   }
 
   // Update order specified by order ID.
   updateOrder() {
-    this.http.put(`${this.baseUrl}${this.orderToUpdate['_id']}`, this.orderToUpdate);
+    this.http.put(`${this.baseUrl}${this.orderToUpdate._id}`, this.orderToUpdate).subscribe(data => {
+      console.log(data);
+    });
     this.orderToUpdate = {};
     location.reload();
   }
 
+  // Select order to be updated
+  selectOrderToUpdate(row) {
+    this.orderToUpdateDisplay = Object.assign({}, row);
+    this.orderToUpdate = {
+      _id: row._id, user: row.user._id, products: row.products
+        .map(p => p = { quantity: p.quantity, product: p.product._id })
+    };
+  }
+
+  // Removing product from the selected order
+  removeProductFromOrder(i: number) {
+    this.orderToUpdate.products.splice(i, 1);
+    this.orderToUpdateDisplay.products.splice(i, 1);
+  }
+
+  // Update selected orders products
+  addProductToOrder() {
+    const qty = this.addNewProductToOrder.quantity;
+    const prod = this.addNewProductToOrder;
+    this.orderToUpdate.products.push({
+      quantity: qty,
+      product: prod._id
+    });
+    this.orderToUpdateDisplay.products.push({
+      quantity: qty,
+      product: prod
+    });
+    this.addNewProductToOrder = {};
+  }
+
   // Delete order specified by order ID.
   deleteOrder(order) {
-    if (confirm(`Are you sure to delete the order of${order.user.username}?`)) {
-      this.http.delete(`${this.baseUrl}${order['_id']}`);
+    if (confirm(`Are you sure to delete the order of ${order.user.username}?`)) {
+      this.http.delete(`${this.baseUrl}${order['_id']}`).subscribe(data => {
+        console.log(data);
+      });
       location.reload();
     }
   }
@@ -94,10 +131,7 @@ export class OrdersComponent implements OnInit {
     this.newOrderDisplay.products.splice(i, 1);
   }
 
-  // Select order to be updated
-  selectOrderToUpdate(row) {
-    this.orderToUpdate = Object.assign({}, row);
-  }
+
   /*
     countTotals(data) {
       data.map(order => {

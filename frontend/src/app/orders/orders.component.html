@@ -21,7 +21,7 @@
         <td>{{order.updatedAt | date:'fullDate'}}</td>
         <td>{{order | total}}</td>
         <td colspan="2" class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#updateModal" (click)="selectOrderToUpdate(order)">Order Details</button>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#updateModal3" (click)="selectOrderToUpdate(order)">Order Details</button>
           <button type="button" class="btn btn-danger" (click)="deleteOrder(order)">Delete Order</button>
         </td>
       </tr>
@@ -127,55 +127,89 @@
 
 
 
-
-
-
-<!-- UpdateModal -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalTitle" aria-hidden="true">
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal3" tabindex="-1" role="dialog" aria-labelledby="updateModalTitle3" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateModalTitle">Update User</h5>
+        <h5 class="modal-title" id="updateModalTitle3">Order details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <label for="updatedUsername">Username</label>
+        <label for="orderId">Order ID</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span id="inputGroupPrepend" class="input-group-text">
+              <span class="fas fa-key" aria-hidden="true"></span>
+            </span>
+          </div>
+          <input class="form-control" name="orderId" disabled type="text" id="orderId" [(ngModel)]="orderToUpdateDisplay['_id']">
+          <!--  <input class="form-control" name="updatedUsername" type="text" id="updateUsername" [(ngModel)]="orderToUpdate['_id']" value="{{orderToUpdate['_id']}}"> -->
+        </div>
+        <label for="orderUser">Username</label>
         <div class="input-group">
           <div class="input-group-prepend">
             <span id="inputGroupPrepend" class="input-group-text">
               <span class="fas fa-user" aria-hidden="true"></span>
             </span>
           </div>
-          <input class="form-control" name="updatedUsername" type="text" id="updateUsername" [(ngModel)]="orderToUpdate.username" value="{{orderToUpdate.username}}">
+          <input class="form-control" name="orderUser" type="text" id="orderUser" [(ngModel)]="orderToUpdateDisplay.user.username">
+          <!--       <input class="form-control" name="updatedEmail" type="text" id="updateEmail" [(ngModel)]="modal.email" value="{{modal.email}}"> -->
         </div>
-        <label for="updatedEmail">E-mail</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span id="inputGroupPrepend" class="input-group-text">
-              <span aria-hidden="true">@</span>
-            </span>
+        <hr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Subtotal</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of orderToUpdateDisplay.products index as i">
+              <td>{{i+1}}</td>
+              <td>{{product.product.productName}}</td>
+              <td>{{product.product.productPrice}}</td>
+              <td>
+                <input class="form-control" name="productQty" type="number" id="productQty" [(ngModel)]="orderToUpdate.products[i].quantity"
+                  required min="1" max="1000">
+              </td>
+              <td>{{product.quantity * product.product.productPrice}} HUF</td>
+              <td class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-danger" (click)="removeProductFromOrder(i)">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <label for="updatedRights">Product name</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span id="inputGroupPrepend" class="input-group-text">
+                  <span class="fas fa-users-cog" aria-hidden="true"></span>
+                </span>
+              </div>
+              <select class="form-control" id="orderUpdateNewProduct" name="orderUpdateNewProduct" [(ngModel)]="addNewProductToOrder" required>
+                <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+product.productPrice+' HUF'}}</option>
+              </select>
+              <input type="number" placeholder="Quantity" [(ngModel)]="addNewProductToOrder.quantity" required>
+            </div>
+            <!--        <input type="button" class="btn btn-outline-primary" value="Add" (click)="add()"> -->
+            <br>
+            <input type="button" class="btn btn-block btn-outline-primary" value="Add" (click)="addProductToOrder()">
           </div>
-          <input class="form-control" name="updatedEmail" type="text" id="updateEmail" [(ngModel)]="orderToUpdate.email" value="{{orderToUpdate.email}}">
-        </div>
-
-        <label for="updatedRights">Rights</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span id="inputGroupPrepend" class="input-group-text">
-              <span class="fas fa-users-cog" aria-hidden="true"></span>
-            </span>
-          </div>
-          <select class="form-control" name="updatedRights" id="updatedRights" (change)="selectChangeHandler($event)">
-            <option id="admin" value="true" [selected]="orderToUpdate.rights === true">Admin</option>
-            <option id="user" value="false" [selected]="orderToUpdate.rights === false">User</option>
-          </select>
         </div>
       </div>
       <div class="modal-footer">
         <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
-        <input type="button" class="btn btn-outline-success" value="Save" (click)="update()">
+        <input type="button" class="btn btn-block btn-outline-success" value="Save" (click)="updateOrder()">
       </div>
     </div>
   </div>
