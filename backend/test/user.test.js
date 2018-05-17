@@ -10,27 +10,27 @@ const userUrl = 'http://localhost:8080/user';
 
 const account = {
   username: 'test@test.com',
-  password: 'test',
+  password: 'testtest',
 };
 
 const newAccount = {
   email: 'test@test.com',
   username: 'test',
-  password: 'test',
+  password: 'testtest',
   rights: true,
 };
 
 const put = {
   email: 'put@put.com',
   username: 'put',
-  password: 'put',
+  password: 'testtest',
   rights: false,
 };
 
 const put2 = {
   email: 'put@put.com',
   username: 'put',
-  password: 'put',
+  password: 'testtest',
   rights: false,
 };
 

@@ -28,10 +28,10 @@ module.exports = {
       email: req.body.email,
       rights: req.body.rights,
     }), req.body.password)
-      .then(() => res.json({
-        success: 'Sikeres regisztráció',
-      }))
-      .catch(err => res.send(err));
+      .then(user => res.json(user))
+      .catch((err) => {
+        res.status(500).json({ error: err });
+      });
   },
   /**
    * Egyszerű login
