@@ -44,7 +44,7 @@ export class OrdersComponent implements OnInit {
 
   // Place a new order with the data of newOrder
   placeOrder() {
-    this.http.post(this.baseUrl, JSON.stringify(this.newOrder));
+    this.http.post(this.baseUrl, this.newOrder);
     this.newOrder = { products: [] };
     location.reload();
   }
