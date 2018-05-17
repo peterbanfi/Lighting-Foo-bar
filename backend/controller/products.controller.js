@@ -3,7 +3,18 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 mongoose.Promise = require('bluebird');
 
+/**
+ * @module Product
+ */
+
 module.exports = {
+
+  /**
+    * összes termék listázása
+    * @param {String} req - A kérés.
+    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+    */
+
   list: (req, res) => {
     Products.find({})
       .then((products) => {
@@ -15,6 +26,12 @@ module.exports = {
         });
       });
   },
+
+  /**
+   * Egy termék megjelenítése
+   * @param {String} req - A kérés.
+   * @param {Object} res - Ha nem történt hiba, a kért adatot visszakapjuk egy objektumban.
+   */
 
   find: (req, res) => {
     Products.findById(req.params.id)
@@ -34,6 +51,12 @@ module.exports = {
       });
   },
 
+  /**
+ * termék létrehozása
+ * @param {String} req - Ha van file feltölti és az útvonalát beállítja a db-ben
+ * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+ */
+
   create: (req, res) => {
     let body = JSON.stringify(req.body);
     body = JSON.parse(body);
@@ -52,6 +75,12 @@ module.exports = {
         });
       });
   },
+
+  /**
+   * termék adatainak frissítése
+   * @param {String} req - Ha van file feltölti és ha van korábbi kép amit felülírunk, azt törli
+   * @param {Object} res - Ha nem történt hiba, a frissítés előtti visszakapjuk egy objektumban.
+   */
 
   update: (req, res) => {
     let body = JSON.stringify(req.body);
@@ -101,6 +130,13 @@ module.exports = {
         });
     }
   },
+
+
+  /**
+   * termék törlése
+   * @param {String} req - Törli a terméket
+   * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   */
 
   remove: (req, res) => {
     Products.findByIdAndRemove(req.params.id)
