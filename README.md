@@ -7,7 +7,7 @@
 
 #### Felhasználó kezelés (Admin, Vásárlók)
 
-Nyilvántartjuk a felhasználók adatait MongoDB adatbázisban. 
+Nyilvántartjuk a felhasználók adatait egy felhő alapú MongoDB adatbázisban. 
 A felhasználók közt megkülönböztetünk adminokat, aki minden funkcióhoz rendelkeznek jogosultsággal, és felhasználót, akik a webáruház vásárlói. Ők csak a saját adataikat szerkeszthetik, előzetes vásárlásaikat látják.
 A felhasználókról elsősorban a nevét, email címét, és jelszavát tároljuk regisztrációkor. 
 
@@ -69,11 +69,13 @@ __Adatok:__
 * mikor történt a rendelés/módosítás
 * rendelt termékek, mennyiségük és az értékük
 
-
 __Funkciók__: 
 
 * rendelést leadni csak regisztrált, belépett felhasználó tud
-* rendelés módosítása, törlése szintén az admin jogosultsághoz van kötve
+* rendelés módosítása, törlése szintén az admin jogosultsághoz van kötve.
+
+Részletes unit tesztek kerültek megírásra a különböző CRUD folyamatokhoz. A tesztek működnek a regisztráció, a bejelentkezés, a termékek és a rendelések esetén is.
+
 
 ### Frontend
 
@@ -87,7 +89,8 @@ __Oldalak/Funkciók:__
 - __Statistic:__ számokkal megjelennek a rendszer főbb statisztikai adatai: 
   - felhasználók száma, 
   - termékek száma,
-  - adott havi bevétel megjelenítése (számmal és grafikonon (google-chart használatával) is, napokra bontva) 
+  - vásárlók száma,
+  - adott havi bevétel megjelenítése (számmal és grafikonon (ng2 google-chart használatával) is, napokra bontva) 
 - __Orders:__ beérkező rendelések CRUD. 
 - __Products:__ termékek CRUD. Képfeltöltés is lehetséges az adott termékhez.
 - __Users:__ 
