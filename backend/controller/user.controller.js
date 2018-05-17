@@ -30,14 +30,14 @@ module.exports = {
    */
   register: (req, res) => {
     User.register(new User({
-        username: req.body.username,
-        email: req.body.email,
-        rights: req.body.rights,
-      }), req.body.password)
+      username: req.body.username,
+      email: req.body.email,
+      rights: req.body.rights,
+    }), req.body.password)
       .then(user => res.json(user))
       .catch((err) => {
         res.status(500).json({
-          error: err
+          error: err,
         });
       });
   },
@@ -61,8 +61,8 @@ module.exports = {
       success: 'Sikeres kilépés',
     });
   },
-  /** 
-   * felhasználó törlése 
+  /**
+   * felhasználó törlése
    * @param {String} req - A kérés a felhasználó azonosítóját állítja be.
    * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot.
    * */
@@ -73,9 +73,7 @@ module.exports = {
           success: 'Sikeres törlés',
         });
       })
-      .catch((err) => {
-        return res.status(500).send(err);
-      });
+      .catch((err) => res.status(500).send(err));
   },
 
   /**
