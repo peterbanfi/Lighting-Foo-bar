@@ -37,7 +37,6 @@ import { InterceptorModule } from './interceptor/interceptor.module';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
   ],
   providers: [
     OrderService,
