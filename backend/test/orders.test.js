@@ -6,22 +6,36 @@ const should = require('chai').should();
 
 const chaiHttp = require('chai-http');
 
-const productsUrl = 'http://localhost:8080/products';
+const orderUrl = 'http://localhost:8080/orders';
 const account = {
   username: 'admin@admin.com',
   password: 'admin',
 };
-const product = {
-  productName: 'test',
-  productUrl: 'test',
-  productPrice: 12345,
-  productManufacturer: 'test',
+
+const order = {
+  user: '5afc439634a9371cf8fca12bb',
+  products: [{
+    product: '5af99826722bf5522c3d40a1',
+    quantity: 3,
+  },
+  {
+    product: '5afc2bc465eb1eabd8370ab6',
+    quantity: 6,
+  },
+  ],
 };
+
 const put = {
-  productName: 'put',
-  productUrl: 'put',
-  productPrice: 12345,
-  productManufacturer: 'put',
+  user: '5afc439634a9371cf8fca12bb',
+  products: [{
+    product: '5af99826722bf5522c3d40a1',
+    quantity: 9,
+  },
+  {
+    product: '5afc2bc465eb1eabd8370ab6',
+    quantity: 6,
+  },
+  ],
 };
 let cookie;
 let id = '/';
@@ -29,11 +43,11 @@ let id = '/';
 chai.use(chaiHttp);
 
 
-describe('Products', () => {
+describe('Orders', () => {
   // login
   beforeEach((done) => {
-    chai.request('http://localhost:8080/user')
-      .post('/login')
+    chai.request('http://localhost:8080/orders')
+      .get('/')
       .send(account)
       .end((err, res) => {
         if (err) {
@@ -44,71 +58,71 @@ describe('Products', () => {
       });
   });
 
-  // Products list test
+  // Orders list test
   describe('list()', () => {
     it('response statusCode equal to 200', (done) => {
-      chai.request(productsUrl)
+      chai.request(orderUrl)
         .get('/')
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Array');
-          res.body[0].productName.should.be.eql('kalinka');
+          res.body[0].user.username.should.be.eql('Marton17');
           done();
         });
     });
   });
 
-  // Products find test
+  // Order find test
   describe('find()', () => {
-    it('should find item', (done) => {
-      chai.request(productsUrl)
-        .get('/5af9917fbb6b544b14321638')
+    it('should find order specified by id', (done) => {
+      chai.request(orderUrl)
+        .get('/5afbe4943f04ab3b18e53303')
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.productName.should.be.eql('kalinka');
+          res.body.user.username.should.be.eql('admin');
           done();
         });
     });
   });
 
-  // Products post test
+  // Order post test
   describe('create()', () => {
-    it('should create give item', (done) => {
-      chai.request(productsUrl)
+    it('should create order in database', (done) => {
+      chai.request(orderUrl)
         .post('/')
         .set('Cookie', cookie)
-        .send(product)
+        .send(order)
         .end((err, res) => {
           id += res.body._id;
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.productName.should.be.eql('test');
+          res.body.products[0].quantity.should.be.eql(3);
           done();
         });
     });
   });
 
-  // Products update test
+  // Order update test
   describe('update()', () => {
-    it('should update given items with given data', (done) => {
-      chai.request(productsUrl)
+    it('should update specified order with given data', (done) => {
+      chai.request(orderUrl)
         .put(id)
         .set('Cookie', cookie)
         .send(put)
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.productName.should.be.eql('test');
+          res.body.products[0].quantity.should.be.eql(9);
           done();
         });
     });
   });
 
-  // Products delete test
-  describe('delete()', () => {
-    it('should delete given item', (done) => {
-      chai.request(productsUrl)
+  // Order delete test
+  describe('remove()', () => {
+    it('should delete specified order', (done) => {
+      chai.request(orderUrl)
         .delete(id)
         .set('Cookie', cookie)
         .end((err, res) => {

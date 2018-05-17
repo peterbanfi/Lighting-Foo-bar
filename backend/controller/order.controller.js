@@ -15,8 +15,8 @@ module.exports = {
       .populate('user', 'username')
       .populate('products.product', 'productName productPrice')
       .exec()
-      .then(orders => res.json(orders))
-      .catch(err => res.send(err));
+      .then(orders => res.status(200).json(orders))
+      .catch(err => res.status(500).send(err));
   },
 
   /**
@@ -29,8 +29,8 @@ module.exports = {
       .populate('user', 'username')
       .populate('products.product', 'productName productPrice')
       .exec()
-      .then(order => res.json(order))
-      .catch(err => res.send(err));
+      .then(order => res.status(200).json(order))
+      .catch(err => res.status(500).send(err));
   },
 
   /**
@@ -61,8 +61,8 @@ module.exports = {
      */
   update: (req, res) => {
     Order.findByIdAndUpdate(req.params.id, req.body)
-      .then(order => res.json(order))
-      .catch(err => res.send(err));
+      .then(order => res.status(200).json(order))
+      .catch(err => res.status(500).send(err));
   },
 
 
@@ -73,7 +73,7 @@ module.exports = {
      */
   remove: (req, res) => {
     Order.findByIdAndRemove(req.params.id)
-      .then(order => res.json(order))
-      .catch(err => res.send(err));
+      .then(order => res.status(200).json(order))
+      .catch(err => res.status(500).send(err));
   },
 };
