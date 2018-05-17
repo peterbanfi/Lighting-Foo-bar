@@ -33,6 +33,7 @@ export class StatisticsComponent implements OnInit {
   numberOfProducts = 0;
   datas4: any = [];
   datas5: any = [];
+  datas6: any = [];
 
   constructor(public http: HttpClient) {
 
@@ -94,11 +95,26 @@ export class StatisticsComponent implements OnInit {
       }
       this.datas4[i][1] = allPrice;
       this.allIncome = this.allIncome + allPrice;
+      this.datas6.push(data[i].user.username);
     }
-
+    this.checkSameCustomers(this.datas6);
     this.checkSameDays(this.datas4);
     this.populateChart(this.datas4);
 
+  }
+
+  checkSameCustomers(data) {
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data.length; j++) {
+        if (i !== j) {
+          const name1 = data[i];
+          const name2 = data[j];
+          if (name1 === name2) {
+            this.datas6.splice(j, 1);
+          }
+        }
+      }
+    }
   }
 
   populateChart(data) {
