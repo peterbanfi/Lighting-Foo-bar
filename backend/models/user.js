@@ -20,13 +20,9 @@ const userSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
-<<<<<<< HEAD
 }, {
   timestamps: true,
 });
-=======
-}, { timestamps: true });
->>>>>>> Products2
 
 /**
  * Beállítva az 5 elrontott próbálkozás után 3 percre kitiltás

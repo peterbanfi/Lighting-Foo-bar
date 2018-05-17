@@ -90,7 +90,6 @@ module.exports = {
             }
           });
 
-<<<<<<< HEAD
         if (products) {
           res.status(200).json(products);
         } else {
@@ -104,18 +103,6 @@ module.exports = {
           error: err,
         });
       });
-=======
-          if (products) {
-            res.status(200).json(products);
-          } else {
-            res.status(404).json({ message: 'Not a valid Id!' });
-          }
-        })
-        .catch((err) => {
-          res.status(500).json({ error: err });
-        });
-    }
->>>>>>> Products2
   },
 
   remove: (req, res) => {
