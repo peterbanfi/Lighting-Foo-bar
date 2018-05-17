@@ -10,11 +10,10 @@ import { Http, RequestOptions } from '@angular/http';
 export class NavComponent implements OnInit {
 
 
-
-
   user: any = {
     username: 'username',
-    password: 'password'
+    password: 'password',
+    rights: true,
   };
 
   options = new RequestOptions({ withCredentials: true });

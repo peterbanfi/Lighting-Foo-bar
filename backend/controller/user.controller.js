@@ -30,10 +30,10 @@ module.exports = {
    */
   register: (req, res) => {
     User.register(new User({
-        username: req.body.username,
-        email: req.body.email,
-        rights: req.body.rights,
-      }), req.body.password)
+      username: req.body.username,
+      email: req.body.email,
+      rights: req.body.rights,
+    }), req.body.password)
       .then(user => res.json(user))
       .catch((err) => {
         res.status(500).json({
@@ -61,8 +61,8 @@ module.exports = {
       success: 'Sikeres kilépés',
     });
   },
-  /** 
-   * felhasználó törlése 
+  /**
+   * felhasználó törlése
    * @param {String} req - A kérés a felhasználó azonosítóját állítja be.
    * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot.
    * */
@@ -84,14 +84,17 @@ module.exports = {
    * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a frissített adatokat.
    */
   update: (req, res) => {
-    req.body.updatedAt = new Date().toLocaleDateString();
-    User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
-      if (err) {
-        res.send(err);
-        console.log(err);
-      }
-      res.json(post);
-    });
+    console.log(req.params);
+    if (req.body.rights === true) {
+      req.body.updatedAt = new Date().toLocaleDateString();
+      User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+        if (err) {
+          res.send(err);
+          console.log(err);
+        }
+        res.json(post);
+      });
+    }
   },
 
   /**

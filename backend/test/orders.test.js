@@ -80,7 +80,7 @@ describe('Products', () => {
         .set('Cookie', cookie)
         .send(product)
         .end((err, res) => {
-          id += res['body']['_id'];
+          id += res.body._id;
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
           res.body.productName.should.be.eql('test');
