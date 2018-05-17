@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: products.controller.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: products.controller.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Products = require('../models/products');
+const mongoose = require('mongoose');
+const fs = require('fs');
+mongoose.Promise = require('bluebird');
+
+/**
+ * @module Product
+ */
+
+module.exports = {
+
+  /**
+    * összes termék listázása
+    * @param {String} req - A kérés.
+    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+    */
+
+  list: (req, res) => {
+    Products.find({})
+      .then((products) => {
+        res.status(200).json(products);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  },
+
+  /**
+   * Egy termék megjelenítése
+   * @param {String} req - A kérés.
+   * @param {Object} res - Ha nem történt hiba, a kért adatot visszakapjuk egy objektumban.
+   */
+
+  find: (req, res) => {
+    Products.findById(req.params.id)
+      .then((products) => {
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(404).json({
+            message: 'Not a valid Id!',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  },
+
+  /**
+ * termék létrehozása
+ * @param {String} req - Ha van file feltölti és az útvonalát beállítja a db-ben
+ * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+ */
+
+  create: (req, res) => {
+    let body = JSON.stringify(req.body);
+    body = JSON.parse(body);
+
+    if (req.file) {
+      body.productImg = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
+    }
+
+    Products.create(body)
+      .then((products) => {
+        res.status(200).json(products);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  },
+
+  /**
+   * termék adatainak frissítése
+   * @param {String} req - Ha van file feltölti és ha van korábbi kép amit felülírunk, azt törli
+   * @param {Object} res - Ha nem történt hiba, a frissítés előtti visszakapjuk egy objektumban.
+   */
+
+  update: (req, res) => {
+    let body = JSON.stringify(req.body);
+    body = JSON.parse(body);
+    if (req.file) {
+      body.productImg = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
+    }
+
+    if (!body.productImg) {
+      Products.findById(req.params.id)
+        .then((products) => {
+          body.productImg = products.productImg;
+        })
+        .then(Products.findByIdAndUpdate(req.params.id, body)
+          .then((products) => {
+            if (products) {
+              res.status(200).json(products);
+            } else {
+              res.status(404).json({ message: 'Not a valid Id!' });
+            }
+          })
+          .catch((err) => {
+            res.status(500).json({ error: err });
+          }));
+    } else {
+      Products.findByIdAndUpdate(req.params.id, body)
+        .then((products) => {
+          let imgRoute = products.productImg;
+          imgRoute = imgRoute.substring(22);
+
+          fs.exists(imgRoute, (exists) => {
+            if (exists) {
+              fs.unlink(imgRoute, (err) => {
+                if (err) throw err;
+              });
+            }
+          });
+
+          if (products) {
+            res.status(200).json(products);
+          } else {
+            res.status(404).json({ message: 'Not a valid Id!' });
+          }
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err });
+        });
+    }
+  },
+
+
+  /**
+   * termék törlése
+   * @param {String} req - Törli a terméket
+   * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   */
+
+  remove: (req, res) => {
+    Products.findByIdAndRemove(req.params.id)
+      .then((products) => {
+        if (products) {
+          res.status(200).json(products);
+        } else {
+          res.status(404).json({
+            message: 'Not a valid Id!',
+          });
+        }
+        let imgRoute = '';
+        if (products.productImg) {
+          imgRoute = products.productImg;
+          imgRoute = imgRoute.substring(22);
+        }
+
+        fs.exists(imgRoute, (exists) => {
+          if (exists) {
+            fs.unlink(imgRoute, (err) => {
+              if (err) throw err;
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
+        });
+      });
+  },
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Product.html">Product</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu May 17 2018 10:58:48 GMT+0200 (Nyugat-európai nyári idő)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
