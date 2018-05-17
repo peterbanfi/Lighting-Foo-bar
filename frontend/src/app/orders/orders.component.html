@@ -146,7 +146,6 @@
             </span>
           </div>
           <input class="form-control" name="orderId" disabled type="text" id="orderId" [(ngModel)]="orderToUpdateDisplay['_id']">
-          <!--  <input class="form-control" name="updatedUsername" type="text" id="updateUsername" [(ngModel)]="orderToUpdate['_id']" value="{{orderToUpdate['_id']}}"> -->
         </div>
         <label for="orderUser">Username</label>
         <div class="input-group">
@@ -156,7 +155,6 @@
             </span>
           </div>
           <input class="form-control" name="orderUser" type="text" id="orderUser" [(ngModel)]="orderToUpdateDisplay.user.username">
-          <!--       <input class="form-control" name="updatedEmail" type="text" id="updateEmail" [(ngModel)]="modal.email" value="{{modal.email}}"> -->
         </div>
         <hr>
         <table class="table">
@@ -201,7 +199,6 @@
               </select>
               <input type="number" placeholder="Quantity" [(ngModel)]="addNewProductToOrder.quantity" required>
             </div>
-            <!--        <input type="button" class="btn btn-outline-primary" value="Add" (click)="add()"> -->
             <br>
             <input type="button" class="btn btn-block btn-outline-primary" value="Add to order" (click)="addProductToOrder()">
           </div>
