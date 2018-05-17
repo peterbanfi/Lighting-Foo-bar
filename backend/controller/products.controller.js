@@ -56,47 +56,55 @@ module.exports = {
   update: (req, res) => {
     let body = JSON.stringify(req.body);
     body = JSON.parse(body);
-
     if (req.file) {
       body.productImg = `http://localhost:8080/${req.file.path.replace(/\\/, '/')}`;
     }
 
-    Products.findByIdAndUpdate(req.params.id, body)
-      .then((products) => {
-        let imgRoute = products.productImg;
-        imgRoute = imgRoute.substring(22);
-        console.log(imgRoute);
+    if (!body.productImg) {
+      Products.findById(req.params.id)
+        .then((products) => {
+          body.productImg = products.productImg;
+        })
+        .then(Products.findByIdAndUpdate(req.params.id, body)
+          .then((products) => {
+            if (products) {
+              res.status(200).json(products);
+            } else {
+              res.status(404).json({ message: 'Not a valid Id!' });
+            }
+          })
+          .catch((err) => {
+            res.status(500).json({ error: err });
+          }));
+    } else {
+      Products.findByIdAndUpdate(req.params.id, body)
+        .then((products) => {
+          let imgRoute = products.productImg;
+          imgRoute = imgRoute.substring(22);
 
-        fs.unlink(imgRoute, (err) => {
-          if (err) throw err;
-        });
-
-        if (products) {
-          res.status(200).json(products);
-        } else {
-          res.status(404).json({
-            message: 'Not a valid Id!',
+          fs.exists(imgRoute, (exists) => {
+            if (exists) {
+              fs.unlink(imgRoute, (err) => {
+                if (err) throw err;
+              });
+            }
           });
-        }
-      })
-      .catch((err) => {
-        res.status(500).json({
-          error: err,
+
+          if (products) {
+            res.status(200).json(products);
+          } else {
+            res.status(404).json({ message: 'Not a valid Id!' });
+          }
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err });
         });
-      });
+    }
   },
 
   remove: (req, res) => {
     Products.findByIdAndRemove(req.params.id)
       .then((products) => {
-        let imgRoute = products.productImg;
-        imgRoute = imgRoute.substring(22);
-        console.log(imgRoute);
-
-        fs.unlink(imgRoute, (err) => {
-          if (err) throw err;
-        });
-
         if (products) {
           res.status(200).json(products);
         } else {
@@ -104,6 +112,19 @@ module.exports = {
             message: 'Not a valid Id!',
           });
         }
+        let imgRoute = '';
+        if (products.productImg) {
+          imgRoute = products.productImg;
+          imgRoute = imgRoute.substring(22);
+        }
+
+        fs.exists(imgRoute, (exists) => {
+          if (exists) {
+            fs.unlink(imgRoute, (err) => {
+              if (err) throw err;
+            });
+          }
+        });
       })
       .catch((err) => {
         res.status(500).json({

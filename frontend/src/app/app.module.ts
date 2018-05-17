@@ -16,28 +16,39 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './products/products.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { HttpProductsService } from './http-products.service';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { InterceptorModule } from './interceptor/interceptor.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavComponent,
-        RegistrationComponent,
-        AllUserComponent,
-        HomeComponent,
-        OrdersComponent,
-        ProductsComponent,
-        TotalPipe,
-        StatisticsComponent,
-    ],
-    imports: [
-        BrowserModule,
-        HttpModule,
-        FormsModule,
-        AppRoutingModule,
-        Ng2GoogleChartsModule,
-        HttpClientModule
-    ],
-    providers: [OrderService],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    NavComponent,
+    RegistrationComponent,
+    AllUserComponent,
+    HomeComponent,
+    OrdersComponent,
+    ProductsComponent,
+    TotalPipe,
+    StatisticsComponent,
+  ],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    AppRoutingModule,
+    Ng2GoogleChartsModule,
+    HttpClientModule,
+    InterceptorModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger'
+    })
+
+  ],
+  providers: [OrderService,
+    OrderService,
+    HttpProductsService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
