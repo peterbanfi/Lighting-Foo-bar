@@ -30,10 +30,10 @@ module.exports = {
    */
   register: (req, res) => {
     User.register(new User({
-      username: req.body.username,
-      email: req.body.email,
-      rights: req.body.rights,
-    }), req.body.password)
+        username: req.body.username,
+        email: req.body.email,
+        rights: req.body.rights,
+      }), req.body.password)
       .then(user => res.json(user))
       .catch((err) => {
         res.status(500).json({
@@ -84,17 +84,14 @@ module.exports = {
    * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a frissített adatokat.
    */
   update: (req, res) => {
-    console.log(req.params);
-    if (req.body.rights === true) {
-      req.body.updatedAt = new Date().toLocaleDateString();
-      User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
-        if (err) {
-          res.send(err);
-          console.log(err);
-        }
-        res.json(post);
-      });
-    }
+    req.body.updatedAt = new Date().toLocaleDateString();
+    User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+      if (err) {
+        res.send(err);
+        console.log(err);
+      }
+      res.json(post);
+    });
   },
 
   /**

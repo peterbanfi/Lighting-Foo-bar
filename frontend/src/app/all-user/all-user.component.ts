@@ -53,9 +53,10 @@ export class AllUserComponent implements OnInit {
   update() {
     this.http.put(`${this.baseUrl}/update/${this.modal['_id']}`, this.modal)
       .subscribe(data => {
+        console.log(data);
         this.errorHandling(data);
       });
-    location.reload();
+    //location.reload();
   }
   /**
    * Basic error handling
