@@ -8,7 +8,6 @@ const fs = require('fs');
 const path = require('path');
 const rfs = require('rotating-file-stream');
 const helmet = require('helmet');
-const cors = require('cors');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
@@ -72,16 +71,39 @@ mongoose.connect(db.uri, db.options)
     console.error(`MongoDB error.:${err}`);
   });
 
-// Enable CORS
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:4200',
-}));
+// CORS for frontend
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'lazyUpdate, normalizedNames, headers, Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE');
+    return res.status(200).json({});
+  }
+  return next();
+});
 
 // User User router
 app.use('/user/', userRouter);
 app.use('/products/', productsRouter);
 app.use('/orders/', ordersRouter);
+
+// 404 error handling
+app.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+// 500 error
+app.use((error, req, res) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
 
 // Start server
 app.listen(port);
