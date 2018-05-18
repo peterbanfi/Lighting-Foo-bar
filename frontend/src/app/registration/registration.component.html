@@ -39,14 +39,16 @@
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-at"></i>
             </div>
-            <input type="text" name="email" class="form-control" id="email" placeholder="you@example.com" required autofocus [(ngModel)]="user.email">
+            <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" required autofocus [(ngModel)]="user.email"
+              #mail="ngModel" ngModel email="true">
           </div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-control-feedback">
+        <div class="form-control-feedback" *ngIf="mail.invalid && (mail.dirty || mail.touched) ">
           <span class="text-danger align-middle">
-            <!-- Put e-mail validation error messages here -->
+            <i class="fas fa-times"></i>
+            Please add a valid e-mail!
           </span>
         </div>
       </div>
@@ -61,14 +63,16 @@
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-key"></i>
             </div>
-            <input type="password" name="password" class="form-control" id="passwordReg" placeholder="Password" required [(ngModel)]="user.password">
+            <input type="password" name="password" class="form-control" minlength="8" id="passwordReg" placeholder="Password" required
+              [(ngModel)]="user.password" #password="ngModel">
           </div>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-control-feedback">
-          <span class="text-danger align-middle">
-            <i class="fa fa-close"></i>
+        <div class="form-control-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <span class="text-danger align-middle" *ngIf="password.errors.minlength">
+            <i class="fas fa-times"></i>
+            Password must be at least 8 characters!
           </span>
         </div>
       </div>
@@ -84,8 +88,16 @@
               <i class="fas fa-reply"></i>
             </div>
             <input type="password" name="passwordConfirmation" class="form-control" id="passwordConfirm" placeholder="Password" required
-              [(ngModel)]="passwordConf">
+              [(ngModel)]="passwordConf" #passwordCon="ngModel">
           </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback" *ngIf="(passwordCon.dirty || passwordCon.touched) && user.password !== passwordConf">
+          <span class="text-danger align-middle">
+            <i class="fas fa-times"></i>
+            Confirm your password!
+          </span>
         </div>
       </div>
     </div>
@@ -106,9 +118,9 @@
 
     <div class="row">
       <div class="col-md-3"></div>
-      <div class="col-md-6">
+      <div class="col-md-6" *ngIf="user.password === passwordConf && password.valid">
         <hr>
-        <button type="submit" class="btn btn-success" (click)="validation()">
+        <button type="submit" class="btn btn-block btn-outline-success" (click)="validation()">
           <i class="fa fa-user-plus"></i> Register</button>
       </div>
     </div>

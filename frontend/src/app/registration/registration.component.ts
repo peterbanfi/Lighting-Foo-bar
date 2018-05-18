@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +17,8 @@ export class RegistrationComponent implements OnInit {
   };
   passwordConf: '';
   baseUrl = 'http://localhost:8080/user/register';
-
+  passCheck: true;
+  options: any = new RequestOptions({ withCredentials: true });
   constructor(public http: HttpClient) { }
 
   ngOnInit() {
@@ -25,9 +26,12 @@ export class RegistrationComponent implements OnInit {
 
   register() {
     console.log(this.user);
-    this.http.post(this.baseUrl, this.user)
+    this.http.post(this.baseUrl, this.user, this.options)
       .subscribe(data => {
         console.log(data);
+        /*         if (data['error']) {
+                  console.log('pass too short');
+                } */
       });
   }
 
@@ -37,10 +41,14 @@ export class RegistrationComponent implements OnInit {
     }
     if (this.user.password !== this.passwordConf) {
       return alert('Confirm your password!');
-    } else {
+    }
+    /*    if (this.user.password.length < 8) {
+         return alert('Password too short!');
+       }  */
+    else {
       this.register();
       alert('Thank you! You can login now!');
-      window.location.href = 'http://localhost:4200/home';
+      //window.location.href = 'http://localhost:4200/home';
     }
 
   }
