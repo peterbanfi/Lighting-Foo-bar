@@ -29,29 +29,17 @@ module.exports = {
    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
    */
   register: (req, res) => {
-    if (req.user) {
-      if (req.user.rights === true) {
-        User.register(new User({
-            username: req.body.username,
-            email: req.body.email,
-            rights: req.body.rights,
-          }), req.body.password)
-          .then(user => res.json(user))
-          .catch((err) => {
-            res.status(500).json({
-              error: err,
-            });
-          });
-      } else {
-        res.json({
-          err: false,
+    User.register(new User({
+        username: req.body.username,
+        email: req.body.email,
+        rights: req.body.rights,
+      }), req.body.password)
+      .then(user => res.json(user))
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
         });
-      }
-    } else {
-      res.json({
-        err: false,
       });
-    }
   },
   /**
    * Egyszerű login
@@ -60,6 +48,7 @@ module.exports = {
    */
   login: (req, res) => res.json({
     login: true,
+    user: req.body,
   }),
   /**
    * És logout

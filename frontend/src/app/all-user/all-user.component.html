@@ -70,6 +70,14 @@
             <option id="user" value="false" [selected]="modal.rights === false">User</option>
           </select>
         </div>
+        <div class="row" *ngIf="updated">
+          <div class="col-12">
+            <br>
+            <div class="alert alert-success text-center" role="alert">
+              Updated!
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
