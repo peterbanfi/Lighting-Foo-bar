@@ -21,22 +21,25 @@ export class HomeComponent implements OnInit {
     this.http.getAll(this.baseUrl)
       .then((res) => {
         this.products = res;
-        console.log(this.products);
+        //console.log(this.products);
       })
       .then(() => {
+        console.log(this.products);
         this.lastTen(this.products);
+        console.log(this.products);
       });
 
   }
 
   lastTen(data) {
-    console.log(data);
-    for (let i = data.length; i > 0; i--) {
+    data.reverse();
+    //ha lesz 10 termék akkor tízre állítani!
+    for (let i = 0; i < 10; i++) {
       this.lastTenProducts.push(data[i]);
+      console.log(this.lastTenProducts);
+      /*   for (let i = 0; i < 11; i++) {
+         const element = array[i];
+       } */
     }
-    console.log(this.lastTenProducts);
-    /*   for (let i = 0; i < 11; i++) {
-        const element = array[i];
-      } */
   }
 }

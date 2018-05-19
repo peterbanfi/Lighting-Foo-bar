@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" routerLink="home" routerLinkActive="active">Szeszpress</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -80,7 +80,7 @@
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-at"></i>
             </div>
-            <input class="form-control" type="email" id="name" [(ngModel)]="user.username" ngModel email="true">
+            <input class="form-control" type="email" id="name" [(ngModel)]="user.username" ngModel email="true" placeholder="your@email.com">
           </div>
         </div>
         <label for="password" *ngIf="!loggedIn">Password</label>
@@ -94,12 +94,12 @@
         </div>
         <br>
         <div class="alert alert-success text-center" role="alert" *ngIf="loggedIn">
-          Thank you! You are logged in {{userName}}!
+          Thank you! You are logged in as: {{userName}}!
         </div>
         <div class="alert alert-danger text-center" role="alert" *ngIf="wrong">
           Wrong e-mail or password!
         </div>
-        <div  *ngIf="user.password.length > 0 && user.username.length > 0">
+        <div *ngIf="user.password.length > 0 && user.username.length > 0">
           <hr>
           <div class="btn-group" role="group" aria-label="Basic example" *ngIf="!loggedIn">
             <input id="logI" type="button" class="btn btn-block btn-outline-success" value="Login" (click)="login()">

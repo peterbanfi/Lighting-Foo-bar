@@ -1,5 +1,245 @@
-<div class="container">
-
-  <h1>HOME</h1>
-
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="../../assets/img/1_1.jpg" alt="drinks">
+      <div class="carousel-caption d-none d-md-block">
+        <h1>Coctails!</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit beatae saepe tempora aperiam, aliquid incidunt repellendus
+          rem accusamus cupiditate earum iure ea nostrum, adipisci aut error, quos odio nemo repellat!</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="../../assets/img/2_1.jpg" alt="drinks">
+      <div class="carousel-caption d-none d-md-block">
+        <h1>Beers!</h1>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore eaque, distinctio magnam sit repellat quaerat corrupti
+          commodi quasi totam suscipit inventore adipisci in ab, natus, velit cumque obcaecati dicta. Quis.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="../../assets/img/3_1.jpg" alt="drinks">
+      <div class="carousel-caption d-none d-md-block">
+        <h1>Shots!</h1>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque aspernatur, soluta ratione quam cumque, impedit ipsam
+          fugiat magni quisquam ab nulla obcaecati eius cum, est laudantium sed esse. Impedit, omnis?</p>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Our latest products</h1>
+    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius distinctio, quidem iure, dolorem soluta molestiae animi
+      consequuntur libero voluptatum voluptate dolorum quibusdam quam hic eaque omnis minus facilis tempore saepe!</p>
+  </div>
+</div>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[0].productImg}} alt={{lastTenProducts[0].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">1. {{lastTenProducts[0].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-center">{{lastTenProducts[0].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[0].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[0].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[0].productName}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[1].productImg}} alt={{lastTenProducts[1].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">2. {{lastTenProducts[1].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[1].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[1].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[1].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[1].productName}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[2].productImg}} alt={{lastTenProducts[2].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">3. {{lastTenProducts[2].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[2].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[2].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[2].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[2].productName}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[3].productImg}} alt={{lastTenProducts[3].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">4. {{lastTenProducts[3].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[3].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[3].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[3].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[3].productName}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[4].productImg}} alt={{lastTenProducts[4].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">5. {{lastTenProducts[4].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[4].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[4].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[4].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[4].productName}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[5].productImg}} alt={{lastTenProducts[5].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">6. {{lastTenProducts[5].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[5].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[5].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[5].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[5].productName}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[6].productImg}} alt={{lastTenProducts[6].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">7. {{lastTenProducts[6].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[6].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[6].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[6].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[6].productName}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[7].productImg}} alt={{lastTenProducts[7].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">8. {{lastTenProducts[7].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[7].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[7].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[7].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[7].productName}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[8].productImg}} alt={{lastTenProducts[8].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">9. {{lastTenProducts[8].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[8].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[8].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[8].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[8].productName}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src={{lastTenProducts[9].productImg}} alt={{lastTenProducts[9].productName}}>
+        <div class="card-body">
+          <h5 class="card-title">10. {{lastTenProducts[9].productName}}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{lastTenProducts[9].productPrice}} Ft</li>
+          <li class="list-group-item">{{lastTenProducts[9].productManufacturer}}</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="http://localhost:4200/products/{{lastTenProducts[9].productUrl}}" class="card-link">More...</a>
+          <a href="#" class="card-link">{{lastTenProducts[9].productName}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+    </div>
+  </div>
 </div>
