@@ -24,6 +24,9 @@
         <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="statistics" routerLinkActive="active">Statistics</a>
         </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="registration" routerLinkActive="active">Registration</a>
+        </li>
         <li class="nav-item" *ngIf="loggedIn === true">
           <a class="nav-link">Profile</a>
         </li>
@@ -71,8 +74,8 @@
       </div>
       <div class="modal-body">
 
-        <label for="name">Email</label>
-        <div class="form-group">
+        <label for="name" *ngIf="!loggedIn">Email</label>
+        <div class="form-group" *ngIf="!loggedIn">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-at"></i>
@@ -80,8 +83,8 @@
             <input class="form-control" type="email" id="name" [(ngModel)]="user.username" ngModel email="true">
           </div>
         </div>
-        <label for="password">Password</label>
-        <div class="form-group">
+        <label for="password" *ngIf="!loggedIn">Password</label>
+        <div class="form-group" *ngIf="!loggedIn">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-key"></i>
@@ -91,17 +94,17 @@
         </div>
         <br>
         <div class="alert alert-success text-center" role="alert" *ngIf="loggedIn">
-          Updated!
+          Thank you! You are logged in {{userName}}!
         </div>
-        <hr>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <input id="logI" type="button" class="btn btn-outline-success" value="Login" (click)="login()">
-          <input type="button" class="btn btn-outline-dark" value="Profil" (click)="profile()">
+        <div class="alert alert-danger text-center" role="alert" *ngIf="wrong">
+          Wrong e-mail or password!
         </div>
-      </div>
-
-      <div class="modal-footer">
-        <a routerLink="registration" data-dismiss="modal" routerLinkActive="active">Registrate!</a>
+        <div  *ngIf="user.password.length > 0 && user.username.length > 0">
+          <hr>
+          <div class="btn-group" role="group" aria-label="Basic example" *ngIf="!loggedIn">
+            <input id="logI" type="button" class="btn btn-block btn-outline-success" value="Login" (click)="login()">
+          </div>
+        </div>
       </div>
     </div>
   </div>

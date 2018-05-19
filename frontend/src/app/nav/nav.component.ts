@@ -20,6 +20,8 @@ export class NavComponent implements OnInit {
   options: any = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/user/';
   loggedIn: Boolean = false;
+  userName: any;
+  wrong: Boolean = false;
 
   constructor(public http: HttpClient, public router: Router, private LServ: LoginService, private cookieService: CookieService) {
 
@@ -34,24 +36,44 @@ export class NavComponent implements OnInit {
       });
   }
 
-  /*   login() {
-      this.http.post(this.baseUrl + 'login', this.user, this.options)
-        .subscribe(data => {
-          console.log(data);
-          if (data['user']) {
-            this.isAdmin = true;
-            console.log(this.isAdmin);
-          }
-        });
-    } */
-
   login() {
-    this.LServ.login(this.baseUrl + 'login', this.user, this.options, this.isAdmin, this.loggedIn);
-    console.log(this.isAdmin, this.loggedIn);
+    this.http.post(this.baseUrl + 'login', this.user, this.options)
+      .subscribe(data => {
+        if (data['login']) {
+          this.admin();
+        }
+      });
+    setTimeout(() => {
+      if (!this.loggedIn) {
+        this.wrong = true;
+      }
+    }, 500);
+  }
+
+  admin() {
+    const modal = document.getElementById('exampleModalLong');
+    this.http.get(this.baseUrl + 'profile', this.options)
+      .subscribe((data2) => {
+        data2 = data2['user'];
+        this.userName = data2['username'];
+        if (data2['rights']) {
+          this.cookieService.put('xyz', 'true');
+          this.isAdmin = true;
+          this.loggedIn = true;
+          this.wrong = false;
+        }
+        if (!data2['rights']) {
+          this.cookieService.put('xyz', 'false');
+          this.isAdmin = false;
+          this.loggedIn = true;
+          this.wrong = false;
+        }
+      });
   }
 
   logout() {
     this.LServ.logout(this.baseUrl + 'logout', this.options);
     this.loggedIn = false;
+    this.isAdmin = false;
   }
 }

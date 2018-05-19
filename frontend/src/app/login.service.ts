@@ -9,36 +9,38 @@ export class LoginService {
 
   baseUrl = 'http://localhost:8080/user/';
   options: any = new RequestOptions({ withCredentials: true });
+  rights: any = [];
 
   constructor(public http: HttpClient, public router: Router, private cookieService: CookieService) { }
 
-  login(url, user, options, set, log) {
-    this.http.post(url, user, options)
-      .subscribe(data => {
-        if (data['login']) {
-          this.admin(set, log);
-        }
-      });
-  }
-
-  admin(set, log) {
-    this.http.get(this.baseUrl + 'profile', this.options)
-      .subscribe((data2) => {
-        data2 = data2['user'];
-        if (data2['rights']) {
-          this.cookieService.put('xyz', 'true');
-          set = true;
-          log = true;
-          console.log(set, log);
-        }
-        if (!data2['rights']) {
-          this.cookieService.put('xyz', 'false');
-          set = false;
-          log = true;
-          console.log(set, log);
-        }
-      });
-  }
+  /*   login(url, user, options, set, log) {
+      this.http.post(url, user, options)
+        .subscribe(data => {
+          if (data['login']) {
+            this.admin(set, log);
+          }
+        });
+    }
+  
+    admin(set, log) {
+      this.http.get(this.baseUrl + 'profile', this.options)
+        .subscribe((data2) => {
+          data2 = data2['user'];
+          if (data2['rights']) {
+            this.cookieService.put('xyz', 'true');
+            set = true;
+            log = true;
+            console.log(set, log);
+          }
+          if (!data2['rights']) {
+            this.cookieService.put('xyz', 'false');
+            set = false;
+            log = true;
+            console.log(set, log);
+          }
+        });
+      return this.rights = [set, log]
+    } */
 
   /*   auth(set, log) {
       console.log('hé');
