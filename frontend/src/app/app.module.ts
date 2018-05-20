@@ -19,6 +19,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { HttpProductsService } from './http-products.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { InterceptorModule } from './interceptor/interceptor.module';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { InterceptorModule } from './interceptor/interceptor.module';
     ProductsComponent,
     TotalPipe,
     StatisticsComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
