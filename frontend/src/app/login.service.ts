@@ -13,6 +13,18 @@ export class LoginService {
 
   constructor(public http: HttpClient, public router: Router, private cookieService: CookieService) { }
 
+  isLoggedIn(): boolean {
+    if (this.cookieService.get('xyz') === 'true') {
+      return true;
+    }
+    if (this.cookieService.get('xyz') === 'false') {
+      return false;
+    } else {
+      return false;
+    }
+
+  }
+
   /*   login(url, user, options, set, log) {
       this.http.post(url, user, options)
         .subscribe(data => {

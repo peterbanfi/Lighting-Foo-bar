@@ -21,6 +21,7 @@ import { HttpProductsService } from './http-products.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { InterceptorModule } from './interceptor/interceptor.module';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     OrderService,
     HttpProductsService,
     LoginService,
-    CookieService
+    CookieService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
