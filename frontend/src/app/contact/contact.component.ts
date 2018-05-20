@@ -3,6 +3,7 @@ import { Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+
 declare const google: any;
 
 @Component({
@@ -16,7 +17,7 @@ export class ContactComponent implements OnInit {
   lng = 19.053167;
   msg: any = {
     email: '',
-    coreMsg: '',
+    message: '',
   };
 
   baseUrl = 'http://localhost:8080/contact/';
@@ -25,7 +26,7 @@ export class ContactComponent implements OnInit {
               public router: Router) { }
 
   sendMsg() {
-    this.http.post(this.baseUrl + 'sendClientMsg', this.msg)
+    this.http.post(this.baseUrl + 'sendMessage', this.msg)
       .subscribe(data => {
         console.log(data['_body']);
       });

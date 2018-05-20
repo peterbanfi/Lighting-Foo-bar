@@ -11,7 +11,7 @@ const nodemailer = require('nodemailer');
 /**
  * saját email cím beállítása
  */
-mailRouter.post('/send', (req, res) => {
+mailRouter.post('/contact/sendMessage', (req, res) => {
   const smtpTransport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     secureConnection: false,
@@ -23,11 +23,13 @@ mailRouter.post('/send', (req, res) => {
       pass: 'szeszpress2018',
     },
   });
+
   const output = `
   <p>incoming message</p>
   <p>Email: ${req.body.email}</p>
   <p>Email: ${req.body.message}</p>
   `;
+
   /**
    * ahonnan és ahogy kapjuk az üzenetet, annak beállítása
    * from: a küldő email címe

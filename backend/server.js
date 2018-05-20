@@ -8,13 +8,15 @@ const fs = require('fs');
 const path = require('path');
 const rfs = require('rotating-file-stream');
 const helmet = require('helmet');
+const nodemailer = require('nodemailer');
+
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('./config/database.js');
 const User = require('./models/user');
 const userRouter = require('./route/user.route');
 const productsRouter = require('./route/products.route');
 const ordersRouter = require('./route/order.route');
-const mailRouter = require('./route/mail.route');
+// const mailRouter = require('./route/mail.route');
 
 const logDirectory = path.join(__dirname, 'log');
 const port = process.env.PORT || 8080;
@@ -88,7 +90,7 @@ app.use((req, res, next) => {
 app.use('/user/', userRouter);
 app.use('/products/', productsRouter);
 app.use('/orders/', ordersRouter);
-app.use('/contact/', mailRouter);
+// app.use('/contact/', mailRouter);
 
 // 404 error handling
 app.use((req, res, next) => {
@@ -109,3 +111,26 @@ app.use((error, req, res) => {
 
 // Start server
 app.listen(port);
+
+app.post('/contact/sendMessage', (req, res) => {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'szeszpress@gmail.com',
+      pass: 'szeszpress2018',
+    },
+  });
+  const mailOptions = {
+    from: 'youremail@gmail.com', // X-Google-Original-From:
+    to: 'szeszpress@gmail.com',
+    subject: `Üzenet From: ${req.body.email}`,
+    text: req.body.message,
+  };
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.json({ success: `Email sent: ${info.response}` });
+    }
+  });
+});
