@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 text-center  custom-btn">
+      <i class="fas fa-user-circle fa-3x"></i>
+      <h3>Update Your profile</h3>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4 text-center custom-btn">
+      <div class="custom-btn" (click)=orders()>
+        <i class="fas fa-shopping-cart fa-3x"></i>
+        <h3>Order history</h3>
+      </div>
+    </div>
+  </div>
+  <section *ngIf="openClose === true">
+
+    <section *ngIf="pastOrder.length === 0">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4">
+          <h4>You have no orders yet!</h4>
+        </div>
+      </div>
+
+    </section>
+    <section *ngIf="pastOrder.length > 0">
+      <div class="row" *ngFor="let x of pastOrder; let i = index">
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4">
+          <h4>Order No.: {{i+1}}.</h4>
+          <p>{{x.createdAt | date:'fullDate'}}</p>
+          <hr>
+          <div *ngFor="let y of x.products">
+            <ul>
+              <li>Product: {{y.product.productName}}</li>
+              <li>Price: {{y.product.productPrice}} Ft.</li>
+              <li>Quantity: {{y.quantity}}</li>
+            </ul>
+          </div>
+          <h5>Total Price:</h5>
+          <p>
+            <em>{{pastOrderPrices[i]}} Ft</em>
+          </p>
+          <hr>
+        </div>
+
+      </div>
+    </section>
+  </section>
+</div>

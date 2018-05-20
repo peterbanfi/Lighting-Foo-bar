@@ -22,7 +22,13 @@ export class LoginService {
     } else {
       return false;
     }
-
+  }
+  isLoggedInUser(): boolean {
+    if (this.cookieService.get('xyz')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /*   login(url, user, options, set, log) {

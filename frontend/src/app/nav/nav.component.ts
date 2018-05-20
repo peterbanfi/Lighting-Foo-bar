@@ -29,12 +29,6 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
-  profile() {
-    this.http.get(this.baseUrl + 'profile', this.options)
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
 
   login() {
     this.http.post(this.baseUrl + 'login', this.user, this.options)
