@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
@@ -44,8 +44,10 @@ import { ContactComponent } from './contact/contact.component';
     InterceptorModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger'
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB5G21AVMuyuovz3i0gIuoBgm7vZqUe6WM'
     })
-
   ],
   providers: [OrderService,
     OrderService,
@@ -54,3 +56,4 @@ import { ContactComponent } from './contact/contact.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
