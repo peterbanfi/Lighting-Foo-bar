@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const passportLocalMongoose = require('passport-local-mongoose');
 /**
  * @module User
  */
@@ -86,6 +87,11 @@ module.exports = {
   update: (req, res) => {
     req.body.updatedAt = new Date().toLocaleDateString();
     User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+      if (req.body.update === true) {
+        post.changePassword(req.body.oldPassword, req.body.newPassword, () => {
+          post.save();
+        });
+      }
       if (err) {
         res.send(err);
         console.log(err);
@@ -93,6 +99,8 @@ module.exports = {
       res.json(post);
     });
   },
+
+  //updatePassword: () => {},
 
   /**
    * Egy bizonyos felhasználó keresése

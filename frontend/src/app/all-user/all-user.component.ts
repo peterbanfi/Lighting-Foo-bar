@@ -61,7 +61,6 @@ export class AllUserComponent implements OnInit {
         this.listAll();
         this.updated = true;
       });
-
   }
   /**
    * Basic error handling

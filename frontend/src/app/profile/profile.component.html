@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-4 text-center  custom-btn">
+    <div class="col-4 text-center  custom-btn" (click)="updatePage()">
       <i class="fas fa-user-circle fa-3x"></i>
       <h3>Update Your profile</h3>
     </div>
@@ -12,19 +12,59 @@
       </div>
     </div>
   </div>
-  <section *ngIf="openClose === true">
-
-    <section *ngIf="pastOrder.length === 0">
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4"></div>
-        <div class="col-4">
+  <!-- update profile -->
+  <section *ngIf="openCloseUpdate === true">
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-12 text-center">
+            <td class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-outline-dark" (click)="updateDetails()">Update Details</button>
+              <button type="button" class="btn btn-outline-dark" (click)="updatePassword()">New Password</button>
+            </td>
+          </div>
+        </div>
+        <form>
+          <div *ngIf="details">
+            <div class="form-group">
+              <label for="username">Email address</label>
+              <input type="text" class="form-control" id="username" placeholder="{{userDetails.username}}">
+            </div>
+            <div class=" form-group ">
+              <label for="email ">Email address</label>
+              <input type="email " class="form-control " id="email " placeholder="{{userDetails.email}}">
+            </div>
+          </div>
+          <div *ngIf="pass">
+            <div class="form-group">
+              <label for="passOld">Password Old</label>
+              <input type="password" class="form-control" name="oldPass" id="passOld " placeholder="passOld" [(ngModel)]="userPass.oldPassword">
+            </div>
+            <div class="form-group">
+              <label for="passNew">Password New</label>
+              <input type="password" class="form-control" id="passNew" name="newPass" placeholder="passNew" [(ngModel)]="userPass.newPassword">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" *ngIf="details">Submit</button>
+          <button type="submit" class="btn btn-primary" *ngIf="pass" (click)="changePassword()">Submit</button>
+        </form>
+      </div>
+      <div class="col-6 "></div>
+    </div>
+  </section>
+  <!-- order history -->
+  <section *ngIf="openClose === true ">
+    <section *ngIf="pastOrder.length===0 ">
+      <div class="row ">
+        <div class="col-4 "></div>
+        <div class="col-4 "></div>
+        <div class="col-4 ">
           <h4>You have no orders yet!</h4>
         </div>
       </div>
-
     </section>
-    <section *ngIf="pastOrder.length > 0">
+
+    <section *ngIf="pastOrder.length> 0">
       <div class="row" *ngFor="let x of pastOrder; let i = index">
         <div class="col-4"></div>
         <div class="col-4"></div>

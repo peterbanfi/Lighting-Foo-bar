@@ -18,6 +18,18 @@ export class ProfileComponent implements OnInit {
   pastOrder: any = [];
   pastOrderPrices: any = [];
   openClose: Boolean = false;
+  openCloseUpdate: Boolean = false;
+  details: Boolean = false;
+  pass: Boolean = false;
+  userDetails: any = {
+    username: '',
+    email: '',
+  };
+  userPass: any = {
+    update: true,
+    oldPassword: '',
+    newPassword: '',
+  }
 
   constructor(public http: HttpClient, public router: Router, private LServ: LoginService, private cookieService: CookieService) {
     this.profile();
@@ -31,6 +43,7 @@ export class ProfileComponent implements OnInit {
     this.http.get(`${this.baseUrl}user/profile`, this.options)
       .subscribe(data => {
         this.userId = data['user']._id;
+        this.userDetails = data['user'];
       });
   }
 
@@ -64,6 +77,36 @@ export class ProfileComponent implements OnInit {
   }
   orders() {
     this.openClose = !this.openClose;
+    this.openCloseUpdate = false;
+  }
+  updatePage() {
+    this.openCloseUpdate = !this.openCloseUpdate;
+    this.openClose = false;
+  }
+
+  updateDetails() {
+    this.details = !this.details;
+    this.pass = false;
+  }
+  updatePassword() {
+    this.pass = !this.pass;
+    this.details = false;
+  }
+
+  changePassword() {
+    if (this.userPass['oldPassword'].length === 0 && this.userPass['newPassword'].length === 0) {
+      alert('You must fill all fields!');
+      return;
+    }
+    if (this.userPass['newPassword'].length < 8) {
+      alert('New password must be more than 8 characters!');
+    } else {
+      console.log(this.userPass);
+      this.http.put(`${this.baseUrl}user/update/${this.userId}`, this.userPass, this.options)
+        .subscribe(data => {
+          console.log(data);
+        });
+    }
   }
 
 }
