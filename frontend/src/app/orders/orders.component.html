@@ -96,13 +96,13 @@
                   {{product.name}}
                 </td>
                 <td>
-                  {{product.product.productPrice | currency:'HUF'}}
+                  {{product.product.productPrice | currency:'Ft':'':'':'hu'}}
                 </td>
                 <td>
                   {{product.quantity}}
                 </td>
                 <td>
-                  {{(product.product.productPrice * product.quantity) | currency:'HUF'}}
+                  {{(product.product.productPrice * product.quantity) | currency:'Ft':'':'':'hu'}}
                 </td>
                 <td>
                   <button class="btn btn-danger" (click)="deleteProduct(i)">Remove</button>
@@ -117,7 +117,7 @@
       </pre>
       <div class="modal-footer">
         <p>
-          Total: {{newOrderDisplay.total | currency:'HUF'}}
+          Total: {{newOrderDisplay.total | currency:'Ft':'':'':'hu'}}
         </p>
         <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel" (click)="clear()">
         <input type="button" class="btn btn-outline-success" value="Place order" (click)="placeOrder()">
@@ -175,12 +175,12 @@
             <tr *ngFor="let product of orderToUpdateDisplay.products index as i">
               <td>{{i+1}}</td>
               <td>{{product.product.productName}}</td>
-              <td>{{product.product.productPrice | currency:'HUF'}}</td>
+              <td>{{product.product.productPrice | currency:'Ft':'':'':'hu'}}</td>
               <td>
                 <input class="form-control" name="productQty" type="number" id="productQty" [(ngModel)]="orderToUpdate.products[i].quantity"
                   required min="1" max="1000">
               </td>
-              <td>{{(product.quantity * product.product.productPrice) | currency:'HUF'}}</td>
+              <td>{{(product.quantity * product.product.productPrice) | currency:'Ft':'':'':'hu'}}</td>
               <td class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-outline-danger" (click)="removeProductFromOrder(i)">Remove</button>
               </td>
@@ -198,7 +198,7 @@
                 </span>
               </div>
               <select class="form-control" id="orderUpdateNewProduct" name="orderUpdateNewProduct" [(ngModel)]="addNewProductToOrder" required>
-                <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+(product.productPrice | currency:'HUF')}}</option>
+                <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+(product.productPrice | currency:'Ft':'':'':'hu')}}</option>
               </select>
               <input type="number" placeholder="Quantity" [(ngModel)]="addNewProductQuantity" required>
             </div>
