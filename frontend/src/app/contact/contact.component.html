@@ -12,10 +12,10 @@
 </section>
 <section class="section-contactform">
   <div class="container">
-    <div class="row" ng-repeat="input in inputs | filter:inputNumber">
+    <div class="row">
       <div class="form col-12">
         <h3>Írjon nekünk</h3>
-        <form id="contact-form" contact-form="ngForm">
+        <form id="contact-form">
           <div class="input-group mb-3 inputs">
             <div class="input-group-prepend" for="contactname">
               <span id="basic-addon1" class="fas fa-user input-group-text"></span>
@@ -23,7 +23,7 @@
             </div>
             <div class="input-group-prepend" for="subject">
               <span id="basic-addon2" class="input-group-text">...</span>
-              <input type="text" class="form-control" id="subject" placeholder="Tárgy">
+              <input type="text" class="form-control" name="subject" placeholder="Tárgy" [(ngModel)]="msg.subject" #subject="ngModel">
             </div>
             <div class="input-group-prepend" for="contactemail">
               <span id="basic-addon3" class="input-group-text">@</span>
@@ -34,7 +34,7 @@
             <div class="input-group-prepend" for="massage">
               <span id="basic-addon4" class="input-group-text far fa-comment-alt"></span>
             </div>
-            <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Üzenet szövege"[(ngModel)]="msg.message" required #message="ngModel"></textarea>
+            <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Üzenet szövege" [(ngModel)]="msg.message" required #message="ngModel"></textarea>
             <br>
           </div>
           <div class="input-group mb-3">

@@ -97,3 +97,12 @@ __Oldalak/Funkciók:__
   - CRUD, ahol az admin, és a user jogosultságú felhasználókat is kezeljük
   - az admin felhasználók a regisztrált emberek jogosultságát módosítani tudják egy egyszerű select segítségével. 
 
+
+## 2. Sprint
+
+#### Kapcsolat oldal
+
+A térkép megjelenítését a frontend részén a agm-map -pal készítettük el. Ehhez telepíteni kellett:
+npm install @agm/core --save
+
+A sikeres üzenetküldés megjelenítéséhez telepítettük (npm i angular2-flash-messages) a flesshMessageService-t. Ez biztosítja azt, hogy ha felveszi egy ügyfél velünk a kapcsolatot, elküldi az üzenetét akkor Ő is fog kapni róla egy visszajelzést, hogy sikeres küldés.

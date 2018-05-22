@@ -20,6 +20,7 @@ import { HttpProductsService } from './http-products.service';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { InterceptorModule } from './interceptor/interceptor.module';
 import { ContactComponent } from './contact/contact.component';
+import { FlashMessagesService, FlashMessagesModule } from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -47,11 +48,13 @@ import { ContactComponent } from './contact/contact.component';
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyB5G21AVMuyuovz3i0gIuoBgm7vZqUe6WM'
-    })
+    }),
+    FlashMessagesModule.forRoot()
   ],
   providers: [OrderService,
     OrderService,
-    HttpProductsService
+    HttpProductsService,
+    FlashMessagesService
   ],
   bootstrap: [AppComponent]
 })

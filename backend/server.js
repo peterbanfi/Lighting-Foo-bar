@@ -109,28 +109,35 @@ app.use((error, req, res) => {
   });
 });
 
-// Start server
-app.listen(port);
+// nodemailer üzenetküldés
+app.post('/sendemail', (req, res) => {
+  const mailadr = req.body;
+  console.log(mailadr);
 
-app.post('/contact/sendMessage', (req, res) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
       user: 'szeszpress@gmail.com',
       pass: 'szeszpress2018',
     },
   });
   const mailOptions = {
-    from: 'youremail@gmail.com', // X-Google-Original-From:
+    from: mailadr.from,
     to: 'szeszpress@gmail.com',
-    subject: `Üzenet From: ${req.body.email}`,
-    text: req.body.message,
+    subject: mailadr.subject,
+    html: `<i>${mailadr.html}</i>`,
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log(error);
-    } else {
-      res.json({ success: `Email sent: ${info.response}` });
+      return console.log(error);
     }
+    console.log('Message %s sent: %s', info.messageId, info.response);
+    res.render('index');
   });
 });
+
+// Start server
+app.listen(port);
