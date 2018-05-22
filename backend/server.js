@@ -115,7 +115,6 @@ app.post('/sendemail', (req, res) => {
   console.log(mailadr);
 
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
@@ -130,6 +129,7 @@ app.post('/sendemail', (req, res) => {
     subject: mailadr.subject,
     html: `<i>${mailadr.html}</i>`,
   };
+
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
@@ -138,6 +138,5 @@ app.post('/sendemail', (req, res) => {
     res.render('index');
   });
 });
-
 // Start server
 app.listen(port);
