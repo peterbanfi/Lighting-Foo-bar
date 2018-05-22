@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { CookieService } from 'angular2-cookie/core';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-nav',
@@ -16,12 +17,18 @@ export class NavComponent implements OnInit {
     username: '',
     password: '',
   };
+  tempAdmin: any = {
+    username: 'admin@admin.com',
+    password: 'admin',
+  };
+  dropdown: Boolean = true;
   isAdmin: Boolean = false;
   options: any = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/user/';
   loggedIn: Boolean = false;
   userName: any;
   wrong: Boolean = false;
+  scrollPos: number;
 
   constructor(public http: HttpClient, public router: Router, private LServ: LoginService, private cookieService: CookieService) {
 
@@ -29,9 +36,12 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+  dropdownToggle() {
+    this.dropdown ? this.dropdown = false : this.dropdown = true;
+  }
 
   login() {
-    this.http.post(this.baseUrl + 'login', this.user, this.options)
+    this.http.post(this.baseUrl + 'login', this.tempAdmin, this.options)
       .subscribe(data => {
         if (data['login']) {
           this.admin();
@@ -69,5 +79,29 @@ export class NavComponent implements OnInit {
     this.LServ.logout(this.baseUrl + 'logout', this.options);
     this.loggedIn = false;
     this.isAdmin = false;
+  }
+
+  //transparent navbar
+  @HostListener('window:scroll') onScroll() {
+    const navbar = document.querySelector('#navbar') as HTMLElement;
+    this.scrollPos = document.documentElement.scrollTop;
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+      navbar.style.backgroundColor = 'rgba(52, 58, 64, 0.6)';
+    } else {
+      navbar.style.backgroundColor = '#343A40';
+    }
+  };
+
+  //listening scroll pos
+  @HostListener('mousemove', ['$event'])
+  onMousemove(event: MouseEvent) {
+    const navbar = document.querySelector('#navbar') as HTMLElement;
+    if (this.scrollPos > 60) {
+      if (event.clientY <= 60) {
+        navbar.style.backgroundColor = '#343A40';
+      } else {
+        navbar.style.backgroundColor = 'rgba(52, 58, 64, 0.6)';
+      }
+    }
   }
 }
