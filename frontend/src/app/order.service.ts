@@ -8,25 +8,25 @@ import 'rxjs/add/operator/toPromise';
 export class OrderService {
   constructor(public http: HttpClient) { }
 
-  getAll() {
-    /*this.http.get(`http://localhost:8080/orders/`).forEach(data =>
-      this.Orders = JSON.parse(data['_body']));
-    this.http.get(`http://localhost:8080/products/`).subscribe(
-      data => this.Products = JSON.parse(data['_body']));
-    this.http.get(`http://localhost:8080/user/listAll`).subscribe(
-      data => this.Users = JSON.parse(data['_body']));*/
+  getAll(domain) {
+    return this.http.get(domain).toPromise();
+
   }
 
-  createNew(data) {
-    this.http.post(`http://localhost:8080/orders/`, data);
+  getSingle(domain) {
+    return this.http.get(domain).toPromise();
   }
 
-  update(id, data) {
-    this.http.put(`http://localhost:8080/orders/${id}`, data);
+  post(domain, data) {
+    return this.http.post(domain, data).toPromise();
   }
 
-  delete(id) {
-    this.http.delete(`http://localhost:8080/orders/${id}`);
+  put(domain, data) {
+    return this.http.put(domain, data).toPromise();
+  }
+
+  delete(domain) {
+    return this.http.delete(domain).toPromise();
   }
 
 }
