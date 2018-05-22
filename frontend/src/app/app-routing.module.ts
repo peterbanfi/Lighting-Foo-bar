@@ -13,7 +13,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
-import { BucketComponent } from './bucket/bucket.component';
+import { BasketComponent } from './basket/basket.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'statistics', component: StatisticsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [UserAuthGuard] },
-  { path: 'bucket', component: BucketComponent },
+  { path: 'basket', component: BasketComponent },
 ];
 
 @NgModule({

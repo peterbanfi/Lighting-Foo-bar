@@ -55,6 +55,7 @@ export class OrdersComponent implements OnInit {
       console.log(data);
     });
     this.newOrder = { products: [] };
+    this.storeInBasket();
     // location.reload();
     this.getAll();
   }
@@ -156,6 +157,14 @@ export class OrdersComponent implements OnInit {
       });
     }
   */
+
+ // letárolom session storage-be
+ storeInBasket() {
+ const basket = sessionStorage.basket ? JSON.parse(sessionStorage.basket) : [];
+ basket.push(this.newOrder);
+ const session = JSON.stringify(basket);
+ sessionStorage.setItem('basket', session);
+ }
 
   ngOnInit() {
   }

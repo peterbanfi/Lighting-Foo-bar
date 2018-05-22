@@ -93,22 +93,6 @@ app.use('/orders/', ordersRouter);
 // app.use('/contact/', mailRouter);
 app.use('/categories/', categoriesRouter);
 
-// 404 error handling
-app.use((req, res, next) => {
-  const error = new Error('Not Found');
-  error.status = 404;
-  next(error);
-});
-
-// 500 error
-app.use((error, req, res) => {
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message,
-    },
-  });
-});
 
 // nodemailer üzenetküldés
 app.post('/sendemail', (req, res) => {
@@ -139,5 +123,23 @@ app.post('/sendemail', (req, res) => {
     res.render('index');
   });
 });
+
+// 404 error handling
+app.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+// 500 error
+app.use((error, req, res) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
+
 // Start server
 app.listen(port);

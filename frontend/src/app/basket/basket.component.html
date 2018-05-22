@@ -1,0 +1,54 @@
+<div class="container">
+<h1>
+  Kosár tartalma
+</h1>
+<br>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <th scope="col">Product name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Subtotal</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of basket index as i">
+          <td>
+            {{product.name}}
+          </td>
+          <td>
+            {{product.product.productPrice | currency:'Ft':'':'':'hu'}}
+          </td>
+          <td>
+            <input type="number" name="productname" id="productname">{{product.quantity}}
+          </td>
+          <td>
+            {{(product.product.productPrice * product.quantity) | currency:'Ft':'':'':'hu'}}
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="updateProduct(i)">Update</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteProduct(i)">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  <p>
+    Total: {{newOrderDisplay.total | currency:'Ft':'':'':'hu'}}
+  </p>
+  <br>
+  <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel" (click)="clear()">
+  <input type="button" class="btn btn-outline-success" value="Place order" (click)="placeOrder()">
+  <a href="http://localhost:4200/products" class="btn btn-outline-primary" role="button">Back to Shopping</a>
+</div>
+</div>
+<pre>
+  {{addNewProductToOrder | json}}
+</pre>
+
+  
+
