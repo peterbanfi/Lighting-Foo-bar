@@ -24,6 +24,7 @@
     "@angular/router": "^5.2.0",
     "angular-confirmation-popover": "^4.1.0",
     "angular2-flash-messages": "^2.0.5",
+    "angular2-cookie": "^1.2.6",
     "canvasjs": "^1.8.1",
     "core-js": "^2.4.1",
     "jsdoc": "^3.5.5",

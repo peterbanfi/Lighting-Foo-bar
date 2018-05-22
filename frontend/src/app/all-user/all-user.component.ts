@@ -18,6 +18,8 @@ export class AllUserComponent implements OnInit {
     rights: Boolean,
   };
   user: any;
+  options: any = new RequestOptions({ withCredentials: true });
+  updated: Boolean = false;
   constructor(public http: HttpClient) {
     this.listAll();
   }
@@ -28,7 +30,7 @@ export class AllUserComponent implements OnInit {
    * Listing all users on admin page
    */
   listAll() {
-    this.http.get(`${this.baseUrl}listAll`)
+    this.http.get(`${this.baseUrl}listAll`, this.options)
       .subscribe(data => {
         this.errorHandling(data);
       }
@@ -40,23 +42,25 @@ export class AllUserComponent implements OnInit {
    */
   removeUser(id, name) {
     if (confirm(`Are you sure to delete ${name}?`)) {
-      this.http.delete(`${this.baseUrl}remove/${id}`)
+      this.http.delete(`${this.baseUrl}remove/${id}`, this.options)
         .subscribe(data => {
           this.errorHandling(data);
+          this.listAll();
         });
-      location.reload();
+
     }
   }
   /**
    * Update specified user.
    */
   update() {
-    this.http.put(`${this.baseUrl}/update/${this.modal['_id']}`, this.modal)
+    this.http.put(`${this.baseUrl}/update/${this.modal['_id']}`, this.modal, this.options)
       .subscribe(data => {
         console.log(data);
         this.errorHandling(data);
+        this.listAll();
+        this.updated = true;
       });
-    location.reload();
   }
   /**
    * Basic error handling

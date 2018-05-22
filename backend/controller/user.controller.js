@@ -44,11 +44,11 @@ module.exports = {
   /**
    * Egyszerű login
    * @param {String} req - A kérés.
-   * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi az adott felhasználó megadott adatait.
+   * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi az adott felhasználó adatait.
    */
   login: (req, res) => res.json({
     login: true,
-    user: req.user.rights,
+    user: req.body,
   }),
   /**
    * És logout
@@ -73,7 +73,9 @@ module.exports = {
           success: 'Sikeres törlés',
         });
       })
-      .catch((err) => res.status(500).send(err));
+      .catch((err) => {
+        res.status(500).send(err);
+      });
   },
 
   /**
@@ -84,6 +86,11 @@ module.exports = {
   update: (req, res) => {
     req.body.updatedAt = new Date().toLocaleDateString();
     User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+      if (req.body.update === true) {
+        post.changePassword(req.body.oldPassword, req.body.newPassword, () => {
+          post.save();
+        });
+      }
       if (err) {
         res.send(err);
         console.log(err);
@@ -92,10 +99,13 @@ module.exports = {
     });
   },
 
+  //updatePassword: () => {},
+
   /**
    * Egy bizonyos felhasználó keresése
    * @param {String} req - A kérés a felhasználó azonosítóját állítja be.
-   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot és a keresett felhasználót.
+   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot és a
+   * keresett felhasználót.
    */
   getOne: (req, res, next) => {
     User.findById(req.params.id)
