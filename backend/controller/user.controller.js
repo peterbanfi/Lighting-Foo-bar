@@ -45,12 +45,7 @@ module.exports = {
   /**
    * Egyszerű login
    * @param {String} req - A kérés.
-<<<<<<< HEAD
-   * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi az adott felhasználó
-   *  megadott adatait.
-=======
    * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi az adott felhasználó adatait.
->>>>>>> PB
    */
   login: (req, res) => res.json({
     login: true,
@@ -79,13 +74,9 @@ module.exports = {
           success: 'Sikeres törlés',
         });
       })
-<<<<<<< HEAD
-      .catch(err => res.status(500).send(err));
-=======
       .catch((err) => {
         res.status(500).send(err);
       });
->>>>>>> PB
   },
 
   /**
