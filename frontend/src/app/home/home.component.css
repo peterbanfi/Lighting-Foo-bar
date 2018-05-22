@@ -1,0 +1,9 @@
+.card-img-top {
+  height: 50vh;
+  object-fit: scale-down;
+  transition: width 1s;
+}
+
+.card-img-top:hover {
+  width: 96%;
+}

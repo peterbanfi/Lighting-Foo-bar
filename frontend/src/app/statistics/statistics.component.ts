@@ -45,6 +45,10 @@ export class StatisticsComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  refresh() {
+    location.reload();
+  }
   /**
    * A rendelések lekérése.
    */

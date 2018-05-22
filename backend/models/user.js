@@ -40,7 +40,10 @@ userSchema.plugin(passportLocalMongoose, {
   hashField: 'password',
   passwordValidator: (password, cb) => {
     if (!validator.isLength(password, 8)) {
-      return cb({ code: 400, message: 'A megadott jelszónak legalább 8 karakter hosszúnak kell lennie.' });
+      return cb({
+        code: 400,
+        message: 'A megadott jelszónak legalább 8 karakter hosszúnak kell lennie.'
+      });
     }
     return cb(null);
   },
