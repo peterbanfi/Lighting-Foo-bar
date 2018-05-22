@@ -10,13 +10,15 @@ mongoose.Promise = require('bluebird');
 module.exports = {
 
   /**
-    * összes termék listázása
-    * @param {String} req - A kérés.
-    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
-    */
+   * összes termék listázása
+   * @param {String} req - A kérés.
+   * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   */
 
   list: (req, res) => {
     Products.find({})
+      .populate('productCategory', 'categoryName')
+      .exec()
       .then((products) => {
         res.status(200).json(products);
       })
@@ -35,6 +37,17 @@ module.exports = {
 
   find: (req, res) => {
     Products.findById(req.params.id)
+      .populate('productCategory', 'categoryName')
+      .populate({
+        path: 'productComments',
+        select: 'text user createdAt',
+        populate: {
+          path: 'user',
+          select: 'username',
+          model: 'User',
+        },
+      })
+      .exec()
       .then((products) => {
         if (products) {
           res.status(200).json(products);
@@ -52,10 +65,10 @@ module.exports = {
   },
 
   /**
- * termék létrehozása
- * @param {String} req - Ha van file feltölti és az útvonalát beállítja a db-ben
- * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
- */
+   * termék létrehozása
+   * @param {String} req - Ha van file feltölti és az útvonalát beállítja a db-ben
+   * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   */
 
   create: (req, res) => {
     let body = JSON.stringify(req.body);
@@ -99,11 +112,15 @@ module.exports = {
             if (products) {
               res.status(200).json(products);
             } else {
-              res.status(404).json({ message: 'Not a valid Id!' });
+              res.status(404).json({
+                message: 'Not a valid Id!',
+              });
             }
           })
           .catch((err) => {
-            res.status(500).json({ error: err });
+            res.status(500).json({
+              error: err,
+            });
           }));
     } else {
       Products.findByIdAndUpdate(req.params.id, body)
@@ -122,11 +139,15 @@ module.exports = {
           if (products) {
             res.status(200).json(products);
           } else {
-            res.status(404).json({ message: 'Not a valid Id!' });
+            res.status(404).json({
+              message: 'Not a valid Id!',
+            });
           }
         })
         .catch((err) => {
-          res.status(500).json({ error: err });
+          res.status(500).json({
+            error: err,
+          });
         });
     }
   },
@@ -168,4 +189,27 @@ module.exports = {
         });
       });
   },
+  /**
+   * Komment hozzáadása a termékhez
+   * @param {String} productId - A kiválasztott termék ID-je.
+   * @param {String} commentId - A hozzáfúzött komment ID-je,
+   *  amit az adott termék productComments tömbjébe helyez.
+   */
+  addComment: (productId, commentId) => Products.findByIdAndUpdate(productId, {
+    $push: {
+      productComments: commentId,
+    },
+  }),
+
+  /**
+   * Komment eltávolítása a termékhez
+   * @param {String} productId - A kiválasztott termék ID-je.
+   * @param {String} commentId - A hozzáfúzött komment ID-je,
+   *  amit kiveszünk az adott termék productComments tömbjéből.
+   */
+  removeComment: (productId, commentId) => Products.findByIdAndUpdate(productId, {
+    $pull: {
+      productComments: commentId,
+    },
+  }),
 };

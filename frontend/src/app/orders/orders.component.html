@@ -31,7 +31,7 @@
 
 <!-- PlaceOrderModal -->
 <div class="modal fade" id="placeOrderModal" tabindex="-1" role="dialog" aria-labelledby="placeOrderModalTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="placeOrderModalTitle">Place new order</h5>
@@ -73,7 +73,7 @@
                 <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+product.productPrice+' HUF'}}</option>
               </select>
               <input type="number" class="form-control tableinput" name="newProductQuantity" id="newProductQuantity" [(ngModel)]="addNewProductQuantity"
-                min="1" max="1000" required>
+                min="1" max="1000" required pattern="[0-9]{4}">
             </div>
           </div>
           <div class="col-2">
@@ -120,7 +120,7 @@
           Total: {{newOrderDisplay.total | currency:'Ft':'':'':'hu'}}
         </p>
         <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel" (click)="clear()">
-        <input type="button" class="btn btn-outline-success" value="Place order" (click)="placeOrder()">
+        <input type="button" class="btn btn-outline-success" value="Place order" data-dismiss="modal" (click)="placeOrder()">
       </div>
     </div>
   </div>
@@ -132,7 +132,7 @@
 
 <!-- Update Modal -->
 <div class="modal fade" id="updateModal3" tabindex="-1" role="dialog" aria-labelledby="updateModalTitle3" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="updateModalTitle3">Order details</h5>
@@ -157,7 +157,7 @@
               <span class="fas fa-user" aria-hidden="true"></span>
             </span>
           </div>
-          <input class="form-control" name="orderUser" type="text" id="orderUser" [(ngModel)]="orderToUpdateDisplay.user.username">
+          <input class="form-control" name="orderUser" type="text" id="orderUser" value={{orderToUpdateDisplay.user.username}} disabled>
         </div>
         <hr>
         <table class="table">
@@ -178,7 +178,7 @@
               <td>{{product.product.productPrice | currency:'Ft':'':'':'hu'}}</td>
               <td>
                 <input class="form-control" name="productQty" type="number" id="productQty" [(ngModel)]="orderToUpdate.products[i].quantity"
-                  required min="1" max="1000">
+                  required min="1" max="1000" pattern="[0-9]{4}">
               </td>
               <td>{{(product.quantity * product.product.productPrice) | currency:'Ft':'':'':'hu'}}</td>
               <td class="btn-group" role="group" aria-label="Basic example">
@@ -200,7 +200,7 @@
               <select class="form-control" id="orderUpdateNewProduct" name="orderUpdateNewProduct" [(ngModel)]="addNewProductToOrder" required>
                 <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+(product.productPrice | currency:'Ft':'':'':'hu')}}</option>
               </select>
-              <input type="number" placeholder="Quantity" [(ngModel)]="addNewProductQuantity" required>
+              <input type="number" pattern="[0-9]{4}" [(ngModel)]="addNewProductQuantity" required>
             </div>
             <br>
             <input type="button" class="btn btn-block btn-outline-primary" value="Add to order" (click)="addProductToOrder()">
@@ -209,7 +209,7 @@
       </div>
       <div class="modal-footer">
         <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
-        <input type="button" class="btn btn-block btn-outline-success" value="Save" (click)="updateOrder()">
+        <input type="button" class="btn btn-block btn-outline-success" value="Save" data-dismiss="modal" (click)="updateOrder()">
       </div>
     </div>
   </div>
