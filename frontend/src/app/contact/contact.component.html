@@ -17,15 +17,15 @@
         <h3>Írjon nekünk</h3>
         <form id="contact-form">
           <div class="input-group mb-3 inputs">
-            <div class="input-group-prepend" for="contactname">
+            <div class="input-group-prepend col-md-4" for="contactname">
               <span id="basic-addon1" class="fas fa-user input-group-text"></span>
               <input type="text" class="form-control" id="contactname" placeholder="Név">
             </div>
-            <div class="input-group-prepend" for="subject">
+            <div class="input-group-prepend col-md-4" for="subject">
               <span id="basic-addon2" class="input-group-text">...</span>
               <input type="text" class="form-control" name="subject" placeholder="Tárgy" [(ngModel)]="msg.subject" #subject="ngModel">
             </div>
-            <div class="input-group-prepend" for="contactemail">
+            <div class="input-group-prepend col-md-4" for="contactemail">
               <span id="basic-addon3" class="input-group-text">@</span>
               <input type="email" class="form-control" name="contactemail" placeholder="E-mail" [(ngModel)]="msg.email" required #contactemail="ngModel">
             </div>

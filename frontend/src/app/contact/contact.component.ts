@@ -34,14 +34,14 @@ export class ContactComponent implements OnInit {
             private flashMessagesService: FlashMessagesService) { }
 
   sendMsg() {
-    const flashMessagesService = this.flashMessagesService;
+    // const flashMessagesService = this.flashMessagesService;
     this.http.post('http://localhost:8080/sendemail', this.msg).subscribe(data => {
       console.log(data);
-    })
-    .then( () => { flashMessagesService.show('Email elküldve.', { cssClass: 'alert-success' });
-  })
-    .catch( (error) => {console.error('Hiba a dokumentum írása közben: ', error);
-  });
+    });
+    // .then( () => { flashMessagesService.show('Email elküldve.', { cssClass: 'alert-success' });
+  // })
+    // .catch( (error) => {console.error('Hiba a dokumentum írása közben: ', error);
+  // });
 }
 
   ngOnInit() {
