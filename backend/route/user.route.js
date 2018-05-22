@@ -17,15 +17,26 @@ function loggedIn(req, res, next) {
             error: 'Access Denied!',
         });
     }
-}
+};
+
+function loggedInUser(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.status(500).json({
+            error: 'Access Denied!',
+        });
+    }
+};
 
 userRouter.get('/profile', UserController.profile);
 userRouter.get('/listAll', UserController.listAll);
 userRouter.get('/getOne/:id', loggedIn, UserController.getOne);
 userRouter.delete('/remove/:id', loggedIn, UserController.remove);
 userRouter.post('/register', loggedIn, UserController.register);
-userRouter.put('/update/:id', UserController.update);
-//userRouter.put('/updatePassword/:id', UserController.update);
+userRouter.put('/update/:id', loggedInUser, UserController.update);
+/* userRouter.put('/updatePassword/:id', UserController.update); */
+
 userRouter.post('/login', passport.authenticate('local'), UserController.login);
 userRouter.get('/logout', UserController.logout);
 
