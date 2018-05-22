@@ -24,9 +24,6 @@
         <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="statistics" routerLinkActive="active">Statistics</a>
         </li>
-        <li class="nav-item" *ngIf="isAdmin">
-          <a class="nav-link" routerLink="registration" routerLinkActive="active">Registration</a>
-        </li>
         <li class="nav-item" *ngIf="loggedIn">
           <a class="nav-link" routerLink="profile" routerLinkActive="active">Profile</a>
         </li>
@@ -101,10 +98,13 @@
         </div>
         <div *ngIf="user.password.length > 0 && user.username.length > 0">
           <hr>
-          <div class="btn-group" role="group" aria-label="Basic example" *ngIf="!loggedIn">
+          <div class="col-12 float-right" *ngIf="!loggedIn">
             <input id="logI" type="button" class="btn btn-block btn-outline-success" value="Login" (click)="login()">
           </div>
         </div>
+      </div>
+      <div class="modal-footer" *ngIf="!loggedIn">
+        <a class="nav-link" routerLink="registration">Not a member yet? Click here to registrate!</a>
       </div>
     </div>
   </div>
