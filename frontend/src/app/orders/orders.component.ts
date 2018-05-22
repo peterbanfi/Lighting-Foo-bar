@@ -2,6 +2,11 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { OrderService } from '../order.service';
+import { registerLocaleData } from '@angular/common';
+import localeHu from '@angular/common/locales/hu';
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeHu, 'hu');
 
 @Pipe({ name: 'total' })
 export class TotalPipe implements PipeTransform {
@@ -10,7 +15,7 @@ export class TotalPipe implements PipeTransform {
     for (let i = 0; i < order.products.length; i++) {
       total += order.products[i].product.productPrice * order.products[i].quantity;
     }
-    return `${total} HUF`;
+    return `${total}`;
   }
 }
 @Component({
@@ -26,39 +31,42 @@ export class OrdersComponent implements OnInit {
   newOrder: any = { products: [] };
   newOrderDisplay: any = { products: [], total: 0 };
   addNewProductToOrder: any = {};
+  addNewProductQuantity = 1;
   orderToUpdate: any = { user: { username: 'valaki' }, products: [] };
   orderToUpdateDisplay: any = { user: { username: 'valaki' }, products: [] };
 
-  constructor(public http: Http, private Oservice: OrderService) {
+  constructor(public http: OrderService) {
     this.getAll();
     // this.countTotals(this.Orders);
   }
   // Get all users, products and orders
   getAll() {
-    this.http.get(this.baseUrl).subscribe(
-      data => this.Orders = JSON.parse(data['_body']));
-    this.http.get(`http://localhost:8080/products/`).subscribe(
-      data => this.Products = JSON.parse(data['_body']));
-    this.http.get(`http://localhost:8080/user/listAll`).subscribe(
-      data => this.Users = JSON.parse(data['_body']));
+    this.http.getAll(this.baseUrl)
+      .then(data => this.Orders = data);
+    this.http.getAll(`http://localhost:8080/products/`)
+      .then(data => this.Products = data);
+    this.http.getAll(`http://localhost:8080/user/listAll`)
+      .then(data => this.Users = data);
   }
 
   // Place a new order with the data of newOrder
   placeOrder() {
-    this.http.post(this.baseUrl, this.newOrder).subscribe(data => {
+    this.http.post(this.baseUrl, this.newOrder).then(data => {
       console.log(data);
     });
     this.newOrder = { products: [] };
-    location.reload();
+    // location.reload();
+    this.getAll();
   }
 
   // Update order specified by order ID.
   updateOrder() {
-    this.http.put(`${this.baseUrl}${this.orderToUpdate._id}`, this.orderToUpdate).subscribe(data => {
+    this.http.put(`${this.baseUrl}${this.orderToUpdate._id}`, this.orderToUpdate).then(data => {
       console.log(data);
     });
     this.orderToUpdate = {};
-    location.reload();
+    // location.reload();
+    this.getAll();
   }
 
   // Select order to be updated
@@ -78,7 +86,7 @@ export class OrdersComponent implements OnInit {
 
   // Update selected orders products
   addProductToOrder() {
-    const qty = this.addNewProductToOrder.quantity;
+    const qty = this.addNewProductQuantity;
     const prod = this.addNewProductToOrder;
     this.orderToUpdate.products.push({
       quantity: qty,
@@ -88,22 +96,23 @@ export class OrdersComponent implements OnInit {
       quantity: qty,
       product: prod
     });
-    this.addNewProductToOrder = {};
+    this.clear();
   }
 
   // Delete order specified by order ID.
   deleteOrder(order) {
     if (confirm(`Are you sure to delete the order of ${order.user.username}?`)) {
-      this.http.delete(`${this.baseUrl}${order['_id']}`).subscribe(data => {
+      this.http.delete(`${this.baseUrl}${order['_id']}`).then(data => {
         console.log(data);
       });
-      location.reload();
+      // location.reload();
+      this.getAll();
     }
   }
 
   // Add product to the new order
   addProduct() {
-    const qty = this.addNewProductToOrder.quantity;
+    const qty = this.addNewProductQuantity;
     const price = this.addNewProductToOrder.productPrice;
     this.newOrder.products.push({
       product: this.addNewProductToOrder._id,
@@ -118,7 +127,7 @@ export class OrdersComponent implements OnInit {
         }
       });
     this.newOrderDisplay.total += price * qty;
-    this.addNewProductToOrder = {};
+    this.clear();
     // console.log(this.newOrder);
     // console.log(this.newOrderDisplay);
   }
@@ -131,6 +140,10 @@ export class OrdersComponent implements OnInit {
     this.newOrderDisplay.products.splice(i, 1);
   }
 
+  clear() {
+    this.addNewProductToOrder = {};
+    this.addNewProductQuantity = 1;
+  }
 
   /*
     countTotals(data) {
@@ -143,13 +156,6 @@ export class OrdersComponent implements OnInit {
       });
     }
   */
-
-  muti() {
-    // this.countTotals(this.Orders);
-    console.log(this.Orders);
-    console.log(this.Products);
-    console.log(this.Users);
-  }
 
   ngOnInit() {
   }

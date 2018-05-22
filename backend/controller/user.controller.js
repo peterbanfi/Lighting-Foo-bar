@@ -44,7 +44,8 @@ module.exports = {
   /**
    * Egyszerű login
    * @param {String} req - A kérés.
-   * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi az adott felhasználó megadott adatait.
+   * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi az adott felhasználó
+   *  megadott adatait.
    */
   login: (req, res) => res.json({
     login: true,
@@ -73,7 +74,7 @@ module.exports = {
           success: 'Sikeres törlés',
         });
       })
-      .catch((err) => res.status(500).send(err));
+      .catch(err => res.status(500).send(err));
   },
 
   /**
@@ -95,7 +96,8 @@ module.exports = {
   /**
    * Egy bizonyos felhasználó keresése
    * @param {String} req - A kérés a felhasználó azonosítóját állítja be.
-   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot és a keresett felhasználót.
+   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot és a
+   * keresett felhasználót.
    */
   getOne: (req, res, next) => {
     User.findById(req.params.id)
