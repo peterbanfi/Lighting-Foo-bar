@@ -26,6 +26,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { BucketComponent } from './bucket/bucket.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ProfileComponent } from './profile/profile.component';
     StatisticsComponent,
     ContactComponent,
     ProfileComponent,
+    BucketComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,7 @@ import { ProfileComponent } from './profile/profile.component';
   providers: [OrderService,
     OrderService,
     HttpProductsService,
-    FlashMessagesService
+    FlashMessagesService,
     LoginService,
     CookieService,
     AuthGuard,
