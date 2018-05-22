@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const passportLocalMongoose = require('passport-local-mongoose');
 /**
  * @module User
  */
@@ -83,6 +82,10 @@ module.exports = {
    * Update felhasznló
    * @param {String} req - A kérés a felhasználó azonosítóját és fő aatait kéri.
    * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a frissített adatokat.
+   * @param {Boolean} req.body.update - Ha a user bodyja rendelkezik update-el, akkor jelszót módosít
+   * a beépített changePassword metódussal.
+   * @param {String} req.body.oldPassword - a user régi jelszava
+   * @param {String} req.body.newPassword - a user új jelszava
    */
   update: (req, res) => {
     req.body.updatedAt = new Date().toLocaleDateString();
@@ -99,8 +102,6 @@ module.exports = {
       res.json(post);
     });
   },
-
-  //updatePassword: () => {},
 
   /**
    * Egy bizonyos felhasználó keresése

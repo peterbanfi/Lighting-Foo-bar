@@ -27,25 +27,45 @@
         <form>
           <div *ngIf="details">
             <div class="form-group">
-              <label for="username">Email address</label>
-              <input type="text" class="form-control" id="username" placeholder="{{userDetails.username}}">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" name="username" placeholder="{{userDetails.username}}" [(ngModel)]="userDetails.username">
             </div>
-            <div class=" form-group ">
+            <div class="form-group ">
               <label for="email ">Email address</label>
-              <input type="email " class="form-control " id="email " placeholder="{{userDetails.email}}">
+              <input type="email " class="form-control" id="email" name="email" placeholder="{{userDetails.email}}" [(ngModel)]="userDetails.email">
+            </div>
+          </div>
+          <div class="row" *ngIf="updated">
+            <div class="col-12">
+              <br>
+              <div class="alert alert-success text-center" role="alert">
+                Updated!
+              </div>
             </div>
           </div>
           <div *ngIf="pass">
             <div class="form-group">
               <label for="passOld">Password Old</label>
-              <input type="password" class="form-control" name="oldPass" id="passOld " placeholder="passOld" [(ngModel)]="userPass.oldPassword">
+              <input type="password" class="form-control" name="oldPass" id="passOld" placeholder="passOld" [(ngModel)]="userPass.oldPassword">
             </div>
             <div class="form-group">
               <label for="passNew">Password New</label>
               <input type="password" class="form-control" id="passNew" name="newPass" placeholder="passNew" [(ngModel)]="userPass.newPassword">
             </div>
+            <div class="form-group">
+              <label for="passNewConf">Password New</label>
+              <input type="password" class="form-control" id="passNewConf" name="newPassConf" placeholder="passNewConf" [(ngModel)]="passwordConf">
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary" *ngIf="details">Submit</button>
+          <div class="row" *ngIf="updatedPass">
+            <div class="col-12">
+              <br>
+              <div class="alert alert-success text-center" role="alert">
+                Updated!
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-outline-primary" *ngIf="details" (click)="update()">Submit</button>
           <button type="submit" class="btn btn-primary" *ngIf="pass" (click)="changePassword()">Submit</button>
         </form>
       </div>
