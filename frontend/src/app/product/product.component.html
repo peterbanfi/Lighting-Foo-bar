@@ -1,0 +1,36 @@
+<div class="container">
+  <form *ngFor='let field of product'>
+    <div class="form-group">
+      <label for="prodId">ID</label>
+      <input id="prodId" type="text" name='prodId' [(ngModel)]="product[0]._id" disabled class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="prodName">Termék</label>
+      <input id="prodName" type="text" name='prodName' [(ngModel)]="product[0].productName" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="prodPrice">Ár</label>
+      <input id="prodPrice" type="text" name='prodPrice' [(ngModel)]="product[0].productPrice" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="prodManufacturer">Gyártó</label>
+      <input id="prodManufacturer" name='prodManufacturer' type="text" [(ngModel)]="product[0].productManufacturer" class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="prodUrl">Keresőszavak</label>
+      <input id="prodUrl" type="text" name='prodUrl' [(ngModel)]="product[0].productUrl" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="prodCreatedAt">Feltöltve</label>
+      <input id="prodCreatedAt" type="text" name='prodCreatedAt' value='{{ product[0].createdAt | date:"yyyy-MM-dd HH:mm" }}' disabled
+        class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="prodUpdatedAt">Frissítve</label>
+      <input id="prodUpdatedAt" type="text" name='prodUpdatedAt' value='{{ product[0].updatedAt | date:"yyyy-MM-dd HH:mm" }}' disabled
+        class="form-control" />
+    </div>
+    <img src="{{ product[0].productImg }}" alt="{{ product[0].productName }}" height="100" />
+  </form>
+</div>

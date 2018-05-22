@@ -12,6 +12,10 @@
         <a class="nav-link" routerLink="home" routerLinkActive="active">Home
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="product" routerLinkActive="active">Termék
+        </a>
+      </li>
       <li class="nav-item" *ngIf="loggedIn">
         <a class="nav-link" routerLink="profile" routerLinkActive="active">Profile</a>
       </li>
@@ -19,6 +23,19 @@
   </div>
   <div id="rightLinks">
     <ul>
+      <li>
+        <div class="dropdown">
+          <button type="button" class="btn btn-outline-secondary dropbtn" (click)='dropdownToggleK()'>
+            <i class="fas fa-toolbox"></i>
+            <span>Termékkategóriák</span>
+          </button>
+          <div class="dropdown-content" [hidden]='dropdownK'>
+            <a *ngFor='let category of categories' class="dropdown-item" routerLink="users" routerLinkActive="active">
+              {{ category }}
+            </a>
+          </div>
+        </div>
+      </li>
       <li>
         <div id="adminLinks">
           <div class="dropdown" *ngIf="isAdmin">

@@ -22,6 +22,7 @@ export class NavComponent implements OnInit {
     password: 'admin',
   };
   dropdown: Boolean = true;
+  dropdownK: Boolean = true;
   isAdmin: Boolean = false;
   options: any = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/user/';
@@ -29,15 +30,22 @@ export class NavComponent implements OnInit {
   userName: any;
   wrong: Boolean = false;
   scrollPos: number;
+  categories: Array<String> = [];
 
   constructor(public http: HttpClient, public router: Router, private LServ: LoginService, private cookieService: CookieService) {
 
   }
+
   ngOnInit() {
+    this.categoryLister();
   }
 
   dropdownToggle() {
     this.dropdown ? this.dropdown = false : this.dropdown = true;
+  }
+
+  dropdownToggleK() {
+    this.dropdownK ? this.dropdownK = false : this.dropdownK = true;
   }
 
   login() {
@@ -81,6 +89,12 @@ export class NavComponent implements OnInit {
     this.isAdmin = false;
   }
 
+  categoryLister() {
+    const body = ['vodka', 'pálinka', 'whiskey', 'sör', 'gin'];
+    body.forEach(x => this.categories.push(x));
+    this.categories.unshift('Összes');
+  }
+
   //transparent navbar
   @HostListener('window:scroll') onScroll() {
     const navbar = document.querySelector('#navbar') as HTMLElement;
@@ -104,4 +118,5 @@ export class NavComponent implements OnInit {
       }
     }
   }
+
 }
