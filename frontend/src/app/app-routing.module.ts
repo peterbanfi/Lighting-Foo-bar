@@ -19,7 +19,7 @@ import { PublicProductsComponent } from './public-products/public-products.compo
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'product', component: ProductComponent },
+  { path: 'public-products/product', component: ProductComponent },
   { path: 'public-products', component: PublicProductsComponent },
   { path: 'categories', component: CategoryComponent, canActivate: [AuthGuard] },
   { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },

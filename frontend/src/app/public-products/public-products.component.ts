@@ -33,7 +33,7 @@ export class PublicProductsComponent implements OnInit {
           if (x.productCategory._id === this.global.categoryId) {
             this.products.push(x);
           }
-        })
+        });
       });
   }
 
@@ -44,7 +44,6 @@ export class PublicProductsComponent implements OnInit {
 
     promise.then((res) => {
       this.global.singleProductId = res._id;
-      console.log(this.global.singleProductId);
     });
 
   }
