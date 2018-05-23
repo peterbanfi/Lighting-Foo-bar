@@ -1,112 +1,157 @@
 <div class="container">
-  <div class="row">
-    <div class="col-4 text-center  custom-btn" (click)="updatePage()">
-      <i class="fas fa-user-circle fa-3x"></i>
-      <h3>Update Your profile</h3>
-    </div>
-    <div class="col-4"></div>
-    <div class="col-4 text-center custom-btn">
-      <div class="custom-btn" (click)=orders()>
-        <i class="fas fa-shopping-cart fa-3x"></i>
-        <h3>Order history</h3>
-      </div>
-    </div>
-  </div>
-  <!-- update profile -->
-  <section *ngIf="openCloseUpdate === true">
     <div class="row">
-      <div class="col-6">
-        <div class="row">
-          <div class="col-12 text-center">
-            <td class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-outline-dark" (click)="updateDetails()">Update Details</button>
-              <button type="button" class="btn btn-outline-dark" (click)="updatePassword()">New Password</button>
-            </td>
-          </div>
-        </div>
-        <form>
-          <div *ngIf="details">
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" name="username" placeholder="{{userDetails.username}}" [(ngModel)]="userDetails.username">
-            </div>
-            <div class="form-group ">
-              <label for="email ">Email address</label>
-              <input type="email " class="form-control" id="email" name="email" placeholder="{{userDetails.email}}" [(ngModel)]="userDetails.email">
-            </div>
-          </div>
-          <div class="row" *ngIf="updated">
-            <div class="col-12">
-              <br>
-              <div class="alert alert-success text-center" role="alert">
-                Updated!
-              </div>
-            </div>
-          </div>
-          <div *ngIf="pass">
-            <div class="form-group">
-              <label for="passOld">Password Old</label>
-              <input type="password" class="form-control" name="oldPass" id="passOld" placeholder="passOld" [(ngModel)]="userPass.oldPassword">
-            </div>
-            <div class="form-group">
-              <label for="passNew">Password New</label>
-              <input type="password" class="form-control" id="passNew" name="newPass" placeholder="passNew" [(ngModel)]="userPass.newPassword">
-            </div>
-            <div class="form-group">
-              <label for="passNewConf">Password New</label>
-              <input type="password" class="form-control" id="passNewConf" name="newPassConf" placeholder="passNewConf" [(ngModel)]="passwordConf">
-            </div>
-          </div>
-          <div class="row" *ngIf="updatedPass">
-            <div class="col-12">
-              <br>
-              <div class="alert alert-success text-center" role="alert">
-                Updated!
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-outline-primary" *ngIf="details" (click)="update()">Submit</button>
-          <button type="submit" class="btn btn-primary" *ngIf="pass" (click)="changePassword()">Submit</button>
-        </form>
+      <div class="col-4 text-center  custom-btn" (click)="updatePage()">
+        <i class="fas fa-user-circle fa-3x"></i>
+        <h3>Profil frissítése</h3>
       </div>
-      <div class="col-6 "></div>
+      <div class="col-4"></div>
+      <div class="col-4 text-center custom-btn">
+        <div class="custom-btn" (click)=orders()>
+          <i class="fas fa-shopping-cart fa-3x"></i>
+          <h3>Rendelési előzmények</h3>
+        </div>
+      </div>
     </div>
-  </section>
-  <!-- order history -->
-  <section *ngIf="openClose === true ">
-    <section *ngIf="pastOrder.length===0 ">
-      <div class="row ">
-        <div class="col-4 "></div>
-        <div class="col-4 "></div>
-        <div class="col-4 ">
-          <h4>You have no orders yet!</h4>
-        </div>
-      </div>
-    </section>
-
-    <section *ngIf="pastOrder.length> 0">
-      <div class="row" *ngFor="let x of pastOrder; let i = index">
-        <div class="col-4"></div>
-        <div class="col-4"></div>
-        <div class="col-4">
-          <h4>Order No.: {{i+1}}.</h4>
-          <p>{{x.createdAt | date:'fullDate'}}</p>
-          <hr>
-          <div *ngFor="let y of x.products">
-            <ul>
-              <li>Product: {{y.product.productName}}</li>
-              <li>Price: {{y.product.productPrice}} Ft.</li>
-              <li>Quantity: {{y.quantity}}</li>
-            </ul>
+    <!-- update profile -->
+    <section *ngIf="openCloseUpdate === true">
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-12 text-center">
+              <td class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-dark" (click)="updateDetails()">Frissítés</button>
+                <button type="button" class="btn btn-outline-dark" (click)="updatePassword()">Új jelszó</button>
+              </td>
+            </div>
           </div>
-          <h5>Total Price:</h5>
-          <p>
-            <em>{{pastOrderPrices[i]}} Ft</em>
-          </p>
-          <hr>
+          <form>
+            <div *ngIf="details">
+              <div class="form-group">
+                <label for="username">Felhasználó név</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="{{userDetails.username}}" [(ngModel)]="userDetails.username">
+              </div>
+              <div class="form-group">
+                <label for="email ">Email cím</label>
+                <input type="email " class="form-control" id="email" name="email" placeholder="{{userDetails.email}}" [(ngModel)]="userDetails.email">
+              </div>
+              <div class="form-group">
+                <label for="adress">Szállítási cím</label>
+                <div class="form-group col-10 offset-2">
+                  <label for="acity ">Város</label>
+                  <input type="text" class="form-control" id="acity" name="acity" placeholder="{{userDetails.address_city}}" [(ngModel)]="userDetails.address_city">
+                </div>
+                <div class="form-group col-10 offset-2">
+                  <label for="aaddress">Cím</label>
+                  <input type="text" class="form-control" id="aaddress" name="aaddress" placeholder="{{userDetails.address_address}}" [(ngModel)]="userDetails.address_address">
+                </div>
+                <div class="form-group col-10 offset-2">
+                  <label for="aaddress2">Cím folytatás</label>
+                  <input type="text" class="form-control" id="aaddress2" name="aaddress2" placeholder="{{userDetails.address_address2}}" [(ngModel)]="userDetails.address_address2">
+                </div>
+                <div class="form-group col-10 offset-2">
+                  <label for="azip">Irányítószám</label>
+                  <input type="text" class="form-control" id="azip" name="azip" placeholder="{{userDetails.address_zip}}" [(ngModel)]="userDetails.address_zip">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="iaddress">Számlázási cím</label>
+                <div class="form-group col-10 offset-2">
+                  <label for="icity ">Város</label>
+                  <input type="text" class="form-control" id="icity" name="icity" placeholder="{{userDetails.invoiceA_city}}" [(ngModel)]="userDetails.invoiceA_city">
+                </div>
+                <div class="form-group col-10 offset-2">
+                  <label for="iaddress">Cím</label>
+                  <input type="text" class="form-control" id="iaddress" name="iaddress" placeholder="{{userDetails.invoiceA_address}}"
+                    [(ngModel)]="userDetails.invoiceA_address">
+                </div>
+                <div class="form-group col-10 offset-2">
+                  <label for="iaddress2">Cím folytatás</label>
+                  <input type="text" class="form-control" id="iaddress2" name="iaddress2" placeholder="{{userDetails.invoiceA_address2}}"
+                    [(ngModel)]="userDetails.invoiceA_address2">
+                </div>
+                <div class="form-group col-10 offset-2">
+                  <label for="izip">Irányítószám</label>
+                  <input type="text" class="form-control" id="izip" name="izip" placeholder="{{userDetails.invoiceA_zip}}" [(ngModel)]="userDetails.invoiceA_zip">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefonszám</label>
+                <input type="phone" class="form-control" id="phone" name="phone" placeholder="{{userDetails.phone}}" [(ngModel)]="userDetails.phone">
+              </div>
+            </div>
+            <div class="row" *ngIf="updated">
+              <div class="col-12">
+                <br>
+                <div class="alert alert-success text-center" role="alert">
+                  Updated!
+                </div>
+              </div>
+            </div>
+            <div *ngIf="pass">
+              <div class="form-group">
+                <label for="passOld">Régi jelszó</label>
+                <input type="password" class="form-control" name="oldPass" id="passOld" placeholder="Régi jelszó" [(ngModel)]="userPass.oldPassword">
+              </div>
+              <div class="form-group">
+                <label for="passNew">Új jelszó</label>
+                <input type="password" class="form-control" id="passNew" name="newPass" placeholder="Új jelszó" [(ngModel)]="userPass.newPassword">
+              </div>
+              <div class="form-group">
+                <label for="passNewConf">Új jelszó mégegyszer</label>
+                <input type="password" class="form-control" id="passNewConf" name="newPassConf" placeholder="Új jelszó mégegyszer" [(ngModel)]="passwordConf">
+              </div>
+            </div>
+            <div class="row" *ngIf="updatedPass">
+              <div class="col-12">
+                <br>
+                <div class="alert alert-success text-center" role="alert">
+                  Frissítve!
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-outline-primary" *ngIf="details" (click)="update()">Küldés</button>
+            <button type="submit" class="btn btn-primary" *ngIf="pass" (click)="changePassword()">Küldés</button>
+          </form>
         </div>
-
+        <div class="col-6 "></div>
       </div>
     </section>
-  </section>
-</div>
+    <!-- order history -->
+    <section *ngIf="openClose === true ">
+      <section *ngIf="pastOrder.length===0 ">
+        <div class="row ">
+          <div class="col-4 "></div>
+          <div class="col-4 "></div>
+          <div class="col-4 ">
+            <h4>Még nem rendeltél semmit!</h4>
+          </div>
+        </div>
+      </section>
+  
+      <section *ngIf="pastOrder.length> 0">
+        <div class="row" *ngFor="let x of pastOrder; let i = index">
+          <div class="col-4"></div>
+          <div class="col-4"></div>
+          <div class="col-4">
+            <h4>Rendelés száma: {{i+1}}.</h4>
+            <p>{{x.createdAt | date:'fullDate'}}</p>
+            <hr>
+            <div *ngFor="let y of x.products">
+              <ul>
+                <li>Termék: {{y.product.productName}}</li>
+                <li>Egység ár: {{y.product.productPrice}} Ft.</li>
+                <li>Mennyiség: {{y.quantity}}</li>
+              </ul>
+            </div>
+            <h5>Rendelés összege:</h5>
+            <p>
+              <em>{{pastOrderPrices[i]}} Ft</em>
+            </p>
+            <hr>
+          </div>
+  
+        </div>
+      </section>
+    </section>
+  </div>
+  
