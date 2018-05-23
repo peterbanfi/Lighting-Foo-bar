@@ -13,27 +13,51 @@ const account = {
 };
 
 const order = {
-  user: '5afc439634a9371cf8fca12bb',
+  user: '5afa961c9454c01ea4b35bfc',
+  address: {
+    city: 'test',
+    address: 'test',
+    address2: 'test',
+    zip: 1234,
+  },
+  invoiceAddress: {
+    city: 'test2',
+    address: 'test2',
+    address2: 'test2',
+    zip: 4321,
+  },
   products: [{
-    product: '5af99826722bf5522c3d40a1',
-    quantity: 3,
+    product: '5af9917fbb6b544b14321638',
+    quantity: 1,
   },
   {
-    product: '5afc2bc465eb1eabd8370ab6',
-    quantity: 6,
+    product: '5af99826722bf5522c3d40a1',
+    quantity: 2,
   },
   ],
 };
 
 const put = {
-  user: '5afc439634a9371cf8fca12bb',
+  user: '5afa961c9454c01ea4b35bfc',
+  address: {
+    city: 'put',
+    address: 'put',
+    address2: 'put',
+    zip: 2345,
+  },
+  invoiceAddress: {
+    city: 'put2',
+    address: 'put2',
+    address2: 'put2',
+    zip: 3456,
+  },
   products: [{
     product: '5af99826722bf5522c3d40a1',
-    quantity: 9,
+    quantity: 3,
   },
   {
-    product: '5afc2bc465eb1eabd8370ab6',
-    quantity: 6,
+    product: '5af9917fbb6b544b14321638',
+    quantity: 4,
   },
   ],
 };
@@ -46,8 +70,8 @@ chai.use(chaiHttp);
 describe('Orders', () => {
   // login
   beforeEach((done) => {
-    chai.request('http://localhost:8080/orders')
-      .get('/')
+    chai.request('http://localhost:8080/user')
+      .post('/login')
       .send(account)
       .end((err, res) => {
         if (err) {
@@ -63,10 +87,14 @@ describe('Orders', () => {
     it('response statusCode equal to 200', (done) => {
       chai.request(orderUrl)
         .get('/')
+        .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Array');
+          res.body[0].user._id.should.be.eql('5af98ca9a7580c1f4cb83099');
           res.body[0].user.username.should.be.eql('Marton17');
+          res.body[0]._id.should.be.eql('5afa9f505557c213f0fa864b');
+          res.body[0].createdAt.should.be.eql('2018-04-24T08:50:24.408Z');
           done();
         });
     });
@@ -77,10 +105,17 @@ describe('Orders', () => {
     it('should find order specified by id', (done) => {
       chai.request(orderUrl)
         .get('/5afbe4943f04ab3b18e53303')
+        .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
           res.body.user.username.should.be.eql('admin');
+          res.body.user._id.should.be.eql('5afa961c9454c01ea4b35bfc');
+          res.body._id.should.be.eql('5afbe4943f04ab3b18e53303');
+          res.body.createdAt.should.be.eql('2018-05-01T07:58:12.584Z');
+          res.body.products[0].quantity.should.be.eql(10);
+          res.body.products[1].quantity.should.be.eql(4);
+          res.body.products[2].quantity.should.be.eql(15);
           done();
         });
     });
@@ -97,7 +132,17 @@ describe('Orders', () => {
           id += res.body._id;
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.products[0].quantity.should.be.eql(3);
+          res.body.user.should.be.eql('5afa961c9454c01ea4b35bfc');
+          res.body.products[0].product.should.be.eql('5af9917fbb6b544b14321638');
+          res.body.products[0].quantity.should.be.eql(1);
+          res.body.products[1].product.should.be.eql('5af99826722bf5522c3d40a1');
+          res.body.products[1].quantity.should.be.eql(2);
+          res.body.address.should.be.eql({
+            city: 'test', address: 'test', address2: 'test', zip: 1234,
+          });
+          res.body.invoiceAddress.should.be.eql({
+            city: 'test2', address: 'test2', address2: 'test2', zip: 4321,
+          });
           done();
         });
     });
@@ -113,7 +158,17 @@ describe('Orders', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.products[0].quantity.should.be.eql(9);
+          res.body.user.should.be.eql('5afa961c9454c01ea4b35bfc');
+          res.body.products[0].product.should.be.eql('5af9917fbb6b544b14321638');
+          res.body.products[0].quantity.should.be.eql(1);
+          res.body.products[1].product.should.be.eql('5af99826722bf5522c3d40a1');
+          res.body.products[1].quantity.should.be.eql(2);
+          res.body.address.should.be.eql({
+            city: 'test', address: 'test', address2: 'test', zip: 1234,
+          });
+          res.body.invoiceAddress.should.be.eql({
+            city: 'test2', address: 'test2', address2: 'test2', zip: 4321,
+          });
           done();
         });
     });
@@ -128,7 +183,17 @@ describe('Orders', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.productName.should.be.eql('put');
+          res.body.user.should.be.eql('5afa961c9454c01ea4b35bfc');
+          res.body.products[0].product.should.be.eql('5af99826722bf5522c3d40a1');
+          res.body.products[0].quantity.should.be.eql(3);
+          res.body.products[1].product.should.be.eql('5af9917fbb6b544b14321638');
+          res.body.products[1].quantity.should.be.eql(4);
+          res.body.address.should.be.eql({
+            city: 'put', address: 'put', address2: 'put', zip: 2345,
+          });
+          res.body.invoiceAddress.should.be.eql({
+            city: 'put2', address: 'put2', address2: 'put2', zip: 3456,
+          });
           done();
         });
     });

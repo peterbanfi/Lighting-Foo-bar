@@ -16,12 +16,14 @@ const product = {
   productUrl: 'test',
   productPrice: 12345,
   productManufacturer: 'test',
+  productCategory: '5b052bf5c1441623009d93d5',
 };
 const put = {
   productName: 'put',
   productUrl: 'put',
-  productPrice: 12345,
+  productPrice: 54321,
   productManufacturer: 'put',
+  productCategory: '5b052ca27e90f92b0d837bec',
 };
 let cookie;
 let id = '/';
@@ -52,7 +54,17 @@ describe('Products', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Array');
+          res.body[0]._id.should.be.eql('5af9917fbb6b544b14321638');
           res.body[0].productName.should.be.eql('kalinka');
+          res.body[0].productPrice.should.be.eql(3599);
+          res.body[0].productManufacturer.should.be.eql('zwack unicum');
+          res.body[0].productUrl.should.be.eql('kalinka-vodka');
+          res.body[0].productCategory.should.be.eql({
+            _id: '5b052bf5c1441623009d93d5',
+            categoryName: 'vodka',
+          });
+          res.body[0].createdAt.should.be.eql('2018-05-14T13:39:11.952Z');
+          res.body[0].productImg.should.be.eql('http://localhost:8080/uploads/2018-05-14T13-39-11.938Z.jpeg');
           done();
         });
     });
@@ -66,7 +78,17 @@ describe('Products', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
+          res.body._id.should.be.eql('5af9917fbb6b544b14321638');
           res.body.productName.should.be.eql('kalinka');
+          res.body.productPrice.should.be.eql(3599);
+          res.body.productManufacturer.should.be.eql('zwack unicum');
+          res.body.productUrl.should.be.eql('kalinka-vodka');
+          res.body.productCategory.should.be.eql({
+            _id: '5b052bf5c1441623009d93d5',
+            categoryName: 'vodka',
+          });
+          res.body.createdAt.should.be.eql('2018-05-14T13:39:11.952Z');
+          res.body.productImg.should.be.eql('http://localhost:8080/uploads/2018-05-14T13-39-11.938Z.jpeg');
           done();
         });
     });
@@ -84,6 +106,10 @@ describe('Products', () => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
           res.body.productName.should.be.eql('test');
+          res.body.productPrice.should.be.eql(12345);
+          res.body.productManufacturer.should.be.eql('test');
+          res.body.productUrl.should.be.eql('test');
+          res.body.productCategory.should.be.eql('5b052bf5c1441623009d93d5');
           done();
         });
     });
@@ -100,6 +126,10 @@ describe('Products', () => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
           res.body.productName.should.be.eql('test');
+          res.body.productPrice.should.be.eql(12345);
+          res.body.productManufacturer.should.be.eql('test');
+          res.body.productUrl.should.be.eql('test');
+          res.body.productCategory.should.be.eql('5b052bf5c1441623009d93d5');
           done();
         });
     });
@@ -115,6 +145,10 @@ describe('Products', () => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
           res.body.productName.should.be.eql('put');
+          res.body.productPrice.should.be.eql(54321);
+          res.body.productManufacturer.should.be.eql('put');
+          res.body.productUrl.should.be.eql('put');
+          res.body.productCategory.should.be.eql('5b052ca27e90f92b0d837bec');
           done();
         });
     });
