@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -7,13 +7,14 @@ import { LoginService } from '../login.service';
 import { CookieService } from 'angular2-cookie/core';
 import { HostListener } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
+import { Globals } from '../globalvars';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit, OnChanges {
+export class NavComponent implements OnInit {
   user: any = {
     username: '',
     password: '',
@@ -31,23 +32,32 @@ export class NavComponent implements OnInit, OnChanges {
   userName: any;
   wrong: Boolean = false;
   scrollPos: number;
-  public categories: Array<String> = [];
+  categories: Array<String> = [];
+
 
   constructor(
     public http: HttpClient,
     public router: Router,
     private LServ: LoginService,
     private cookieService: CookieService,
-    private httpServ: HttpRequestService
+    private httpServ: HttpRequestService,
+    private global: Globals,
   ) {
 
   }
 
-  ngOnInit() {
-    this.categoryLister();
+  clickCategory(category) {
+    const promise = new Promise((resolve, reject) => {
+      resolve(category);
+    });
+
+    promise.then((res) => {
+      this.global.categoryId = res._id;
+    });
+
   }
 
-  @HostListener('change') ngOnChanges() {
+  ngOnInit() {
     this.categoryLister();
   }
 
@@ -109,11 +119,11 @@ export class NavComponent implements OnInit, OnChanges {
       })
       .then(() => {
         body.map(x => {
-          this.categories.push(x.categoryName);
+          this.categories.push(x);
         });
-      })
-      .then(() => this.categories.unshift('Összes'));
+      });
   }
+
 
   //transparent navbar
   @HostListener('window:scroll') onScroll() {

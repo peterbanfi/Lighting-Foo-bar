@@ -27,6 +27,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductComponent } from './product/product.component';
 import { HttpRequestService } from './http-request.service';
 import { CategoryComponent } from './category/category.component';
+import { PublicProductsComponent } from './public-products/public-products.component';
+import { Globals } from './globalvars';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { CategoryComponent } from './category/category.component';
     ProfileComponent,
     ProductComponent,
     CategoryComponent,
+    PublicProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { CategoryComponent } from './category/category.component';
     CookieService,
     AuthGuard,
     UserAuthGuard,
-    NavComponent
+    Globals
   ],
   bootstrap: [AppComponent]
 })

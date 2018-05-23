@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>Termékek</h1>
+  <div class="row">
+    <table class="table table-light table-hover">
+      <thead>
+        <tr>
+          <th class="sort-th">ID</th>
+          <th class="sort-th">Terméknév</th>
+          <th class="sort-th">Ár</th>
+          <th class="sort-th">Gyártó</th>
+          <th class="sort-th">Kulcsszavak</th>
+          <th class="sort-th">Kategória</th>
+          <th class="sort-th">Feltöltve</th>
+          <th class="sort-th">Frissítve</th>
+          <th class="sort-th">Kép</th>
+          <th>
+            <button id="listAll" (click)="list()" class="btn btn-success">Lista Frissítés</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product._id }}</td>
+          <td>{{ product.productName }}</td>
+          <td>{{ product.productPrice }}</td>
+          <td>{{ product.productManufacturer }}</td>
+          <td>{{ product.productUrl }}</td>
+          <td>{{ product.productCategory.categoryName }}</td>
+          <td>{{ product.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ product.updatedAt | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td>
+            <img src="{{ product.productImg }}" alt="{{ product.productName }}" height="100" />
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)='clickProduct(product)'>Megtekintés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
