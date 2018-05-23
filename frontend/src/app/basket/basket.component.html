@@ -1,0 +1,27 @@
+<div class="container">
+  <br>
+  <h1>Kosár tartalma</h1>
+  <hr>
+
+  <div>
+    <div class="row" *ngFor="let x of basket; let i = index">
+      <div class="col-12">
+        <h4>{{i+1}}. Termék: {{x[0].productName}}</h4>
+        <hr>
+        <ul>
+          <li>Egység ár: {{x[0].productPrice}} Ft.</li>
+          <li>
+            <label for="quantity">Mennyiség: </label>
+            <input type="number" pattern="[0-9]{4}" min="1" name="quantity" value="{{x[0].quantity}}" [(ngModel)]="x[0].quantity" (click)="countQuantity()">
+          </li>
+        </ul>
+        <hr>
+      </div>
+    </div>
+  </div>
+  <h5>Rendelés összege:</h5>
+  <p>
+    <em>{{totalPrice}} Ft</em>
+  </p>
+  <button class="btn btn-outline-success" (click)="order()">Rendelés!</button>
+</div>

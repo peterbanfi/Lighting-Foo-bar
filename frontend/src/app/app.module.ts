@@ -31,6 +31,8 @@ import { HttpRequestService } from './http-request.service';
 import { CategoryComponent } from './category/category.component';
 import { PublicProductsComponent } from './public-products/public-products.component';
 import { Globals } from './globalvars';
+import { CommentService } from './comment.service';
+import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { Globals } from './globalvars';
     ContactComponent,
     CategoryComponent,
     PublicProductsComponent,
+    BasketComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ import { Globals } from './globalvars';
     CookieService,
     AuthGuard,
     UserAuthGuard,
-    Globals
+    Globals,
+    CommentService,
   ],
   bootstrap: [AppComponent]
 })

@@ -7,10 +7,10 @@ mongoose.Promise = require('bluebird');
  */
 module.exports = {
   /**
-     * Az összes hozzászólás megjelenítése
-     * @param {String} req - A távoli kérés.
-     * @param {Object} res - A lekérdezett adatok, vagy hiba visszaküldése egy objektumban.
-     */
+   * Az összes hozzászólás megjelenítése
+   * @param {String} req - A távoli kérés.
+   * @param {Object} res - A lekérdezett adatok, vagy hiba visszaküldése egy objektumban.
+   */
   list: (req, res) => {
     Comment.find()
       .populate('user', 'username')
@@ -20,10 +20,10 @@ module.exports = {
   },
 
   /**
-     * Egy bizonyos, id-vel azonosított rendelés megjelenítése.
-     * @param {String} req - A távoli kérés.
-     * @param {Object} res - A lekérdezett adatok, vagy hiba visszaküldése egy objektumban.
-     */
+   * Egy bizonyos, id-vel azonosított rendelés megjelenítése.
+   * @param {String} req - A távoli kérés.
+   * @param {Object} res - A lekérdezett adatok, vagy hiba visszaküldése egy objektumban.
+   */
   find: (req, res) => {
     Comment.findById(req.params.id)
       .populate('user', 'username')
@@ -33,10 +33,10 @@ module.exports = {
   },
 
   /**
-     * Egy Hozzászólás rögzítése az adatbázisban.
-     * @param {String} req - A távoli kérés, mely tartalmazza a felvinni kívánt adatot.
-     * @param {Object} res - A felvitt adat, vagy hiba visszaküldése egy objektumban.
-     */
+   * Egy Hozzászólás rögzítése az adatbázisban.
+   * @param {String} req - A távoli kérés, mely tartalmazza a felvinni kívánt adatot.
+   * @param {Object} res - A felvitt adat, vagy hiba visszaküldése egy objektumban.
+   */
   create: (req, res) => {
     Comment.create(req.body)
       .then(comment => productController.addComment(req.params.prodid, comment._id))
@@ -55,10 +55,10 @@ module.exports = {
   },
 
   /**
-     * Egy bizonyos, id-vel azonosított hozzászólás módosítása az adatbázisban.
-     * @param {String} req - A távoli kérés, mely tartalmazza a módisítani kívánt adatot.
-     * @param {Object} res - A felülírt adat, vagy hiba visszaküldése egy objektumban.
-     */
+   * Egy bizonyos, id-vel azonosított hozzászólás módosítása az adatbázisban.
+   * @param {String} req - A távoli kérés, mely tartalmazza a módisítani kívánt adatot.
+   * @param {Object} res - A felülírt adat, vagy hiba visszaküldése egy objektumban.
+   */
   update: (req, res) => {
     Comment.findByIdAndUpdate(req.params.id, req.body)
       .then(comment => res.status(200).json(comment))
@@ -67,11 +67,11 @@ module.exports = {
 
 
   /**
-     * Egy bizonyos, id-vel azonosított hozzászólás törlése az adatbázisból.
-     * @param {String} req - A távoli kérés, mely tartalmazza a módisítani kívánt adatot.
-     * @param {Object} res - A törölt adat, vagy hiba visszaküldése egy objektumban.
-     * @returns {Object} - A törölt adat, vagy hiba visszaküldése egy objektumban.
-     */
+   * Egy bizonyos, id-vel azonosított hozzászólás törlése az adatbázisból.
+   * @param {String} req - A távoli kérés, mely tartalmazza a módisítani kívánt adatot.
+   * @param {Object} res - A törölt adat, vagy hiba visszaküldése egy objektumban.
+   * @returns {Object} - A törölt adat, vagy hiba visszaküldése egy objektumban.
+   */
   remove: (req, res) => {
     Comment.findByIdAndRemove(req.params.commid)
       .then(comment => productController.removeComment(req.params.prodid, comment._id))
