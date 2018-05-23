@@ -9,35 +9,35 @@ const orderSchema = mongoose.Schema({
   address: {
     city: {
       type: String,
-      required: true,
+      required: false,
     },
     address: {
       type: String,
-      required: true,
+      required: false,
     },
     address2: {
       type: String,
     },
     zip: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   invoiceAddress: {
     city: {
       type: String,
-      required: true,
+      required: false,
     },
     address: {
       type: String,
-      required: true,
+      required: false,
     },
     address2: {
       type: String,
     },
     zip: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   products: [{

@@ -33,6 +33,7 @@ export class AllUserComponent implements OnInit {
     this.http.get(`${this.baseUrl}listAll`, this.options)
       .subscribe(data => {
         this.errorHandling(data);
+        console.log(data);
       }
       );
   }

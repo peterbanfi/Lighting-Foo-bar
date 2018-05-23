@@ -17,10 +17,6 @@ export class NavComponent implements OnInit {
     username: '',
     password: '',
   };
-  tempAdmin: any = {
-    username: 'admin@admin.com',
-    password: 'admin',
-  };
   dropdown: Boolean = true;
   dropdownK: Boolean = true;
   isAdmin: Boolean = false;
@@ -49,7 +45,7 @@ export class NavComponent implements OnInit {
   }
 
   login() {
-    this.http.post(this.baseUrl + 'login', this.tempAdmin, this.options)
+    this.http.post(this.baseUrl + 'login', this.user, this.options)
       .subscribe(data => {
         if (data['login']) {
           this.admin();

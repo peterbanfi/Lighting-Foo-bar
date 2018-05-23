@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CookieService } from 'angular2-cookie/core';
+import { HttpClient } from '@angular/common/http';
+import { OrderService } from '../order.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
@@ -7,82 +12,77 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasketComponent implements OnInit {
   basket: any;
-  basketAll: any = [];
+  basketAll: any;
   price: Number = 0;
   product: any = {};
-  constructor() {
+  totalPrice: any = 0;
+  constructor(private cookieService: CookieService, public http: OrderService, public router: Router) {
     this.getBasket();
   }
 
   ngOnInit() {
   }
-
-
   getBasket() {
     this.basket = sessionStorage.basket ? JSON.parse(sessionStorage.basket) : [];
-    console.log(this.basket);
     this.sortBasket(this.basket);
     return this.basket;
   }
 
   sortBasket(data) {
-    let i = 0;
-    /*     if (this.product !== {}) {
-          this.basketAll.push(this.product);
-        } */
-    // for (let j = 0; j < data.length; j++) {
-    //   if (i !== j) {
-    //     if (data[i][0]['_id'] === data[j][0]['_id']) {
-    //       console.log(data[j][0]['productName']);
-    //       this.price = this.price + data[j][0]['productPrice'];
-    //       this.basket.splice(j, 1);
-    //       console.log(this.price);
-    //       /*           this.product = {
-    //                   productName: data[j][0]['productName'],
-    //                   productPrice: this.price,
-    //                   _id: data[j][0]['_id'] */
-    //     };
-    //     if ((j === data.length - 1)) {
-    //       this.price = this.price + data[j][0]['productPrice'];
-    //       console.log(this.price);
-    //     }
-    //     //console.log(this.basketAll);
-    //     i++;
-    //   }
-    // }
-    for (let k = 0; k < data.length; k++) {
-      if (i !== k) {
-        if (data[i][0]['_id'] === data[k][0]['_id']) {
-          //console.log(data[j][0]['productName']);
-          //this.price = this.price + data[j][0]['productPrice'];
-          this.basket.splice(k, 1);
-          console.log(this.basket);
-          /*           this.product = {
-            productName: data[j][0]['productName'],
-            productPrice: this.price,
-            _id: data[j][0]['_id'] */
-        };
-        /*         if ((j === data.length - 1)) {
-          this.price = this.price + data[j][0]['productPrice'];
-          console.log(this.price);
-        } */
-        //console.log(this.basketAll);
-        k = 0;
-        i++;
-      } else {
-        this.basketAll.push(data[i][0]);
-        console.log(this.basketAll);
-      }
+    let num = 0;
+    for (let h = 0; h < data.length; h++) {
+      this.totalPrice = this.totalPrice + (data[h][0]['productPrice'] * data[h][0]['quantity']);
+
     }
+    for (num; num < data.length;) {
+      for (let i = 0; i < data.length; i++) {
+        if (num === i) {
+        } else {
+          if (num !== i && data[num] !== undefined) {
+            if (data[num][0]['_id'] === data[i][0]['_id']) {
+              data[i][0]['quantity'] = data[i][0]['quantity'] + data[num][0]['quantity'];
+              data.splice(num, 1);
+              this.basketAll = data;
+            }
+          }
+        }
+      }
+      num++;
+    }
+  }
 
-    /*     this.basket.forEach(el => {
-          console.log(el[0]['_id']);
-          this.basket.forEach( secondEl =>{
-            if(secondEl[0]['_id'])
-          })
-        }); */
+  addMore(num1) {
+    this.totalPrice = this.totalPrice + num1;
+  }
 
-    console.log(this.basket);
+  countQuantity() {
+    let price = 0;
+    for (let i = 0; i < this.basket.length; i++) {
+      price = price + (this.basket[i][0]['quantity'] * this.basket[i][0]['productPrice']);
+
+    }
+    this.totalPrice = price;
+    console.log(price);
+  }
+
+  // Place a new order with the data of newOrder
+  order() {
+    const products = [];
+
+    for (let i = 0; i < this.basket.length; i++) {
+      products.push({
+        product: this.basket[i][0]['_id'],
+        quantity: this.basket[i][0]['quantity'],
+      });
+    }
+    const userId = this.cookieService.get('abc');
+    const newOrder = { user: userId, products: products };
+    console.log(newOrder);
+    this.http.post('http://localhost:8080/orders/', newOrder).then((data) => {
+      sessionStorage.removeItem('basket');
+      alert('Köszönjük a rendelését');
+      this.router.navigate(['/home']);
+    });
   }
 
 }

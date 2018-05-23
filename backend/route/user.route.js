@@ -33,7 +33,7 @@ userRouter.get('/profile', loggedInUser, UserController.profile);
 userRouter.get('/listAll', UserController.listAll);
 userRouter.get('/getOne/:id', loggedIn, UserController.getOne);
 userRouter.delete('/remove/:id', loggedIn, UserController.remove);
-userRouter.post('/register', loggedIn, UserController.register);
+userRouter.post('/register', UserController.register);
 userRouter.put('/update/:id', loggedInUser, UserController.update);
 /* userRouter.put('/updatePassword/:id', UserController.update); */
 

@@ -68,3 +68,47 @@
               </div>
 
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="jumbotron" *ngFor='let field of product'>
+          <div class="row">
+            <h1 class="display-4 col-lg-5">{{product[0].productName | titlecase}}</h1>
+            <img class="col-lg-2" src="{{ product[0].productImg }}" alt="{{ product[0].productName }}" height="300" />
+            <p class='col-lg-5'></p>
+            <p class="lead">{{ product[0].productPrice }} Ft
+              <span id='afa'>({{ product[0].productPrice /100*79}} Ft + ÁFA)</span>
+            </p>
+            <hr>
+            <div class="my-4 col-lg-12">
+              <div class="row">
+                <div class="col-6">
+
+                  <p>Gyártó: {{product[0].productManufacturer | titlecase}}</p>
+                </div>
+                <!--        <div class="col-3">
+          </div> -->
+                <div class="col-6">
+                  <div class="input-group mb-3">
+                    <input class="form-control" type="number" placeholder="Mennyiség" id="quantity">
+                    <div class="input-group-append">
+                      <button class="btn btn-block btn-outline-primary btn-lg" role="button" (click)="addToBasket3()">Kosárba Rakom</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p>Szállítási idő: 1-4 munkanap</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -92,6 +92,7 @@ app.use('/products/', productsRouter);
 app.use('/orders/', ordersRouter);
 app.use('/categories/', categoriesRouter);
 app.use('/comments/', commentRouter);
+app.use('/', mailRouter);
 
 // 404 error handling
 app.use((req, res, next) => {
