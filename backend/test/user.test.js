@@ -3,16 +3,12 @@ const {
   expect,
 } = require('chai');
 const should = require('chai').should();
-
 const chaiHttp = require('chai-http');
-
 const userUrl = 'http://localhost:8080/user';
-
 const account = {
   username: 'test@test.com',
   password: 'testtest',
 };
-
 const newAccount = {
   email: 'test8@test.com',
   username: 'test8',
@@ -25,27 +21,21 @@ const newAccount2 = {
   password: 'admin',
   rights: true,
 };
-
 const put = {
   email: 'put@put.com',
   username: 'put',
   password: 'testtest',
   rights: false,
 };
-
 const put2 = {
   email: 'put@put.com',
   username: 'put',
   password: 'testtest',
   rights: false,
 };
-
 let cookie;
 let id = '/';
-
 chai.use(chaiHttp);
-
-
 describe('User', () => {
   // User register new test
   describe('register()', () => {
@@ -62,7 +52,6 @@ describe('User', () => {
         });
     });
   });
-
   // User register existing test
   describe('register()', () => {
     it('tries to registers existing user', (done) => {
@@ -77,7 +66,6 @@ describe('User', () => {
         });
     });
   });
-
   // User login test
   describe('login()', () => {
     it('login with new user', (done) => {
@@ -101,7 +89,6 @@ describe('User', () => {
         });
     });
   });
-
   // login
   beforeEach((done) => {
     chai.request('http://localhost:8080/user')
@@ -119,7 +106,6 @@ describe('User', () => {
         done();
       });
   });
-
   // User logout test
   describe('logout()', () => {
     it('log new user out', (done) => {
@@ -134,7 +120,6 @@ describe('User', () => {
         });
     });
   });
-
   // Users list test
   describe('listall()', () => {
     it('list all users', (done) => {
@@ -149,7 +134,6 @@ describe('User', () => {
         });
     });
   });
-
   // Users getOne test
   describe('getOne()', () => {
     it('finds one users', (done) => {
@@ -164,7 +148,6 @@ describe('User', () => {
         });
     });
   });
-
   // Users update test
   describe('update()', () => {
     it('should update user without auth', (done) => {
@@ -180,7 +163,6 @@ describe('User', () => {
         });
     });
   });
-
   // Users update2 test
   describe('update()', () => {
     it('should update user with auth', (done) => {
@@ -196,7 +178,6 @@ describe('User', () => {
         });
     });
   });
-
   // User delete test
   describe('remove()', () => {
     it('deletes user', (done) => {
