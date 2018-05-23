@@ -1,16 +1,16 @@
 <div class="container">
-  <div class="jumbotron" *ngFor='let field of product'>
+  <div class="jumbotron">
     <div class="row">
-      <h1 class="display-4 col-lg-5">{{product[0].productName | titlecase}}</h1>
-      <img class="col-lg-2" src="{{ product[0].productImg }}" alt="{{ product[0].productName }}" height="300" />
+      <h1 class="display-4 col-lg-5">{{product.productName | titlecase}}</h1>
+      <img class="col-lg-2" src="{{ product.productImg }}" alt="{{ product.productName }}" height="300" />
       <p class='col-lg-5'></p>
-      <p class="lead">{{ product[0].productPrice }} Ft
-        <span id='afa'>({{ product[0].productPrice /100*79}} Ft + ÁFA)</span>
+      <p class="lead">{{ product.productPrice }} Ft
+        <span id='afa'>({{ product.productPrice /100*79}} Ft + ÁFA)</span>
       </p>
       <hr class="my-4 col-lg-12">
 
-      <p class='col-lg-10'>Gyártó: {{product[0].productManufacturer | titlecase}}</p>
-      <a class="btn btn-primary btn-lg class='col-lg-2'" href="#" role="button">Kosárba Rakom</a>
+      <p class='col-lg-10'>Gyártó: {{product.productManufacturer | titlecase}}</p>
+      <a class="btn btn-primary btn-lg class='col-lg-2'" href="#" role="button" (click)="addToBasket()">Kosárba Rakom</a>
       <p class='col-lg-12'>Szállítási idő: 1-4 munkanap</p>
 
 
@@ -33,7 +33,7 @@
           <th>Controls</th>
         </thead>
         <tbody>
-          <tr *ngFor="let comment of product[0].productComments">
+          <tr *ngFor="let comment of product.productComments">
             <td>{{comment.user.username}}</td>
             <td>{{comment.text}}</td>
             <td>{{comment.createdAt | date:'fullDate'}}</td>

@@ -12,84 +12,33 @@ import { RequestOptions } from '@angular/http';
 export class ProductComponent implements OnInit {
 
   constructor(public http: CommentService, private global: Globals) {
-    this.getUser();
+
   }
   newComment: any = { text: '', user: '' };
   commentToUpdate: any = {};
   options: any = new RequestOptions({ withCredentials: true });
   baseUrl = 'http://localhost:8080/';
   Orders: any;
-  userOrders: any;
-  productsLength: any;
   canComment: Boolean = false;
   userId: String = '';
   username: any;
-  product: Array<object> = [{
-    _id: '',
-    productName: '',
-    productPrice: '',
-    productManufacturer: '',
-    productUrl: '',
-    createdAt: '',
-    updatedAt: '',
-    productImg: '',
-    productComments: [],
-  }];
+  userRights: any;
+  product: any;
+  toBasket: any = [];
 
   ngOnInit() {
     this.list();
+    this.getUser();
   }
 
   /**
    * Beolvassa a kiválasztott terméket
    */
   list() {
-    this.product = [];
-
     this.http.getAll(`http://localhost:8080/products/${this.global.singleProductId}`)
-      .then((res) => {
-        console.log(res);
+      .then((data) => {
+        this.product = data;
       });
-    const array = [{
-      _id: '5af9917fbb6b544b14321638',
-      updatedAt: '2018-05-16T14:58:20.600Z',
-      createdAt: '2018-05-14T13:39:11.952Z',
-      productName: 'kalinka',
-      productUrl: 'kalinka-vodka',
-      productPrice: 3599,
-      productManufacturer: 'zwack unicum',
-      productImg: 'http://localhost:8080/uploads/2018-05-14T13-39-11.938Z.jpeg',
-      productComments: [{
-        _id: '5b0432142e294b2e4c007bb0',
-        createdAt: '2018-05-22T15:07:00.289Z',
-        user: {
-          _id: '5afd7867c788b011b4c4526c',
-          username: 'Fredi'
-        },
-        text: 'Nagyon finom. Nagyon szeretem!'
-      },
-      {
-        _id: '5b047dc5b881cc2e481a42bf',
-        createdAt: '2018-05-22T20:29:57.640Z',
-        user: {
-          _id: '5af9f587c0ec4521c489ce90',
-          username: 'Bánfi Péter'
-        },
-        text: 'Ha betötlöm a 18-at és anyukám megendgedi, hogy ihassak, akkor biztosan veszek egy doboz Borsodit!'
-      }],
-    }];
-    this.product = array.map(doc => ({
-      _id: doc['_id'],
-      productName: doc['productName'],
-      productPrice: doc['productPrice'],
-      productManufacturer: doc['productManufacturer'],
-      productUrl: doc['productUrl'],
-      createdAt: doc['createdAt'],
-      updatedAt: doc['updatedAt'],
-      productImg: doc['productImg'],
-      productComments: doc['productComments']
-    }));
-    // console.log(this.product);
   }
 
   /**
@@ -100,6 +49,8 @@ export class ProductComponent implements OnInit {
       .then(data => {
         this.userId = data['user']._id;
         this.username = data['user'].username;
+        this.userRights = data['user'].rights;
+        console.log(this.userRights);
         this.getOrders();
       });
   }
@@ -132,7 +83,7 @@ export class ProductComponent implements OnInit {
   userHasProduct() {
     return this.Orders
       .filter(order => order.user._id === this.userId)
-      .filter(order => order.products.filter(product => product.product._id === this.product[0]['_id']).length > 0)
+      .filter(order => order.products.filter(product => product.product._id === this.product['_id']).length > 0)
       .length;
   }
 
@@ -141,10 +92,11 @@ export class ProductComponent implements OnInit {
    */
   addComment() {
     this.newComment.user = this.userId;
-    this.http.post(`${this.baseUrl}comments/${this.product[0]['_id']}`, this.newComment)
+    this.http.post(`${this.baseUrl}comments/${this.product['_id']}`, this.newComment)
       .then(data => {
         console.log(data);
         this.newComment = { text: '', user: '' };
+        this.list();
       });
   }
 
@@ -152,8 +104,13 @@ export class ProductComponent implements OnInit {
    * Értékelés módosítása.
    */
   updateComment() {
-    this.http.post(`${this.baseUrl}comments/${this.commentToUpdate._id}`, this.commentToUpdate)
-      .then(data => console.log(data));
+    const update = { text: this.commentToUpdate.text };
+    this.http.put(`${this.baseUrl}comments/${this.commentToUpdate._id}`, update)
+      .then(data => {
+        console.log(data);
+        this.clearCommentToUpdate();
+        this.list();
+      });
   }
 
 
@@ -162,8 +119,11 @@ export class ProductComponent implements OnInit {
    * @param comment - a törölni kívánt értékelés.
    */
   deleteComment(comment) {
-    this.http.delete(`${this.baseUrl}comments/${this.product[0]['_id']}/${comment._id}`)
-      .then(data => console.log(data));
+    this.http.delete(`${this.baseUrl}comments/${this.product['_id']}/${comment._id}`)
+      .then(data => {
+        console.log(data);
+        this.list();
+      });
   }
 
   /**
@@ -179,6 +139,20 @@ export class ProductComponent implements OnInit {
    */
   clearCommentToUpdate() {
     this.commentToUpdate = {};
+  }
+
+  addToBasket() {
+    this.toBasket.push(this.product);
+    const basket = sessionStorage.basket ? JSON.parse(sessionStorage.basket) : [];
+    basket.push(this.toBasket);
+    const session = JSON.stringify(basket);
+    sessionStorage.setItem('basket', session);
+    this.toBasket = [];
+    console.log(basket);
+  }
+
+  addToBasket2() {
+    sessionStorage.clear();
   }
 
 }
