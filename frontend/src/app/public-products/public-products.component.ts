@@ -43,7 +43,7 @@ export class PublicProductsComponent implements OnInit {
     });
 
     promise.then((res) => {
-      this.global.singleProductId = res._id;
+      this.global.singleProductId = res['_id'];
     });
 
   }

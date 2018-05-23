@@ -52,7 +52,7 @@ export class NavComponent implements OnInit {
     });
 
     promise.then((res) => {
-      this.global.categoryId = res._id;
+      this.global.categoryId = res['_id'];
     });
 
   }
