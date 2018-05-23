@@ -6,7 +6,14 @@ const categorySchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-}, { timestamps: true });
+  categoryPlace: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+}, {
+  timestamps: true,
+});
 
 
 module.exports = mongoose.model('Category', categorySchema);

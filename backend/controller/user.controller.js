@@ -1,5 +1,4 @@
 const User = require('../models/user');
-const passportLocalMongoose = require('passport-local-mongoose');
 /**
  * @module User
  */
@@ -31,10 +30,10 @@ module.exports = {
    */
   register: (req, res) => {
     User.register(new User({
-        username: req.body.username,
-        email: req.body.email,
-        rights: req.body.rights,
-      }), req.body.password)
+      username: req.body.username,
+      email: req.body.email,
+      rights: req.body.rights,
+    }), req.body.password)
       .then(user => res.json(user))
       .catch((err) => {
         res.status(500).json({

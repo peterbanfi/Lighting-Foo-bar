@@ -24,6 +24,44 @@ const userSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  address: {
+    city: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    address2: {
+      type: String,
+    },
+    zip: {
+      type: Number,
+      required: true,
+    },
+  },
+  invoiceAddress: {
+    city: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    address2: {
+      type: String,
+    },
+    zip: {
+      type: Number,
+      required: true,
+    },
+  },
+  phone: {
+    type: Number,
+    required: true,
+  },
 }, {
   timestamps: true,
 });
@@ -42,7 +80,7 @@ userSchema.plugin(passportLocalMongoose, {
     if (!validator.isLength(password, 8)) {
       return cb({
         code: 400,
-        message: 'A megadott jelszónak legalább 8 karakter hosszúnak kell lennie.'
+        message: 'A megadott jelszónak legalább 8 karakter hosszúnak kell lennie.',
       });
     }
     return cb(null);

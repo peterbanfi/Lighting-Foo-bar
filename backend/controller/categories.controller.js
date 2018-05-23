@@ -5,7 +5,9 @@ mongoose.Promise = require('bluebird');
 function lowerCaser(body) {
   const newBody = body;
   Object.keys(newBody).forEach((key) => {
-    newBody[key] = newBody[key].toLowerCase();
+    if (typeof newBody[key] === 'string') {
+      newBody[key] = newBody[key].toLowerCase();
+    }
   });
   return newBody;
 }
@@ -17,10 +19,10 @@ function lowerCaser(body) {
 module.exports = {
 
   /**
-    * összes kategória listázása
-    * @param {String} req - A kérés.
-    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
-    */
+   * Az összes kategória listázása
+   * @param {String} req - A kérés.
+   * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   */
 
   list: (req, res) => {
     Categories.find({})
@@ -59,10 +61,10 @@ module.exports = {
   },
 
   /**
- * kategória létrehozása
- * @param {String} req - Létrehoz egy új kategóriát, lowerCase
- * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
- */
+   * kategória létrehozása
+   * @param {String} req - Létrehoz egy új kategóriát, lowerCase
+   * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   */
 
   create: (req, res) => {
     let body = JSON.stringify(req.body);
@@ -99,11 +101,15 @@ module.exports = {
           if (categories) {
             res.status(200).json(categories);
           } else {
-            res.status(404).json({ message: 'Not a valid Id!' });
+            res.status(404).json({
+              message: 'Not a valid Id!',
+            });
           }
         })
         .catch((err) => {
-          res.status(500).json({ error: err });
+          res.status(500).json({
+            error: err,
+          });
         }));
   },
 

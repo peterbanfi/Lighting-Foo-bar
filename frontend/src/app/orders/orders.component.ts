@@ -5,9 +5,14 @@ import { OrderService } from '../order.service';
 import { registerLocaleData } from '@angular/common';
 import localeHu from '@angular/common/locales/hu';
 
-// the second parameter 'fr' is optional
+// Setting the local 'hu' for hungarian currency format.
 registerLocaleData(localeHu, 'hu');
 
+/**
+ * Total pipe
+ * @param {Object} order - Order object from which the pipe takes the product datas and calculates the total value.
+ * @returns {number} - Returns the total value of the selected order
+ */
 @Pipe({ name: 'total' })
 export class TotalPipe implements PipeTransform {
   transform(order: any) {
@@ -35,10 +40,11 @@ export class OrdersComponent implements OnInit {
   orderToUpdate: any = { user: { username: 'valaki' }, products: [] };
   orderToUpdateDisplay: any = { user: { username: 'valaki' }, products: [] };
 
-  constructor(public http: OrderService) {
+  constructor(public http: OrderService, public httpClient: HttpClient) {
     this.getAll();
     // this.countTotals(this.Orders);
   }
+
   // Get all users, products and orders
   getAll() {
     this.http.getAll(this.baseUrl)
@@ -51,22 +57,14 @@ export class OrdersComponent implements OnInit {
 
   // Place a new order with the data of newOrder
   placeOrder() {
-    this.http.post(this.baseUrl, this.newOrder).then(data => {
-      console.log(data);
-    });
+    this.http.post(this.baseUrl, this.newOrder).then(data => this.getAll());
     this.newOrder = { products: [] };
-    // location.reload();
-    this.getAll();
   }
 
   // Update order specified by order ID.
   updateOrder() {
-    this.http.put(`${this.baseUrl}${this.orderToUpdate._id}`, this.orderToUpdate).then(data => {
-      console.log(data);
-    });
+    this.http.put(`${this.baseUrl}${this.orderToUpdate._id}`, this.orderToUpdate).then(data => this.getAll());
     this.orderToUpdate = {};
-    // location.reload();
-    this.getAll();
   }
 
   // Select order to be updated
@@ -102,11 +100,7 @@ export class OrdersComponent implements OnInit {
   // Delete order specified by order ID.
   deleteOrder(order) {
     if (confirm(`Are you sure to delete the order of ${order.user.username}?`)) {
-      this.http.delete(`${this.baseUrl}${order['_id']}`).then(data => {
-        console.log(data);
-      });
-      // location.reload();
-      this.getAll();
+      this.http.delete(`${this.baseUrl}${order['_id']}`).then(data => this.getAll());
     }
   }
 
