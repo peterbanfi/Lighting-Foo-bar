@@ -24,6 +24,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { ProductComponent } from './product/product.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ProfileComponent } from './profile/profile.component';
     TotalPipe,
     StatisticsComponent,
     ProfileComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,

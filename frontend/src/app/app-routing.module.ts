@@ -12,10 +12,12 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'product', component: ProductComponent },
   { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: 'users', component: AllUserComponent, canActivate: [AuthGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
