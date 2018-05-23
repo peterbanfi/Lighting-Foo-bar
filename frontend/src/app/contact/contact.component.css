@@ -1,0 +1,15 @@
+h1,
+h3 {
+  padding: 20px 0;
+}
+
+agm-map {
+  background-size: cover;
+  height: 350px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.form {
+  margin-top: 20px;
+}

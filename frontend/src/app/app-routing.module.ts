@@ -10,6 +10,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { ProductsComponent } from './products/products.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ContactComponent } from './contact/contact.component';
 import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProductComponent } from './product/product.component';
@@ -18,12 +19,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'product', component: ProductComponent },
-  { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
+  { path: 'registration', component: RegistrationComponent },
   { path: 'users', component: AllUserComponent, canActivate: [AuthGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [UserAuthGuard] },
+  { path: 'contact', component: ContactComponent },
 ];
 
 @NgModule({

@@ -70,12 +70,14 @@ export class NavComponent implements OnInit {
         this.userName = data2['username'];
         if (data2['rights']) {
           this.cookieService.put('xyz', 'true');
+          this.cookieService.put('abc', data2['_id']);
           this.isAdmin = true;
           this.loggedIn = true;
           this.wrong = false;
         }
         if (!data2['rights']) {
           this.cookieService.put('xyz', 'false');
+          this.cookieService.put('abc', data2['_id']);
           this.isAdmin = false;
           this.loggedIn = true;
           this.wrong = false;

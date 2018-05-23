@@ -16,5 +16,6 @@ export class AppComponent implements OnInit {
     }
     ngOnInit() {
         this.cookieService.remove('xyz');
+        this.cookieService.remove('abc');
     }
 }

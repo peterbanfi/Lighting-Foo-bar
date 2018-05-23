@@ -25,6 +25,8 @@ import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductComponent } from './product/product.component';
+import { ContactComponent } from './contact/contact.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { ProductComponent } from './product/product.component';
     StatisticsComponent,
     ProfileComponent,
     ProductComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,10 @@ import { ProductComponent } from './product/product.component';
     InterceptorModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger'
-    })
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyB5G21AVMuyuovz3i0gIuoBgm7vZqUe6WM'
+    }),
 
   ],
   providers: [OrderService,

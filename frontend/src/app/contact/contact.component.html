@@ -1,0 +1,67 @@
+<section class="section-contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>{{ title }}</h1>
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-contactform">
+  <div class="container">
+    <div class="row">
+      <div class="form col-12">
+        <h3>Write us</h3>
+        <form id="contact-form"  action="/send-email" method="post">
+          <div class="input-group mb-3 inputs">
+            <div class="input-group-prepend col-md-4" for="contactname">
+              <span id="basic-addon1" class="fas fa-user input-group-text"></span>
+              <input type="text" class="form-control" id="contactname" placeholder="Name">
+            </div>
+            <div class="input-group-prepend col-md-4" for="subject">
+              <span id="basic-addon2" class="input-group-text">?</span>
+              <input type="text" class="form-control" name="subject" placeholder="Subject" [(ngModel)]="msg.subject" #subject="ngModel">
+            </div>
+            <div class="input-group-prepend col-md-4" for="contactemail">
+              <span id="basic-addon3" class="input-group-text">@</span>
+              <input type="email" class="form-control" name="contactemail" placeholder="Your E-mail" [(ngModel)]="msg.from" required #contactemail="ngModel">
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend" for="massage">
+              <span id="basic-addon4" class="input-group-text far fa-comment-alt"></span>
+            </div>
+            <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Your message" [(ngModel)]="msg.text" required
+              #message="ngModel"></textarea>
+            <br>
+          </div>
+          <div class="input-group mb-3">
+            <button type="button" class="btn btn-lg btn-block btn-primary" type="submit" value="Küldés" (click)="sendMsg()">Send</button>
+            <br>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-last">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h3>Come and say hi at: </h3>
+        <div>
+          <strong>Warehouse:</strong>
+          1117 Budapest, Budafoki út 56.</div>
+        <div>
+          <strong>Opening Times:</strong>
+          Monday-Friday: 6:00 - 14:00</div>
+        <div>
+          <strong>Phone:</strong>
+          +36 30 5555555</div>
+      </div>
+    </div>
+  </div>
+</section>

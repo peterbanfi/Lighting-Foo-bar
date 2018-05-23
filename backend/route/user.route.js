@@ -29,7 +29,7 @@ function loggedInUser(req, res, next) {
     }
 };
 
-userRouter.get('/profile', UserController.profile);
+userRouter.get('/profile', loggedInUser, UserController.profile);
 userRouter.get('/listAll', UserController.listAll);
 userRouter.get('/getOne/:id', loggedIn, UserController.getOne);
 userRouter.delete('/remove/:id', loggedIn, UserController.remove);

@@ -29,7 +29,10 @@ export class ProfileComponent implements OnInit {
     update: true,
     oldPassword: '',
     newPassword: '',
-  }
+  };
+  passwordConf: '';
+  updated: Boolean = false;
+  updatedPass: Boolean = false;
 
   constructor(public http: HttpClient, public router: Router, private LServ: LoginService, private cookieService: CookieService) {
     this.profile();
@@ -101,12 +104,18 @@ export class ProfileComponent implements OnInit {
     if (this.userPass['newPassword'].length < 8) {
       alert('New password must be more than 8 characters!');
     } else {
-      console.log(this.userPass);
       this.http.put(`${this.baseUrl}user/update/${this.userId}`, this.userPass, this.options)
         .subscribe(data => {
-          console.log(data);
+          this.updatedPass = true;
         });
     }
+  }
+
+  update() {
+    this.http.put(`${this.baseUrl}user/update/${this.userId}`, this.userDetails, this.options)
+      .subscribe(data => {
+        this.updated = true;
+      });
   }
 
 }

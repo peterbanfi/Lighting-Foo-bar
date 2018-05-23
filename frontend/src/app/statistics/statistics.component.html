@@ -20,8 +20,10 @@
 
   </div>
 
+  <div *ngIf="displayChart">
+    <google-chart [data]="pieChartData"></google-chart>
+  </div>
 
-  <google-chart [data]="pieChartData"></google-chart>
   <div class="row">
     <div class="col-4"></div>
     <div class="col-4">

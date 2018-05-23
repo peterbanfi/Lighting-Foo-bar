@@ -34,6 +34,7 @@ export class StatisticsComponent implements OnInit {
   datas4: any = [];
   datas5: any = [];
   datas6: any = [];
+  displayChart: Boolean = false;
 
   constructor(public http: HttpClient) {
 
@@ -125,6 +126,9 @@ export class StatisticsComponent implements OnInit {
     for (let i = 0; i < data.length; i++) {
       this.pieChartData.dataTable.push(data[i]);
     }
+    const clone = JSON.parse(JSON.stringify(this.pieChartData));
+    this.pieChartData = clone;
+    this.displayChart = true;
   }
   /**
    * checkSameDays -> Azonos napon leadott rendelések vizsgálása, és összeadása.
