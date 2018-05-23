@@ -12,7 +12,7 @@ const account = {
   password: 'admin',
 };
 
-const comment = {
+const order = {
   user: '5afc439634a9371cf8fca12bb',
   products: [{
     product: '5af99826722bf5522c3d40a1',

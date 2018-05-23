@@ -25,6 +25,7 @@ import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductComponent } from './product/product.component';
+import { CommentService } from './comment.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ProductComponent } from './product/product.component';
     LoginService,
     CookieService,
     AuthGuard,
-    UserAuthGuard
+    UserAuthGuard,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })

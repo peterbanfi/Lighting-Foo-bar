@@ -25,11 +25,11 @@ function isAdmin(req, res, next) {
 }
 
 orderRouter.route('/')
-  .get(isAdmin, orderController.list)
+  .get(loggedIn, orderController.list)
   .post(loggedIn, orderController.create);
 
 orderRouter.route('/:id')
-  .get(isAdmin, orderController.find)
+  .get(loggedIn, orderController.find)
   .put(isAdmin, orderController.update)
   .delete(isAdmin, orderController.remove);
 
