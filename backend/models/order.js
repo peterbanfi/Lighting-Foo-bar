@@ -6,40 +6,40 @@ const orderSchema = mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  /* address: {
+  address: {
     city: {
       type: String,
-      required: true,
+      required: false,
     },
     address: {
       type: String,
-      required: true,
+      required: false,
     },
     address2: {
       type: String,
     },
     zip: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   invoiceAddress: {
     city: {
       type: String,
-      required: true,
+      required: false,
     },
     address: {
       type: String,
-      required: true,
+      required: false,
     },
     address2: {
       type: String,
     },
     zip: {
       type: Number,
-      required: true,
+      required: false,
     },
-  }, */
+  },
   products: [{
     product: {
       type: mongoose.Schema.Types.ObjectId,
@@ -52,8 +52,8 @@ const orderSchema = mongoose.Schema({
     },
   }],
 }, {
-  timestamps: true,
-});
+    timestamps: true,
+  });
 
 
 module.exports = mongoose.model('Order', orderSchema);
