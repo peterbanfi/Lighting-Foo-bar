@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Order</title>
+    <title>JSDoc: Module: Categories</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Order</h1>
+    <h1 class="page-title">Module: Categories</h1>
 
     
 
@@ -72,7 +72,7 @@
 
 
 <div class="description">
-    Egy rendelés rögzítése az adatbázisban.
+    kategória létrehozása
 </div>
 
 
@@ -124,7 +124,7 @@
 
             
 
-            <td class="description last">A távoli kérés, mely tartalmazza a felvinni kívánt adatot.</td>
+            <td class="description last">Létrehoz egy új kategóriát, lowerCase</td>
         </tr>
 
     
@@ -147,7 +147,7 @@
 
             
 
-            <td class="description last">A felvitt adat, vagy hiba visszaküldése egy objektumban.</td>
+            <td class="description last">Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.</td>
         </tr>
 
     
@@ -188,7 +188,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line44">line 44</a>
+        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line72">line 72</a>
     </li></ul></dd>
     
 
@@ -215,7 +215,7 @@
 
         
 <div class="param-desc">
-    - a felvitt új rendelés objektumát küldi vissza.
+    - az újonnan létrehozott kategóriát adja vissza.
 </div>
 
 
@@ -252,7 +252,7 @@
 
 
 <div class="description">
-    Egy bizonyos, id-vel azonosított rendelés megjelenítése.
+    Egy kategória megjelenítése
 </div>
 
 
@@ -304,7 +304,7 @@
 
             
 
-            <td class="description last">A távoli kérés.</td>
+            <td class="description last">A kérés.</td>
         </tr>
 
     
@@ -327,7 +327,7 @@
 
             
 
-            <td class="description last">A lekérdezett adatok, vagy hiba visszaküldése egy objektumban.</td>
+            <td class="description last">Ha nem történt hiba, a kért adatot visszakapjuk egy objektumban.</td>
         </tr>
 
     
@@ -368,7 +368,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line29">line 29</a>
+        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -395,7 +395,7 @@
 
         
 <div class="param-desc">
-    - egy bizonyos rendelés objektumát küldi vissza
+    - az id alapján a keresett kategóriát adja vissza.
 </div>
 
 
@@ -432,7 +432,7 @@
 
 
 <div class="description">
-    Az összes rendelés megjelenítése
+    Az összes kategória listázása
 </div>
 
 
@@ -484,7 +484,7 @@
 
             
 
-            <td class="description last">A távoli kérés.</td>
+            <td class="description last">A kérés.</td>
         </tr>
 
     
@@ -507,7 +507,7 @@
 
             
 
-            <td class="description last">A lekérdezett adatok, vagy hiba visszaküldése egy objektumban.</td>
+            <td class="description last">Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.</td>
         </tr>
 
     
@@ -548,7 +548,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line14">line 14</a>
+        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -575,7 +575,7 @@
 
         
 <div class="param-desc">
-    - a rendelések objektumát küldi vissza.
+    - az összes kategóriát visszaadja.
 </div>
 
 
@@ -604,7 +604,7 @@
     
 
     
-    <h4 class="name" id=".remove"><span class="type-signature">(static) </span>remove<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id=".remove"><span class="type-signature">(static) </span>remove<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -612,7 +612,7 @@
 
 
 <div class="description">
-    Egy bizonyos, id-vel azonosított rendelés törlése az adatbázisból.
+    Kategória törlése
 </div>
 
 
@@ -664,7 +664,7 @@
 
             
 
-            <td class="description last">A távoli kérés, mely tartalmazza a módisítani kívánt adatot.</td>
+            <td class="description last">Törli a kategóriát</td>
         </tr>
 
     
@@ -687,7 +687,7 @@
 
             
 
-            <td class="description last">A törölt adat, vagy hiba visszaküldése egy objektumban.</td>
+            <td class="description last">Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.</td>
         </tr>
 
     
@@ -728,7 +728,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line79">line 79</a>
+        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line128">line 128</a>
     </li></ul></dd>
     
 
@@ -755,7 +755,7 @@
 
         
 <div class="param-desc">
-    a törölt objektum adatait küldi vissza.
+    - a törölt kategóriát adja vissza.
 </div>
 
 
@@ -766,7 +766,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -792,7 +792,7 @@
 
 
 <div class="description">
-    Egy bizonyos, id-vel azonosított rendelés módosítása az adatbázisban.
+    kategória nevének frissítése
 </div>
 
 
@@ -844,7 +844,7 @@
 
             
 
-            <td class="description last">A távoli kérés, mely tartalmazza a módisítani kívánt adatot.</td>
+            <td class="description last">Frissíti a kategória nevét, lowerCase</td>
         </tr>
 
     
@@ -867,7 +867,7 @@
 
             
 
-            <td class="description last">A felülírt adat, vagy hiba visszaküldése egy objektumban.</td>
+            <td class="description last">Ha nem történt hiba, a frissítés előtti visszakapjuk egy objektumban.</td>
         </tr>
 
     
@@ -908,7 +908,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="order.controller.js.html">order.controller.js</a>, <a href="order.controller.js.html#line66">line 66</a>
+        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -935,7 +935,7 @@
 
         
 <div class="param-desc">
-    - a módosított rendelés objektumát küldi vissza.
+    - a módosított kategórianevet adja vissza.
 </div>
 
 
@@ -974,13 +974,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Order.html">Order</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Categories.html">Categories</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 23 2018 23:02:17 GMT+0200 (Közép-európai nyári idő )
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 23 2018 23:16:41 GMT+0200 (Közép-európai nyári idő )
 </footer>
 
 <script> prettyPrint(); </script>

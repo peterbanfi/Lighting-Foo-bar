@@ -31,7 +31,7 @@ const ProductSchema = mongoose.Schema({
     ref: 'Comment',
   }],
 }, {
-    timestamps: true,
-  });
+  timestamps: true,
+});
 
 module.exports = mongoose.model('Product', ProductSchema);
