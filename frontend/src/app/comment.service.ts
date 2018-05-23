@@ -6,6 +6,25 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class CommentService {
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
 
+  getAll(domain) {
+    return this.http.get(domain).toPromise();
+  }
+
+  getSingle(domain, options) {
+    return this.http.get(domain, options).toPromise();
+  }
+
+  post(domain, data) {
+    return this.http.post(domain, data).toPromise();
+  }
+
+  put(domain, data) {
+    return this.http.put(domain, data).toPromise();
+  }
+
+  delete(domain) {
+    return this.http.delete(domain).toPromise();
+  }
 }

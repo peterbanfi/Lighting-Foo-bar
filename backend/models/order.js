@@ -6,7 +6,7 @@ const orderSchema = mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  address: {
+  /* address: {
     city: {
       type: String,
       required: true,
@@ -39,7 +39,7 @@ const orderSchema = mongoose.Schema({
       type: Number,
       required: true,
     },
-  },
+  }, */
   products: [{
     product: {
       type: mongoose.Schema.Types.ObjectId,
