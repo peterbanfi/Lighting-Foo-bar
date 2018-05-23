@@ -27,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductComponent } from './product/product.component';
 import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
+import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AgmCoreModule } from '@agm/core';
     ProfileComponent,
     ProductComponent,
     ContactComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,
