@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { CookieService } from 'angular2-cookie/core';
 import { HostListener } from '@angular/core';
+import { HttpRequestService } from '../http-request.service';
 
 @Component({
   selector: 'app-nav',
@@ -32,13 +33,21 @@ export class NavComponent implements OnInit {
   scrollPos: number;
   categories: Array<String> = [];
 
-  constructor(public http: HttpClient, public router: Router, private LServ: LoginService, private cookieService: CookieService) {
+  constructor(
+    public http: HttpClient,
+    public router: Router,
+    private LServ: LoginService,
+    private cookieService: CookieService,
+    private httpServ: HttpRequestService
+  ) {
 
   }
 
   ngOnInit() {
     this.categoryLister();
   }
+
+
 
   dropdownToggle() {
     this.dropdown ? this.dropdown = false : this.dropdown = true;
@@ -90,8 +99,17 @@ export class NavComponent implements OnInit {
   }
 
   categoryLister() {
-    const body = ['vodka', 'pálinka', 'whiskey', 'sör', 'gin'];
-    body.forEach(x => this.categories.push(x));
+    let body;
+    this.httpServ.getAll('http://localhost:8080/categories')
+      .then((res) => {
+        body = res;
+      })
+      .then(() => {
+        body.map(x => {
+          this.categories.push(x.categoryName);
+        });
+      });
+
     this.categories.unshift('Összes');
   }
 

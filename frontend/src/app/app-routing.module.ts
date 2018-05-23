@@ -13,11 +13,13 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProductComponent } from './product/product.component';
+import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'product', component: ProductComponent },
+  { path: 'categories', component: CategoryComponent, canActivate: [AuthGuard] },
   { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: 'users', component: AllUserComponent, canActivate: [AuthGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },

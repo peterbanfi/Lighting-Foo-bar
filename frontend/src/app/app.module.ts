@@ -25,6 +25,8 @@ import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductComponent } from './product/product.component';
+import { HttpRequestService } from './http-request.service';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { ProductComponent } from './product/product.component';
     StatisticsComponent,
     ProfileComponent,
     ProductComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,12 +57,14 @@ import { ProductComponent } from './product/product.component';
 
   ],
   providers: [OrderService,
+    HttpRequestService,
     OrderService,
     HttpProductsService,
     LoginService,
     CookieService,
     AuthGuard,
-    UserAuthGuard
+    UserAuthGuard,
+    NavComponent
   ],
   bootstrap: [AppComponent]
 })
