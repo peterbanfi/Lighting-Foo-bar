@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Http, RequestOptions } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { HttpRequestService } from '../http-request.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnChanges {
   user: any = {
     username: '',
     password: '',
@@ -31,7 +31,7 @@ export class NavComponent implements OnInit {
   userName: any;
   wrong: Boolean = false;
   scrollPos: number;
-  categories: Array<String> = [];
+  public categories: Array<String> = [];
 
   constructor(
     public http: HttpClient,
@@ -47,7 +47,9 @@ export class NavComponent implements OnInit {
     this.categoryLister();
   }
 
-
+  @HostListener('change') ngOnChanges() {
+    this.categoryLister();
+  }
 
   dropdownToggle() {
     this.dropdown ? this.dropdown = false : this.dropdown = true;
@@ -100,6 +102,7 @@ export class NavComponent implements OnInit {
 
   categoryLister() {
     let body;
+    this.categories = [];
     this.httpServ.getAll('http://localhost:8080/categories')
       .then((res) => {
         body = res;
@@ -108,9 +111,8 @@ export class NavComponent implements OnInit {
         body.map(x => {
           this.categories.push(x.categoryName);
         });
-      });
-
-    this.categories.unshift('Összes');
+      })
+      .then(() => this.categories.unshift('Összes'));
   }
 
   //transparent navbar

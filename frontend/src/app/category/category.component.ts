@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpRequestService } from '../http-request.service';
-import { NavComponent } from '../nav/nav.component';
 
 @Component({
   selector: 'app-category',
@@ -22,7 +21,7 @@ export class CategoryComponent implements OnInit {
     categoryPlace: '',
   };
 
-  constructor(private http: HttpRequestService, private nav: NavComponent) { }
+  constructor(private http: HttpRequestService) { }
 
   ngOnInit() {
     this.list();
@@ -53,7 +52,6 @@ export class CategoryComponent implements OnInit {
       })
       .then(() => {
         console.log('object');
-        this.nav.categoryLister();
       })
       .catch((err) => {
         alert(err.error.error);
