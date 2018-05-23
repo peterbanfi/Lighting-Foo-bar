@@ -12,7 +12,6 @@ const account = {
   password: 'admin',
 };
 
-<<<<<<< HEAD
 const order = {
   user: '5afa961c9454c01ea4b35bfc',
   address: {
@@ -27,10 +26,6 @@ const order = {
     address2: 'test2',
     zip: 4321,
   },
-=======
-const comment = {
-  user: '5afc439634a9371cf8fca12bb',
->>>>>>> 0d826dca7bca3f5efef454095b521095f70c4806
   products: [{
     product: '5af9917fbb6b544b14321638',
     quantity: 1,
