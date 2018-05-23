@@ -14,9 +14,15 @@ const account = {
 };
 
 const newAccount = {
-  email: 'test@test.com',
-  username: 'test',
-  password: 'testtest',
+  email: 'test8@test.com',
+  username: 'test8',
+  password: 'testtest8',
+  rights: true,
+};
+const newAccount2 = {
+  email: 'admin@admin.com',
+  username: 'admin',
+  password: 'admin',
   rights: true,
 };
 
@@ -51,7 +57,7 @@ describe('User', () => {
           id += res.body._id;
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.username.should.be.eql('test');
+          res.body.username.should.be.eql('test8');
           done();
         });
     });
@@ -77,11 +83,20 @@ describe('User', () => {
     it('login with new user', (done) => {
       chai.request(userUrl)
         .post('/login')
-        .send(account)
+        .send({
+          username: 'admin@admin.com',
+          password: 'admin'
+        })
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.success.should.be.eql('Sikeres belépés');
+          res.body.should.be.eql({
+            "login": true,
+            "user": {
+              "username": "admin@admin.com",
+              "password": "admin"
+            }
+          });
           done();
         });
     });
@@ -91,9 +106,13 @@ describe('User', () => {
   beforeEach((done) => {
     chai.request('http://localhost:8080/user')
       .post('/login')
-      .send(account)
+      .send({
+        username: 'admin@admin.com',
+        password: 'admin'
+      })
       .end((err, res) => {
         if (err) {
+          console.log(err);
           throw err;
         }
         cookie = res.headers['set-cookie'].pop().split(';')[0];
@@ -135,12 +154,12 @@ describe('User', () => {
   describe('getOne()', () => {
     it('finds one users', (done) => {
       chai.request(userUrl)
-        .get(`/getOne${id}`)
+        .get(`/getOne/5afa961c9454c01ea4b35bfc`)
         .set('Cookie', cookie)
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.username.should.be.eql('test');
+          res.body.username.should.be.eql('admin');
           done();
         });
     });
@@ -150,13 +169,13 @@ describe('User', () => {
   describe('update()', () => {
     it('should update user without auth', (done) => {
       chai.request(userUrl)
-        .put(`/update${id}`)
+        .put(`/update/5b05cf80630cbd1b54682c8c`)
         .set('Cookie', cookie)
         .send(put)
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('Object');
-          res.body.username.should.be.eql('test');
+          res.body.username.should.be.eql('put');
           done();
         });
     });
@@ -166,7 +185,7 @@ describe('User', () => {
   describe('update()', () => {
     it('should update user with auth', (done) => {
       chai.request(userUrl)
-        .put(`/update${id}`)
+        .put(`/update/5b05cf80630cbd1b54682c8c`)
         .set('Cookie', cookie)
         .send(put2)
         .end((err, res) => {
