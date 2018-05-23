@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class HttpProductsService {
+export class HttpRequestService {
 
   constructor(public http: HttpClient) { }
 
@@ -29,5 +29,5 @@ export class HttpProductsService {
     return this.http.delete(domain).toPromise();
   }
 
-
 }
+

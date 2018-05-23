@@ -27,6 +27,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductComponent } from './product/product.component';
 import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
+import { HttpRequestService } from './http-request.service';
+import { CategoryComponent } from './category/category.component';
+import { PublicProductsComponent } from './public-products/public-products.component';
+import { Globals } from './globalvars';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,8 @@ import { AgmCoreModule } from '@agm/core';
     ProfileComponent,
     ProductComponent,
     ContactComponent,
+    CategoryComponent,
+    PublicProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,12 +66,14 @@ import { AgmCoreModule } from '@agm/core';
 
   ],
   providers: [OrderService,
+    HttpRequestService,
     OrderService,
     HttpProductsService,
     LoginService,
     CookieService,
     AuthGuard,
-    UserAuthGuard
+    UserAuthGuard,
+    Globals
   ],
   bootstrap: [AppComponent]
 })

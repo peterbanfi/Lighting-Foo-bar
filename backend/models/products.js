@@ -24,14 +24,14 @@ const ProductSchema = mongoose.Schema({
   productCategory: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
-    // required: true,
+    required: true,
   },
   productComments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment',
   }],
 }, {
-  timestamps: true,
-});
+    timestamps: true,
+  });
 
 module.exports = mongoose.model('Product', ProductSchema);

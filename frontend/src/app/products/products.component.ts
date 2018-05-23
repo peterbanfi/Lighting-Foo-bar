@@ -19,16 +19,19 @@ export class ProductsComponent implements OnInit {
     createdAt: '',
     updatedAt: '',
     productImg: '',
+    productCategory: '',
   }];
   productPost: object = {
     productName: '',
     productPrice: '',
     productManufacturer: '',
     productUrl: '',
+    productCategory: '',
   };
   selectedFile: File = null;
   deleted: Boolean = false;
   error: String = '';
+  categories: any;
 
   constructor(private http: HttpProductsService) {
 
@@ -37,10 +40,19 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.list();
+    this.categoryList();
   }
 
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
+  }
+
+  categoryList() {
+    this.http.getAll('http://localhost:8080/categories')
+      .then((res) => {
+        this.categories = res;
+        console.log(this.categories);
+      });
   }
 
   list() {
@@ -57,11 +69,21 @@ export class ProductsComponent implements OnInit {
     body.append('productPrice', this.productPost['productPrice']);
     body.append('productManufacturer', this.productPost['productManufacturer']);
     body.append('productUrl', this.productPost['productUrl']);
+    body.append('productCategory', this.productPost['productCategory']);
     if (this.selectedFile) {
       body.append('productImg', this.selectedFile, this.selectedFile.name);
     }
     this.http.post(`${this.domain}`, body)
-      .then(() => location.reload())
+      .then(() => {
+        this.productPost = {
+          productName: '',
+          productPrice: '',
+          productManufacturer: '',
+          productUrl: '',
+          productCategory: '',
+        };
+      })
+      .then(() => this.list())
       .catch((err) => {
         alert(err.error.error);
       });
@@ -83,7 +105,9 @@ export class ProductsComponent implements OnInit {
           createdAt: doc['createdAt'],
           updatedAt: doc['updatedAt'],
           productImg: doc['productImg'],
+          productCategory: doc.productCategory['_id'],
         }));
+        console.log(this.product);
       });
 
   }
@@ -95,12 +119,13 @@ export class ProductsComponent implements OnInit {
     body.append('productPrice', this.product[0]['productPrice']);
     body.append('productManufacturer', this.product[0]['productManufacturer']);
     body.append('productUrl', this.product[0]['productUrl']);
+    body.append('productCategory', this.product[0]['productCategory']);
     if (this.selectedFile) {
       body.append('productImg', this.selectedFile, this.selectedFile.name);
     }
     console.log(body);
     this.http.put(`${domain}`, body)
-      .then(() => location.reload())
+      .then(() => this.list())
       .catch((err) => {
         alert(err.error.error);
       });
@@ -111,7 +136,7 @@ export class ProductsComponent implements OnInit {
     const domain = `${this.domain}/${this.product[0]['_id']}`;
 
     this.http.delete(domain)
-      .then(() => location.reload())
+      .then(() => this.list())
       .catch((err) => {
         alert(err.error.error);
       });

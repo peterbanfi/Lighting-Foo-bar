@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { CookieService } from 'angular2-cookie/core';
 import { HostListener } from '@angular/core';
+import { HttpRequestService } from '../http-request.service';
+import { Globals } from '../globalvars';
 
 @Component({
   selector: 'app-nav',
@@ -32,7 +34,26 @@ export class NavComponent implements OnInit {
   scrollPos: number;
   categories: Array<String> = [];
 
-  constructor(public http: HttpClient, public router: Router, private LServ: LoginService, private cookieService: CookieService) {
+
+  constructor(
+    public http: HttpClient,
+    public router: Router,
+    private LServ: LoginService,
+    private cookieService: CookieService,
+    private httpServ: HttpRequestService,
+    private global: Globals,
+  ) {
+
+  }
+
+  clickCategory(category) {
+    const promise = new Promise((resolve, reject) => {
+      resolve(category);
+    });
+
+    promise.then((res) => {
+      this.global.categoryId = res['_id'];
+    });
 
   }
 
@@ -92,10 +113,19 @@ export class NavComponent implements OnInit {
   }
 
   categoryLister() {
-    const body = ['vodka', 'pálinka', 'whiskey', 'sör', 'gin'];
-    body.forEach(x => this.categories.push(x));
-    this.categories.unshift('Összes');
+    let body;
+    this.categories = [];
+    this.httpServ.getAll('http://localhost:8080/categories')
+      .then((res) => {
+        body = res;
+      })
+      .then(() => {
+        body.map(x => {
+          this.categories.push(x);
+        });
+      });
   }
+
 
   //transparent navbar
   @HostListener('window:scroll') onScroll() {

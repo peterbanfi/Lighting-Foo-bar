@@ -14,12 +14,16 @@ import { ContactComponent } from './contact/contact.component';
 import { AuthGuard } from './auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ProductComponent } from './product/product.component';
+import { CategoryComponent } from './category/category.component';
+import { PublicProductsComponent } from './public-products/public-products.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'product', component: ProductComponent },
-  { path: 'registration', component: RegistrationComponent },
+  { path: 'public-products/product', component: ProductComponent },
+  { path: 'public-products', component: PublicProductsComponent },
+  { path: 'categories', component: CategoryComponent, canActivate: [AuthGuard] },
+  { path: 'registration', component: RegistrationComponent, canActivate: [AuthGuard] },
   { path: 'users', component: AllUserComponent, canActivate: [AuthGuard] },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },

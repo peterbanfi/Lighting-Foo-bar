@@ -1,0 +1,95 @@
+<div class="container">
+  <h1>Termékkategóriák</h1>
+  <div class="row">
+    <table class="table table-light table-hover">
+      <thead>
+        <tr>
+          <th class="sort-th">ID</th>
+          <th class="sort-th">Kategória</th>
+          <th class="sort-th">Sorrend</th>
+          <th class="sort-th">Feltöltve</th>
+          <th class="sort-th">Frissítve</th>
+          <th>
+            <button id="listAll" (click)="list()" class="btn btn-success">Lista Frissítés</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <input type="text" name="id" disabled class="form-control" />
+          </td>
+          <td>
+            <input type="text" name="categoryName" [(ngModel)]="categoryPost.categoryName" class="form-control" />
+          </td>
+          <td>
+            <input type="text" name="categoryPrice" [(ngModel)]="categoryPost.categoryPlace" class="form-control" />
+          </td>
+          <td>
+            <input type="text" name="createdAt" disabled class="form-control" />
+          </td>
+          <td>
+            <input type="text" name="updatedAt" disabled class="form-control" />
+          </td>
+          <td>
+            <button type="button" (click)="post()" class="btn btn-success">Küldés</button>
+          </td>
+        </tr>
+        <tr *ngFor="let category of categories">
+          <td>{{ category._id }}</td>
+          <td>{{ category.categoryName }}</td>
+          <td>{{ category.categoryPlace }}</td>
+          <td>{{ category.createdAt | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td>{{ category.updatedAt | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td>
+            <button type="button" data-toggle="modal" data-target="#singleModal" (click)="single(category)" class="btn btn-primary">Megtekintés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="singleModal" tabindex="-1" role="dialog" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="loginTitle" class="modal-title">Szerkesztő</h5>
+        <button id="closeEditorModal" type="button" data-dismiss="modal" class="close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form *ngFor='let field of category'>
+          <div class="form-group">
+            <label for="catId">ID</label>
+            <input id="catId" type="text" name='catId' [(ngModel)]="category[0]._id" disabled class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="catName">Kategória</label>
+            <input id="catName" type="text" name='catName' [(ngModel)]="category[0].categoryName" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="catPlace">Sorrend</label>
+            <input id="catPlace" type="text" name='catPlace' [(ngModel)]="category[0].categoryPlace" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="prodCreatedAt">Feltöltve</label>
+            <input id="prodCreatedAt" type="text" name='prodCreatedAt' value='{{ category[0].createdAt | date:"yyyy-MM-dd HH:mm" }}'
+              disabled class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="prodUpdatedAt">Frissítve</label>
+            <input id="prodUpdatedAt" type="text" name='prodUpdatedAt' value='{{ category[0].updatedAt | date:"yyyy-MM-dd HH:mm" }}'
+              disabled class="form-control" />
+          </div>
+        </form>
+        <div role="alert" *ngIf="deleted" class="alert alert-info">Kategória törölve!</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-secondary">Bezár</button>
+        <button type="button" (click)="put()" class="btn btn-success">Mentés</button>
+        <button mwlConfirmationPopover="mwlConfirmationPopover" [popoverTitle]="'Törlés megerősítése'" [popoverMessage]="'Biztosan törli az eszközt?'"
+          placement="top" [confirmText]="'Törlés'" [cancelText]="'Mégsem'" (confirm)="delete()" (cancel)="cancelClicked = true"
+          [(isOpen)]="isOpen" class="btn btn-danger">Törlés</button>
+      </div>
