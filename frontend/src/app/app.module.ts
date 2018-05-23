@@ -32,6 +32,7 @@ import { CategoryComponent } from './category/category.component';
 import { PublicProductsComponent } from './public-products/public-products.component';
 import { Globals } from './globalvars';
 import { CommentService } from './comment.service';
+import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CommentService } from './comment.service';
     ContactComponent,
     CategoryComponent,
     PublicProductsComponent,
+    BasketComponent
   ],
   imports: [
     BrowserModule,

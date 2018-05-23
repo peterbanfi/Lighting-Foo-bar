@@ -1,8 +1,12 @@
-.lead{
+#afa {
+  color: grey;
+  font-size: 0.6em;
+}
+
+.lead {
   font-weight: bold;
 }
 
-#afa{
-  color: grey;
-  font-size: 0.6em;
+img {
+  object-fit: scale-down;
 }
