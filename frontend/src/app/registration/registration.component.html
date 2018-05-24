@@ -3,13 +3,13 @@
     <div class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
-        <h2>Register New User</h2>
+        <h2>Regisztráció</h2>
         <hr>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 field-label-responsive">
-        <label for="name">Username</label>
+        <label for="name">Felhasználónév</label>
       </div>
       <div class="col-md-6">
         <div class="form-group">
@@ -17,7 +17,7 @@
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-user"></i>
             </div>
-            <input type="text" name="name" class="form-control" id="username" placeholder="Username" required autofocus [(ngModel)]="user.username">
+            <input type="text" name="name" class="form-control" id="username" placeholder="Felhasználónév" required autofocus [(ngModel)]="user.username">
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
     </div>
     <div class="row">
       <div class="col-md-3 field-label-responsive">
-        <label for="email">E-Mail Address</label>
+        <label for="email">E-Mail cím</label>
       </div>
       <div class="col-md-6">
         <div class="form-group">
@@ -48,14 +48,14 @@
         <div class="form-control-feedback" *ngIf="mail.invalid && (mail.dirty || mail.touched) ">
           <span class="text-danger align-middle">
             <i class="fas fa-times"></i>
-            Please add a valid e-mail!
+            Kérjük érvényes e-mail címet adjon meg!
           </span>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 field-label-responsive">
-        <label for="password">Password</label>
+        <label for="password">Jelszó</label>
       </div>
       <div class="col-md-6">
         <div class="form-group has-danger">
@@ -63,7 +63,7 @@
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-key"></i>
             </div>
-            <input type="password" name="password" class="form-control" minlength="8" id="passwordReg" placeholder="Password" required
+            <input type="password" name="password" class="form-control" minlength="8" id="passwordReg" placeholder="Jelszó" required
               [(ngModel)]="user.password" #password="ngModel">
           </div>
         </div>
@@ -72,14 +72,14 @@
         <div class="form-control-feedback" *ngIf="password.invalid && (password.dirty || password.touched)">
           <span class="text-danger align-middle" *ngIf="password.errors.minlength">
             <i class="fas fa-times"></i>
-            Password must be 8 characters or more!
+            A jelszónak 8 vagy több karakterből kell állnia!
           </span>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-3 field-label-responsive">
-        <label for="password2">Confirm Password</label>
+        <label for="password2">Jelszó megerősítése</label>
       </div>
       <div class="col-md-6">
         <div class="form-group">
@@ -96,7 +96,7 @@
         <div class="form-control-feedback" *ngIf="(passwordCon.dirty || passwordCon.touched) && user.password !== passwordConf">
           <span class="text-danger align-middle">
             <i class="fas fa-times"></i>
-            Confirm your password!
+            Jelszó mégegyszer!
           </span>
         </div>
       </div>
@@ -104,7 +104,7 @@
 
     <div class="row">
       <div class="col-md-3">
-        <label for="exampleFormControlSelect1">Select rights:</label>
+        <label for="exampleFormControlSelect1">Jogosultságok:</label>
       </div>
       <div class="col-md-6">
         <div class="form-group">
@@ -121,7 +121,7 @@
       <div class="col-md-6" *ngIf="user.password === passwordConf && password.valid">
         <hr>
         <button type="submit" class="btn btn-block btn-outline-success" (click)="validation()">
-          <i class="fa fa-user-plus"></i> Register</button>
+          <i class="fa fa-user-plus"></i> Regisztráció</button>
       </div>
     </div>
   </form>

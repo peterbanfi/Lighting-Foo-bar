@@ -10,7 +10,7 @@
       <hr class="my-4 col-lg-12">
 
       <p class='col-lg-10'>Gyártó: {{product.productManufacturer | titlecase}}</p>
-      <a class="btn btn-primary btn-lg col-lg-2" role="button" (click)="addToBasket()">Kosárba Rakom</a>
+      <a class="btn btn-primary btn-lg col-lg-2" role="button" (click)="addToBasket()">Kosárba</a>
       <p class='col-lg-12'>Szállítási idő: 1-4 munkanap</p>
 
 
@@ -20,17 +20,17 @@
         <input type="textfield" class="form-control" [(ngModel)]="newComment.text">
       </div>
       <div class="col-2">
-        <button class="btn btn-default" (click)="addComment()" [disabled]="!newComment.text">Add comment</button>
+        <button class="btn btn-default" (click)="addComment()" [disabled]="!newComment.text">Értékelem</button>
       </div>
     </div>
     <br>
     <div class="row">
       <table class="table table-hover table-striped">
         <thead>
-          <th>Name</th>
-          <th>Review</th>
-          <th>Time</th>
-          <th>Controls</th>
+          <th>Név</th>
+          <th>Értékelés</th>
+          <th>Idő</th>
+          <th>Eszközök</th>
         </thead>
         <tbody>
           <tr *ngFor="let comment of product.productComments">
@@ -61,7 +61,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="commentModalTitle">Edit comment</h5>
+        <h5 class="modal-title" id="commentModalTitle">Szerkesztés</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -73,8 +73,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearCommentToUpdate()">Cancel</button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateComment()">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearCommentToUpdate()">Mégse</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateComment()">Mentés</button>
         </div>
       </div>
     </div>
