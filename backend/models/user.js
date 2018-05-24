@@ -9,6 +9,21 @@ const passportLocalMongoose = require('passport-local-mongoose');
  */
 const validator = require('validator');
 
+/**
+ * userSchema kibővítve a címmel, szállítási címmel
+ * @param username - felhasználónév
+ * @param email - email cím
+ * @param rights - felhasználói jog: admin vagy user
+ * @param address city - szállítási címhez tartozó város
+ * @param address.address - szállítási címhez tartozó cím
+ * @param address.address2 - szállítási címhez tartozó cím2
+ * @param address.zip - szállítási cím irányítószám
+ * @param invoice.city - számlázási cím város
+ * @param invoice.address - számlázási címhez tartozó cím
+ * @param invoice.address2 - számlázási címhez tartozó cím2
+ * @param invoice.zip - számlázási cím irányítószám
+ * @param phone - telefonszám
+ */
 const userSchema = mongoose.Schema({
   username: {
     type: String,
@@ -41,7 +56,7 @@ const userSchema = mongoose.Schema({
       required: false,
     },
   },
-  invoiceAddress: {
+  invoice: {
     city: {
       type: String,
       required: false,
