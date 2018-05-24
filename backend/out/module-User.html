@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Product</title>
+    <title>JSDoc: Module: User</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Product</h1>
+    <h1 class="page-title">Module: User</h1>
 
     
 
@@ -64,7 +64,7 @@
     
 
     
-    <h4 class="name" id=".addComment"><span class="type-signature">(static) </span>addComment<span class="signature">(productId, commentId)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".getOne"><span class="type-signature">(static) </span>getOne<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -72,166 +72,7 @@
 
 
 <div class="description">
-    Komment hozzáadása a termékhez
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>productId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A kiválasztott termék ID-je.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>commentId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A hozzáfúzött komment ID-je,
- amit az adott termék productComments tömbjébe helyez.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line204">line 204</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    termék létrehozása
+    Egy bizonyos felhasználó keresése
 </div>
 
 
@@ -283,7 +124,7 @@
 
             
 
-            <td class="description last">Ha van file feltölti és az útvonalát beállítja a db-ben</td>
+            <td class="description last">A kérés a felhasználó azonosítóját állítja be.</td>
         </tr>
 
     
@@ -306,7 +147,8 @@
 
             
 
-            <td class="description last">Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.</td>
+            <td class="description last">Ha nem történt hiba, a függvény visszaküldi a 200-as kódot és a
+keresett felhasználót.</td>
         </tr>
 
     
@@ -347,7 +189,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line76">line 76</a>
+        <a href="user.controller.js.html">user.controller.js</a>, <a href="user.controller.js.html#line118">line 118</a>
     </li></ul></dd>
     
 
@@ -370,16 +212,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    létrehozott product object-jét küldi vissza.
-</div>
-
-
-
-    
 
 
 
@@ -391,7 +223,7 @@
     
 
     
-    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+    <h4 class="name" id=".listAll"><span class="type-signature">(static) </span>listAll<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -399,187 +231,7 @@
 
 
 <div class="description">
-    Egy termék megjelenítése
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>req</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A kérés.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>res</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Ha nem történt hiba, a kért adatot visszakapjuk egy objektumban.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line40">line 40</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - visszatér egy product-tal.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".list"><span class="type-signature">(static) </span>list<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Array}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    összes termék listázása
+    összes regisztrált felhasználó listázása
 </div>
 
 
@@ -695,7 +347,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line19">line 19</a>
+        <a href="user.controller.js.html">user.controller.js</a>, <a href="user.controller.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -718,28 +370,481 @@
 
 
 
-<h5>Returns:</h5>
+
+
+
+
 
         
-<div class="param-desc">
-    - Visszatér a product-ok tömbjével.
+            
+
+    
+
+    
+    <h4 class="name" id=".login"><span class="type-signature">(static) </span>login<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Egyszerű login
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
-<span class="param-type">Array</span>
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
 
 
-    </dd>
-</dl>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A kérés.</td>
+        </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ha nem történt hiba, akkor a függvény visszaküldi
+az adott felhasználó adatait.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="user.controller.js.html">user.controller.js</a>, <a href="user.controller.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".logout"><span class="type-signature">(static) </span>logout<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    És logout
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A kérés meghívja a logout(), beépített metódust.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ha nem történt hiba, a függvény visszaküldi a success tulajdonságot</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="user.controller.js.html">user.controller.js</a>, <a href="user.controller.js.html#line59">line 59</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".register"><span class="type-signature">(static) </span>register<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    felhasználói jogosultság beállítása
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A kérés.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="user.controller.js.html">user.controller.js</a>, <a href="user.controller.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -759,7 +864,7 @@
 
 
 <div class="description">
-    termék törlése
+    felhasználó törlése
 </div>
 
 
@@ -811,7 +916,7 @@
 
             
 
-            <td class="description last">Törli a terméket, és ha van akkor a képet is.</td>
+            <td class="description last">A kérés a felhasználó azonosítóját állítja be.</td>
         </tr>
 
     
@@ -834,7 +939,8 @@
 
             
 
-            <td class="description last">Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.</td>
+            <td class="description last">Ha nem történt hiba, a függvény visszaküldi a 200-as kódot,
+és a success tulajdonságot</td>
         </tr>
 
     
@@ -875,176 +981,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line167">line 167</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - megkeresi id alapján és a törölt terméket kapjuk vissz aegy objektumban.
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".removeComment"><span class="type-signature">(static) </span>removeComment<span class="signature">(productId, commentId)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Komment eltávolítása a termékhez
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>productId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A kiválasztott termék ID-je.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>commentId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A hozzáfúzött komment ID-je,
- amit kiveszünk az adott termék productComments tömbjéből.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line216">line 216</a>
+        <a href="user.controller.js.html">user.controller.js</a>, <a href="user.controller.js.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -1078,7 +1015,7 @@
     
 
     
-    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -1086,7 +1023,9 @@
 
 
 <div class="description">
-    termék adatainak frissítése
+    Jelszómódosítás
+Megváltoztatja a felhasználó jelszavát.
+Feltétele, hogy a felhasználó be legyen jelentkezve, és helyesen adja meg a régi jelszót.
 </div>
 
 
@@ -1128,7 +1067,7 @@
             <td class="type">
             
                 
-<span class="param-type">String</span>
+<span class="param-type">Object</span>
 
 
             
@@ -1138,7 +1077,7 @@
 
             
 
-            <td class="description last">Ha van file feltölti és ha van korábbi kép amit felülírunk, azt törli</td>
+            <td class="description last">HTTP request objektum</td>
         </tr>
 
     
@@ -1161,7 +1100,7 @@
 
             
 
-            <td class="description last">Ha nem történt hiba, a frissítés előtti visszakapjuk egy objektumban.</td>
+            <td class="description last">HTTP response objektum</td>
         </tr>
 
     
@@ -1202,7 +1141,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line102">line 102</a>
+        <a href="user.controller.js.html">user.controller.js</a>, <a href="user.controller.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -1229,10 +1168,23 @@
 
         
 <div class="param-desc">
-    - az update-elt product értékével tér vissza
+    - sikeres jelszóváltoztatás esetén success tulajdonságú objektumot ad vissza,
+hiba esetén err tulajdonságú objektumot küld
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -1256,13 +1208,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Product.html">Product</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Categories.html">Categories</a></li><li><a href="module-Comment.html">Comment</a></li><li><a href="module-Order.html">Order</a></li><li><a href="module-Product.html">Product</a></li><li><a href="module-User.html">User</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 23 2018 22:57:27 GMT+0200 (Közép-európai nyári idő )
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu May 24 2018 08:44:09 GMT+0200 (Közép-európai nyári idő )
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: Categories</title>
+    <title>JSDoc: Module: Product</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: Categories</h1>
+    <h1 class="page-title">Module: Product</h1>
 
     
 
@@ -64,7 +64,7 @@
     
 
     
-    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".addComment"><span class="type-signature">(static) </span>addComment<span class="signature">(productId, commentId)</span><span class="type-signature"></span></h4>
     
 
     
@@ -72,7 +72,166 @@
 
 
 <div class="description">
-    kategória létrehozása
+    Komment hozzáadása a termékhez
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A kiválasztott termék ID-je.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>commentId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A hozzáfúzött komment ID-je,
+ amit az adott termék productComments tömbjébe helyez.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line204">line 204</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".create"><span class="type-signature">(static) </span>create<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    termék létrehozása
 </div>
 
 
@@ -124,7 +283,7 @@
 
             
 
-            <td class="description last">Létrehoz egy új kategóriát, lowerCase</td>
+            <td class="description last">Ha van file feltölti és az útvonalát beállítja a db-ben</td>
         </tr>
 
     
@@ -188,7 +347,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line72">line 72</a>
+        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -215,22 +374,10 @@
 
         
 <div class="param-desc">
-    - az újonnan létrehozott kategóriát adja vissza.
+    létrehozott product object-jét küldi vissza.
 </div>
 
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
 
     
 
@@ -244,7 +391,7 @@
     
 
     
-    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -252,7 +399,7 @@
 
 
 <div class="description">
-    Egy kategória megjelenítése
+    Egy termék megjelenítése
 </div>
 
 
@@ -368,7 +515,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line47">line 47</a>
+        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -395,7 +542,7 @@
 
         
 <div class="param-desc">
-    - az id alapján a keresett kategóriát adja vissza.
+    - visszatér egy product-tal.
 </div>
 
 
@@ -406,7 +553,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Array</span>
 
 
     </dd>
@@ -424,7 +571,7 @@
     
 
     
-    <h4 class="name" id=".list"><span class="type-signature">(static) </span>list<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".list"><span class="type-signature">(static) </span>list<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
 
     
@@ -432,7 +579,7 @@
 
 
 <div class="description">
-    Az összes kategória listázása
+    összes termék listázása
 </div>
 
 
@@ -548,7 +695,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line28">line 28</a>
+        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -575,7 +722,7 @@
 
         
 <div class="param-desc">
-    - az összes kategóriát visszaadja.
+    - Visszatér a product-ok tömbjével.
 </div>
 
 
@@ -586,7 +733,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Array</span>
 
 
     </dd>
@@ -604,7 +751,7 @@
     
 
     
-    <h4 class="name" id=".remove"><span class="type-signature">(static) </span>remove<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".remove"><span class="type-signature">(static) </span>remove<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
     
 
     
@@ -612,7 +759,7 @@
 
 
 <div class="description">
-    Kategória törlése
+    termék törlése
 </div>
 
 
@@ -664,7 +811,7 @@
 
             
 
-            <td class="description last">Törli a kategóriát</td>
+            <td class="description last">Törli a terméket, és ha van akkor a képet is.</td>
         </tr>
 
     
@@ -728,7 +875,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line128">line 128</a>
+        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line167">line 167</a>
     </li></ul></dd>
     
 
@@ -755,22 +902,10 @@
 
         
 <div class="param-desc">
-    - a törölt kategóriát adja vissza.
+    - megkeresi id alapján és a törölt terméket kapjuk vissz aegy objektumban.
 </div>
 
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
 
     
 
@@ -784,7 +919,7 @@
     
 
     
-    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".removeComment"><span class="type-signature">(static) </span>removeComment<span class="signature">(productId, commentId)</span><span class="type-signature"></span></h4>
     
 
     
@@ -792,7 +927,166 @@
 
 
 <div class="description">
-    kategória nevének frissítése
+    Komment eltávolítása a termékhez
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>productId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A kiválasztott termék ID-je.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>commentId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A hozzáfúzött komment ID-je,
+ amit kiveszünk az adott termék productComments tömbjéből.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line216">line 216</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".update"><span class="type-signature">(static) </span>update<span class="signature">(req, res)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    termék adatainak frissítése
 </div>
 
 
@@ -844,7 +1138,7 @@
 
             
 
-            <td class="description last">Frissíti a kategória nevét, lowerCase</td>
+            <td class="description last">Ha van file feltölti és ha van korábbi kép amit felülírunk, azt törli</td>
         </tr>
 
     
@@ -908,7 +1202,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="categories.controller.js.html">categories.controller.js</a>, <a href="categories.controller.js.html#line96">line 96</a>
+        <a href="products.controller.js.html">products.controller.js</a>, <a href="products.controller.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -935,22 +1229,10 @@
 
         
 <div class="param-desc">
-    - a módosított kategórianevet adja vissza.
+    - az update-elt product értékével tér vissza
 </div>
 
 
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
 
     
 
@@ -974,13 +1256,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Categories.html">Categories</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Categories.html">Categories</a></li><li><a href="module-Comment.html">Comment</a></li><li><a href="module-Order.html">Order</a></li><li><a href="module-Product.html">Product</a></li><li><a href="module-User.html">User</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 23 2018 23:16:41 GMT+0200 (Közép-európai nyári idő )
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu May 24 2018 08:44:09 GMT+0200 (Közép-európai nyári idő )
 </footer>
 
 <script> prettyPrint(); </script>
