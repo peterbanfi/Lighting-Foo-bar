@@ -13,6 +13,7 @@ module.exports = {
    * összes termék listázása
    * @param {String} req - A kérés.
    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   * @return {Array} - Visszatér a product-ok tömbjével.
    */
 
   list: (req, res) => {
@@ -33,6 +34,7 @@ module.exports = {
    * Egy termék megjelenítése
    * @param {String} req - A kérés.
    * @param {Object} res - Ha nem történt hiba, a kért adatot visszakapjuk egy objektumban.
+   * @return {Array} - visszatér egy product-tal.
    */
 
   find: (req, res) => {
@@ -68,6 +70,7 @@ module.exports = {
    * termék létrehozása
    * @param {String} req - Ha van file feltölti és az útvonalát beállítja a db-ben
    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   * @return létrehozott product object-jét küldi vissza.
    */
 
   create: (req, res) => {
@@ -93,6 +96,7 @@ module.exports = {
    * termék adatainak frissítése
    * @param {String} req - Ha van file feltölti és ha van korábbi kép amit felülírunk, azt törli
    * @param {Object} res - Ha nem történt hiba, a frissítés előtti visszakapjuk egy objektumban.
+   * @return - az update-elt product értékével tér vissza
    */
 
   update: (req, res) => {
@@ -113,7 +117,7 @@ module.exports = {
               res.status(200).json(products);
             } else {
               res.status(404).json({
-                message: 'Not a valid Id!',
+                message: 'Nem létező Id!',
               });
             }
           })
@@ -155,8 +159,9 @@ module.exports = {
 
   /**
    * termék törlése
-   * @param {String} req - Törli a terméket
+   * @param {String} req - Törli a terméket, és ha van akkor a képet is.
    * @param {Object} res - Ha nem történt hiba, a kért adatokat visszakapjuk egy objektumban.
+   * @return - megkeresi id alapján és a törölt terméket kapjuk vissz aegy objektumban.
    */
 
   remove: (req, res) => {
@@ -166,7 +171,7 @@ module.exports = {
           res.status(200).json(products);
         } else {
           res.status(404).json({
-            message: 'Not a valid Id!',
+            message: 'Nem létező Id!',
           });
         }
         let imgRoute = '';
@@ -189,6 +194,7 @@ module.exports = {
         });
       });
   },
+
   /**
    * Komment hozzáadása a termékhez
    * @param {String} productId - A kiválasztott termék ID-je.
