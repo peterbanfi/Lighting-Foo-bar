@@ -38,7 +38,7 @@
             <td>{{comment.text}}</td>
             <td>{{comment.createdAt | date:'fullDate'}}</td>
             <td>
-              <div class="btn-group" *ngIf="comment.user._id === userId">
+              <div class="btn-group" *ngIf="((comment.user._id === userId) || (userRights))">
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#commentModal" (click)="selectCommentToUpdate(comment)">
                   <i class="fas fa-edit"></i>
                 </button>

@@ -23,7 +23,7 @@ export class ProductComponent implements OnInit {
   userId: String = '';
   username: any;
   userRights: any;
-  product: any;
+  product: any = { productComments: [] };
   toBasket: any = [];
 
   ngOnInit() {
@@ -38,6 +38,9 @@ export class ProductComponent implements OnInit {
     this.http.getAll(`http://localhost:8080/products/${this.global.singleProductId}`)
       .then((data) => {
         this.product = data;
+        if (this.username) {
+          this.canUserComment();
+        }
       });
   }
 
@@ -50,7 +53,6 @@ export class ProductComponent implements OnInit {
         this.userId = data['user']._id;
         this.username = data['user'].username;
         this.userRights = data['user'].rights;
-        console.log(this.userRights);
         this.getOrders();
       });
   }
@@ -70,11 +72,11 @@ export class ProductComponent implements OnInit {
    * Megvizsgálja, hogy a bejelentkezett  felhasználó kommentelhet-e.
    */
   canUserComment() {
-    if (this.userHasProduct() > 0) {
+    if ((this.userHasProduct() > 0) && (this.hasUserCommented() === 0)) {
       this.canComment = true;
+    } else {
+      this.canComment = false;
     }
-    console.log(this.username);
-    console.log(this.canComment);
   }
 
   /**
@@ -87,6 +89,10 @@ export class ProductComponent implements OnInit {
       .length;
   }
 
+  hasUserCommented() {
+    return this.product.productComments.filter(comment => comment.user['_id'] === this.userId).length;
+  }
+
   /**
    * Értékelés hozzáfűzése a termékhez.
    */
@@ -94,7 +100,6 @@ export class ProductComponent implements OnInit {
     this.newComment.user = this.userId;
     this.http.post(`${this.baseUrl}comments/${this.product['_id']}`, this.newComment)
       .then(data => {
-        console.log(data);
         this.newComment = { text: '', user: '' };
         this.list();
       });
@@ -107,7 +112,6 @@ export class ProductComponent implements OnInit {
     const update = { text: this.commentToUpdate.text };
     this.http.put(`${this.baseUrl}comments/${this.commentToUpdate._id}`, update)
       .then(data => {
-        console.log(data);
         this.clearCommentToUpdate();
         this.list();
       });
@@ -121,7 +125,6 @@ export class ProductComponent implements OnInit {
   deleteComment(comment) {
     this.http.delete(`${this.baseUrl}comments/${this.product['_id']}/${comment._id}`)
       .then(data => {
-        console.log(data);
         this.list();
       });
   }

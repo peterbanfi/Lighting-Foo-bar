@@ -36,7 +36,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="placeOrderModalTitle">Place new order</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" (click)="clearOrder()">&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -70,7 +70,7 @@
                 </span>
               </div>
               <select class="form-control" id="orderNewProduct" name="orderNewProduct" [(ngModel)]="addNewProductToOrder" required>
-                <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+product.productPrice+' HUF'}}</option>
+                <option *ngFor="let product of Products" [ngValue]="product">{{product.productName+' '+(product.productPrice | currency:'Ft':'':'':'hu')}}</option>
               </select>
               <input type="number" class="form-control tableinput" name="newProductQuantity" id="newProductQuantity" [(ngModel)]="addNewProductQuantity"
                 min="1" max="1000" required pattern="[0-9]{4}">
@@ -99,7 +99,9 @@
                   {{product.product.productPrice | currency:'Ft':'':'':'hu'}}
                 </td>
                 <td>
-                  {{product.quantity}}
+                  <input type="number" class="form-control" name="newQuantity" id="newQuantity" [(ngModel)]="product.quantity" min="1" max="1000"
+                    required pattern="[0-9]{4}">
+
                 </td>
                 <td>
                   {{(product.product.productPrice * product.quantity) | currency:'Ft':'':'':'hu'}}
@@ -113,14 +115,15 @@
         </div>
       </div>
       <pre>
-        {{addNewProductToOrder | json}}
+        {{newOrderDisplay | json}}
       </pre>
       <div class="modal-footer">
         <p>
           Total: {{newOrderDisplay.total | currency:'Ft':'':'':'hu'}}
         </p>
-        <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel" (click)="clear()">
-        <input type="button" class="btn btn-outline-success" value="Place order" data-dismiss="modal" (click)="placeOrder()">
+        <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel" (click)="clearOrder()">
+        <input *ngIf="newOrder.user && newOrder.products.length > 0" type="button" class="btn btn-outline-success" value="Place order"
+          data-dismiss="modal" (click)="placeOrder()">
       </div>
     </div>
   </div>

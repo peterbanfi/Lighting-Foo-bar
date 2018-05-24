@@ -50,7 +50,7 @@
   <div class="row">
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[0].productImg}} alt={{lastTenProducts[0].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[0].productImg}}" alt={{lastTenProducts[0].productName}}>
         <div class="card-body">
           <h5 class="card-title">1. {{lastTenProducts[0].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -60,7 +60,7 @@
           <li class="list-group-item">{{lastTenProducts[0].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[0].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[0])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -69,7 +69,7 @@
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[1].productImg}} alt={{lastTenProducts[1].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[1].productImg}}" alt="{{lastTenProducts[1].productName}}">
         <div class="card-body">
           <h5 class="card-title">2. {{lastTenProducts[1].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -79,7 +79,7 @@
           <li class="list-group-item">{{lastTenProducts[1].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[1].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[1])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -88,7 +88,7 @@
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[2].productImg}} alt={{lastTenProducts[2].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[2].productImg}}" alt="{{lastTenProducts[2].productName}}">
         <div class="card-body">
           <h5 class="card-title">3. {{lastTenProducts[2].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -98,7 +98,7 @@
           <li class="list-group-item">{{lastTenProducts[2].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[2].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[2])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -110,7 +110,7 @@
   <div class="row">
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[3].productImg}} alt={{lastTenProducts[3].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[3].productImg}}" alt="{{lastTenProducts[3].productName}}">
         <div class="card-body">
           <h5 class="card-title">4. {{lastTenProducts[3].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -120,7 +120,7 @@
           <li class="list-group-item">{{lastTenProducts[3].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[3].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[3])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -129,7 +129,7 @@
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[4].productImg}} alt={{lastTenProducts[4].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[4].productImg}}" alt="{{lastTenProducts[4].productName}}">
         <div class="card-body">
           <h5 class="card-title">5. {{lastTenProducts[4].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -139,7 +139,7 @@
           <li class="list-group-item">{{lastTenProducts[4].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[4].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[4])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -148,7 +148,7 @@
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[5].productImg}} alt={{lastTenProducts[5].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[5].productImg}}" alt="{{lastTenProducts[5].productName}}">
         <div class="card-body">
           <h5 class="card-title">6. {{lastTenProducts[5].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -158,7 +158,7 @@
           <li class="list-group-item">{{lastTenProducts[5].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[5].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[5])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -170,7 +170,7 @@
   <div class="row">
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[6].productImg}} alt={{lastTenProducts[6].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[6].productImg}}" alt="{{lastTenProducts[6].productName}}">
         <div class="card-body">
           <h5 class="card-title">7. {{lastTenProducts[6].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -180,7 +180,7 @@
           <li class="list-group-item">{{lastTenProducts[6].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[6].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[6])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -189,7 +189,7 @@
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[7].productImg}} alt={{lastTenProducts[7].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[7].productImg}}" alt="{{lastTenProducts[7].productName}}">
         <div class="card-body">
           <h5 class="card-title">8. {{lastTenProducts[7].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -199,7 +199,7 @@
           <li class="list-group-item">{{lastTenProducts[7].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[7].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[7])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -208,7 +208,7 @@
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[8].productImg}} alt={{lastTenProducts[8].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[8].productImg}}" alt="{{lastTenProducts[8].productName}}">
         <div class="card-body">
           <h5 class="card-title">9. {{lastTenProducts[8].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -218,7 +218,7 @@
           <li class="list-group-item">{{lastTenProducts[8].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[8].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[8])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
@@ -232,7 +232,7 @@
     </div>
     <div class="col-4">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src={{lastTenProducts[9].productImg}} alt={{lastTenProducts[9].productName}}>
+        <img class="card-img-top" src="{{lastTenProducts[9].productImg}}" alt="{{lastTenProducts[9].productName}}">
         <div class="card-body">
           <h5 class="card-title">10. {{lastTenProducts[9].productName}}</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -242,7 +242,7 @@
           <li class="list-group-item">{{lastTenProducts[9].productManufacturer}}</li>
         </ul>
         <div class="card-body">
-          <a href="http://localhost:4200/products/{{lastTenProducts[9].productUrl}}" class="card-link">More...</a>
+          <a routerLink="../public-products/product" class="card-link" (click)="goToProduct(lastTenProducts[9])">More...</a>
           <a href="#" class="card-link">
             <i class="fas fa-cart-plus"></i>
           </a>
