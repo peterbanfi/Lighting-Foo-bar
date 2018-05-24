@@ -122,7 +122,7 @@
           Total: {{newOrderDisplay.total | currency:'Ft':'':'':'hu'}}
         </p>
         <input type="button" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel" (click)="clearOrder()">
-        <input *ngIf="newOrder.user && newOrder.products.length > 0" type="button" class="btn btn-outline-success" value="Place order"
+        <input [disabled]="!(newOrder.user && newOrder.products.length > 0)" type="button" class="btn btn-outline-success" value="Place order"
           data-dismiss="modal" (click)="placeOrder()">
       </div>
     </div>

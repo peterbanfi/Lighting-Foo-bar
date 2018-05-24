@@ -145,6 +145,7 @@ export class ProductComponent implements OnInit {
   }
 
   addToBasket() {
+    this.product.quantity = 1;
     this.toBasket.push(this.product);
     const basket = sessionStorage.basket ? JSON.parse(sessionStorage.basket) : [];
     basket.push(this.toBasket);

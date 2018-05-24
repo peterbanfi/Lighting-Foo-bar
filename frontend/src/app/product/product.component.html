@@ -10,7 +10,7 @@
       <hr class="my-4 col-lg-12">
 
       <p class='col-lg-10'>Gyártó: {{product.productManufacturer | titlecase}}</p>
-      <a class="btn btn-primary btn-lg class='col-lg-2'" href="#" role="button" (click)="addToBasket()">Kosárba Rakom</a>
+      <a class="btn btn-primary btn-lg col-lg-2" role="button" (click)="addToBasket()">Kosárba Rakom</a>
       <p class='col-lg-12'>Szállítási idő: 1-4 munkanap</p>
 
 
@@ -20,7 +20,7 @@
         <input type="textfield" class="form-control" [(ngModel)]="newComment.text">
       </div>
       <div class="col-2">
-        <button class="btn btn-default" (click)="addComment()">Add comment</button>
+        <button class="btn btn-default" (click)="addComment()" [disabled]="!newComment.text">Add comment</button>
       </div>
     </div>
     <br>

@@ -35,7 +35,7 @@ export class OrdersComponent implements OnInit {
   Users: any;
   newOrder: any = { products: [] };
   newOrderDisplay: any = { products: [], total: 0 };
-  addNewProductToOrder: any = {};
+  addNewProductToOrder: any;
   addNewProductQuantity = 1;
   orderToUpdate: any = { user: { username: 'valaki' }, products: [] };
   orderToUpdateDisplay: any = { user: { username: 'valaki' }, products: [] };

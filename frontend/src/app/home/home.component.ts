@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   baseUrl = 'http://localhost:8080/products';
   products: any;
   lastTenProducts: any = [];
+  toBasket: any = [];
   constructor(private http: HttpProductsService, private global: Globals) {
     this.list();
 
@@ -45,5 +46,16 @@ export class HomeComponent implements OnInit {
       this.global.singleProductId = res['_id'];
     });
 
+  }
+
+  addToBasket(product) {
+    product.quantity = 1;
+    this.toBasket.push(product);
+    const basket = sessionStorage.basket ? JSON.parse(sessionStorage.basket) : [];
+    basket.push(this.toBasket);
+    const session = JSON.stringify(basket);
+    sessionStorage.setItem('basket', session);
+    this.toBasket = [];
+    console.log(basket);
   }
 }
