@@ -123,7 +123,7 @@ export class NavComponent implements OnInit {
   }
 
 
-  //transparent navbar
+  // transparent navbar
   @HostListener('window:scroll') onScroll() {
     const navbar = document.querySelector('#navbar') as HTMLElement;
     this.scrollPos = document.documentElement.scrollTop;
@@ -132,9 +132,9 @@ export class NavComponent implements OnInit {
     } else {
       navbar.style.backgroundColor = '#343A40';
     }
-  };
+  }
 
-  //listening scroll pos
+  // listening scroll pos
   @HostListener('mousemove', ['$event'])
   onMousemove(event: MouseEvent) {
     const navbar = document.querySelector('#navbar') as HTMLElement;
