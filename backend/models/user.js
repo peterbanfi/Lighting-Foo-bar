@@ -77,9 +77,7 @@ const userSchema = mongoose.Schema({
     type: Number,
     required: false,
   },
-}, {
-  timestamps: true,
-});
+}, { timestamps: true });
 
 /**
  * Beállítva az 5 elrontott próbálkozás után 3 percre kitiltás
