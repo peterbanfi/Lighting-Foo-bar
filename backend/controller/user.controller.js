@@ -44,7 +44,8 @@ module.exports = {
   /**
    * Egyszerű login
    * @param {String} req - A kérés.
-   * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi az adott felhasználó adatait.
+   * @param {Object} res - Ha nem történt hiba, akkor a függvény visszaküldi
+   * az adott felhasználó adatait.
    */
   login: (req, res) => res.json({
     login: true,
@@ -53,7 +54,7 @@ module.exports = {
   /**
    * És logout
    * @param {String} req - A kérés meghívja a logout(), beépített metódust.
-   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a beállított adatokat.
+   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a success tulajdonságot
    */
   logout: (req, res) => {
     req.logout();
@@ -64,7 +65,8 @@ module.exports = {
   /**
    * felhasználó törlése
    * @param {String} req - A kérés a felhasználó azonosítóját állítja be.
-   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot.
+   * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a 200-as kódot,
+   * és a success tulajdonságot
    * */
   remove: (req, res) => {
     User.findByIdAndRemove(req.params.id)
@@ -79,9 +81,17 @@ module.exports = {
   },
 
   /**
-   * Update felhasznló
-   * @param {String} req - A kérés a felhasználó azonosítóját és fő aatait kéri.
+   * Update felhasználó
+   * @param {String} req - A kérés a felhasználó azonosítóját és fő adatait kéri
    * @param {Object} res - Ha nem történt hiba, a függvény visszaküldi a frissített adatokat.
+   */
+  /** Jelszómódosítás
+   * Megváltoztatja a felhasználó jelszavát.
+   * Feltétele, hogy a felhasználó be legyen jelentkezve, és helyesen adja meg a régi jelszót.
+   * @param {Object} req - HTTP request objektum
+   * @param {Object} res - HTTP response objektum
+   * @returns {Object} - sikeres jelszóváltoztatás esetén success tulajdonságú objektumot ad vissza,
+   * hiba esetén err tulajdonságú objektumot küld
    */
   update: (req, res) => {
     req.body.updatedAt = new Date().toLocaleDateString();
@@ -98,8 +108,6 @@ module.exports = {
       res.json(post);
     });
   },
-
-  //updatePassword: () => {},
 
   /**
    * Egy bizonyos felhasználó keresése

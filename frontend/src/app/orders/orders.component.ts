@@ -35,7 +35,7 @@ export class OrdersComponent implements OnInit {
   Users: any;
   newOrder: any = { products: [] };
   newOrderDisplay: any = { products: [], total: 0 };
-  addNewProductToOrder: any = {};
+  addNewProductToOrder: any;
   addNewProductQuantity = 1;
   orderToUpdate: any = { user: { username: 'valaki' }, products: [] };
   orderToUpdateDisplay: any = { user: { username: 'valaki' }, products: [] };
@@ -58,7 +58,7 @@ export class OrdersComponent implements OnInit {
   // Place a new order with the data of newOrder
   placeOrder() {
     this.http.post(this.baseUrl, this.newOrder).then(data => this.getAll());
-    this.newOrder = { products: [] };
+    this.clearOrder();
   }
 
   // Update order specified by order ID.
@@ -106,24 +106,29 @@ export class OrdersComponent implements OnInit {
 
   // Add product to the new order
   addProduct() {
+    const prod = this.addNewProductToOrder;
     const qty = this.addNewProductQuantity;
-    const price = this.addNewProductToOrder.productPrice;
-    this.newOrder.products.push({
-      product: this.addNewProductToOrder._id,
-      quantity: qty
-    });
-    this.newOrderDisplay.products
-      .push({
-        name: this.addNewProductToOrder.productName,
-        quantity: qty,
-        product: {
-          productPrice: price
-        }
+    const price = prod.productPrice;
+    if (this.newOrder.products.filter(e => e.product === prod._id).length > 0) {
+      const pos = this.newOrder.products.map(e => e.product).indexOf(prod._id);
+      this.newOrderDisplay.products[pos].quantity += qty;
+      this.newOrder.products[pos].quantity += qty;
+    } else {
+      this.newOrder.products.push({
+        product: prod._id,
+        quantity: qty
       });
+      this.newOrderDisplay.products
+        .push({
+          name: prod.productName,
+          quantity: qty,
+          product: {
+            productPrice: price
+          }
+        });
+    }
     this.newOrderDisplay.total += price * qty;
     this.clear();
-    // console.log(this.newOrder);
-    // console.log(this.newOrderDisplay);
   }
 
   // Delete product from the new order
@@ -139,17 +144,10 @@ export class OrdersComponent implements OnInit {
     this.addNewProductQuantity = 1;
   }
 
-  /*
-    countTotals(data) {
-      data.map(order => {
-        let count = 0;
-        for (let i = 0; i < order.products.length; i++) {
-          count += order.products[i].product.productPrice * order.products[i].quantity;
-        }
-        order.total = count;
-      });
-    }
-  */
+  clearOrder() {
+    this.newOrder = { products: [] };
+    this.newOrderDisplay = { products: [], total: 0 };
+  }
 
   ngOnInit() {
   }

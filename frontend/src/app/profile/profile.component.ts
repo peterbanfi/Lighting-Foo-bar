@@ -24,6 +24,15 @@ export class ProfileComponent implements OnInit {
   userDetails: any = {
     username: '',
     email: '',
+    address_city: '',
+    address_address: '',
+    address_address2: '',
+    address_zip: '',
+    invoiceA_city: '',
+    invoiceA_address: '',
+    invoiceA_address2: '',
+    invoiceA_zip: '',
+    phone: '',
   };
   userPass: any = {
     update: true,

@@ -1,16 +1,16 @@
 <div class="container">
-  <div class="jumbotron" *ngFor='let field of product'>
+  <div class="jumbotron">
     <div class="row">
-      <h1 class="display-4 col-lg-5">{{product[0].productName | titlecase}}</h1>
-      <img class="col-lg-2" src="{{ product[0].productImg }}" alt="{{ product[0].productName }}" height="300" />
+      <h1 class="display-4 col-lg-5">{{product.productName | titlecase}}</h1>
+      <img class="col-lg-2" src="{{ product.productImg }}" alt="{{ product.productName }}" height="300" />
       <p class='col-lg-5'></p>
-      <p class="lead">{{ product[0].productPrice }} Ft
-        <span id='afa'>({{ product[0].productPrice /100*79}} Ft + ÁFA)</span>
+      <p class="lead">{{ product.productPrice }} Ft
+        <span id='afa'>({{ product.productPrice /100*79}} Ft + ÁFA)</span>
       </p>
       <hr class="my-4 col-lg-12">
 
-      <p class='col-lg-10'>Gyártó: {{product[0].productManufacturer | titlecase}}</p>
-      <a class="btn btn-primary btn-lg class='col-lg-2'" href="#" role="button">Kosárba Rakom</a>
+      <p class='col-lg-10'>Gyártó: {{product.productManufacturer | titlecase}}</p>
+      <a class="btn btn-primary btn-lg col-lg-2" role="button" (click)="addToBasket()">Kosárba</a>
       <p class='col-lg-12'>Szállítási idő: 1-4 munkanap</p>
 
 
@@ -20,25 +20,25 @@
         <input type="textfield" class="form-control" [(ngModel)]="newComment.text">
       </div>
       <div class="col-2">
-        <button class="btn btn-default" (click)="addComment()">Add comment</button>
+        <button class="btn btn-default" (click)="addComment()" [disabled]="!newComment.text">Értékelem</button>
       </div>
     </div>
     <br>
     <div class="row">
       <table class="table table-hover table-striped">
         <thead>
-          <th>Name</th>
-          <th>Review</th>
-          <th>Time</th>
-          <th>Controls</th>
+          <th>Név</th>
+          <th>Értékelés</th>
+          <th>Idő</th>
+          <th>Eszközök</th>
         </thead>
         <tbody>
-          <tr *ngFor="let comment of product[0].productComments">
+          <tr *ngFor="let comment of product.productComments">
             <td>{{comment.user.username}}</td>
             <td>{{comment.text}}</td>
             <td>{{comment.createdAt | date:'fullDate'}}</td>
             <td>
-              <div class="btn-group" *ngIf="comment.user._id === userId">
+              <div class="btn-group" *ngIf="((comment.user._id === userId) || (userRights))">
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#commentModal" (click)="selectCommentToUpdate(comment)">
                   <i class="fas fa-edit"></i>
                 </button>
@@ -61,7 +61,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="commentModalTitle">Edit comment</h5>
+        <h5 class="modal-title" id="commentModalTitle">Szerkesztés</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -73,8 +73,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearCommentToUpdate()">Cancel</button>
-          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateComment()">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clearCommentToUpdate()">Mégse</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateComment()">Mentés</button>
         </div>
       </div>
     </div>

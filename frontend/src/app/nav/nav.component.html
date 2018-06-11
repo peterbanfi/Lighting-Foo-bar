@@ -88,7 +88,7 @@
       </div>
       <div class="modal-body">
 
-        <label for="name" *ngIf="!loggedIn">Email</label>
+        <label for="name" *ngIf="!loggedIn">E-mail</label>
         <div class="form-group" *ngIf="!loggedIn">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon" style="width: 2.6rem">
@@ -97,21 +97,21 @@
             <input class="form-control" type="email" id="name" [(ngModel)]="user.username" ngModel email="true" placeholder="your@email.com">
           </div>
         </div>
-        <label for="password" *ngIf="!loggedIn">Password</label>
+        <label for="password" *ngIf="!loggedIn">Jelszó</label>
         <div class="form-group" *ngIf="!loggedIn">
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon" style="width: 2.6rem">
               <i class="fa fa-key"></i>
             </div>
-            <input class="form-control" type="password" placeholder="Password" required id="password" [(ngModel)]="user.password">
+            <input class="form-control" type="password" placeholder="Jelszó" required id="password" [(ngModel)]="user.password">
           </div>
         </div>
         <br>
         <div class="alert alert-success text-center" role="alert" *ngIf="loggedIn">
-          Thank you! You are logged in as: {{userName}}!
+          Bejelentkezve, mint: {{userName}}!
         </div>
         <div class="alert alert-danger text-center" role="alert" *ngIf="wrong">
-          Wrong e-mail or password!
+          Rossz e-mail cím!
         </div>
         <div *ngIf="user.password.length > 0 && user.username.length > 0">
           <hr>
@@ -121,7 +121,7 @@
         </div>
       </div>
       <div class="modal-footer" *ngIf="!loggedIn">
-        <a class="nav-link" routerLink="registration">Not a member yet? Click here to registrate!</a>
+        <a class="nav-link" routerLink="registration">Még nem regisztrált? Itt megteheti.</a>
       </div>
     </div>
   </div>

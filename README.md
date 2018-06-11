@@ -97,3 +97,23 @@ __Oldalak/Funkciók:__
   - CRUD, ahol az admin, és a user jogosultságú felhasználókat is kezeljük
   - az admin felhasználók a regisztrált emberek jogosultságát módosítani tudják egy egyszerű select segítségével. 
 
+##2. Sprint
+
+__Kapcsolat oldal:__
+
+A kapcsolat oldal elérhető bejelentkezés nélkül is.
+A térkép megjelenítését a frontend részén a agm-map-pal készítettük el. Ehhez telepíteni kellett az @agm/core csomagot: npm install @agm/core --save 
+Az itt küldött e-maileket a szeszpress@gmail.com címünkre továbbítja a szerver a nodemailer segítségével. Ehhez szintén le kellett tölteni ezt a csomagot: npm i nodemailer --save
+
+
+__Termék oldal:__
+
+A termékek külön oldalon is megjelennek. Az itt kiválasztott termékeket a sessionStorage-ba mentjük le és így adjuk át a Kosár nézetnek. 
+
+__Kosár nézet:__
+
+A belépett felhasználó itt láthatja és véglegesítheti a rendelését. Az adatokat a sessionStorage-ból mentjük ki. Ugyanakkor itt is módosítható a rendelés.
+
+__Profil nézet:__
+
+Ezen az oldalon lehet módosítani a felhasználó által megadott adatait beleértve a számlázási és a szállítási adatokat és láthatja a rendeléseit is.

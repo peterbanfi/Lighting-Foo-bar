@@ -25,13 +25,13 @@ const order = {
     zip: 4321,
   },
   products: [{
-      product: '5af9917fbb6b544b14321638',
-      quantity: 1,
-    },
-    {
-      product: '5af99826722bf5522c3d40a1',
-      quantity: 2,
-    },
+    product: '5af9917fbb6b544b14321638',
+    quantity: 1,
+  },
+  {
+    product: '5af99826722bf5522c3d40a1',
+    quantity: 2,
+  },
   ],
 };
 
@@ -50,13 +50,13 @@ const put = {
     zip: 3456,
   },
   products: [{
-      product: '5af99826722bf5522c3d40a1',
-      quantity: 3,
-    },
-    {
-      product: '5af9917fbb6b544b14321638',
-      quantity: 4,
-    },
+    product: '5af99826722bf5522c3d40a1',
+    quantity: 3,
+  },
+  {
+    product: '5af9917fbb6b544b14321638',
+    quantity: 4,
+  },
   ],
 };
 let cookie;
