@@ -94,20 +94,36 @@ module.exports = {
    * hiba esetén err tulajdonságú objektumot küld
    */
   update: (req, res) => {
-    req.body.updatedAt = new Date().toLocaleDateString();
-    User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
-      if (req.body.update === true) {
-        post.changePassword(req.body.oldPassword, req.body.newPassword, () => {
-          post.save();
+    User.findByIdAndUpdate(req.params.id, req.body)
+      .then((post) => {
+        if (req.body.update === true) {
+          post.changePassword(req.body.oldPassword, req.body.newPassword)
+            .then(() => post.save());
+        }
+        res.json(post);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err,
         });
-      }
-      if (err) {
-        res.send(err);
-        console.log(err);
-      }
-      res.json(post);
-    });
+      });
   },
+
+  // update: (req, res) => {
+  //   req.body.updatedAt = new Date().toLocaleDateString();
+  //   User.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
+  //     if (req.body.update === true) {
+  //       post.changePassword(req.body.oldPassword, req.body.newPassword, () => {
+  //         post.save();
+  //       });
+  //     }
+  //     if (err) {
+  //       res.send(err);
+  //       console.log(err);
+  //     }
+  //     res.json(post);
+  //   });
+  // },
 
   /**
    * Egy bizonyos felhasználó keresése
